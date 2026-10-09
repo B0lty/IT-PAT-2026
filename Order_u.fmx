@@ -1,0 +1,300 @@
+object frmOrder: TfrmOrder
+  Left = 0
+  Top = 0
+  Caption = 'Smart Eats - Order Placement'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object btnOrderAddItem: TButton
+    Position.X = 350.000000000000000000
+    Position.Y = 130.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = 'Add to order'
+    TextSettings.Trimming = None
+  end
+  object btnOrderBack: TButton
+    Position.X = 430.000000000000000000
+    Position.Y = 356.000000000000000000
+    Size.Width = 190.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 16
+    Text = 'Back to Main'
+    TextSettings.Trimming = None
+  end
+  object btnOrderClear: TButton
+    Position.X = 140.000000000000000000
+    Position.Y = 416.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = 'Clear order'
+    TextSettings.Trimming = None
+  end
+  object btnOrderExport: TButton
+    Position.X = 430.000000000000000000
+    Position.Y = 318.000000000000000000
+    Size.Width = 190.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 13
+    Text = 'Export Bill to file'
+    TextSettings.Trimming = None
+  end
+  object btnOrderRemoveLine: TButton
+    Position.X = 10.000000000000000000
+    Position.Y = 416.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    Text = 'Remove line'
+    TextSettings.Trimming = None
+  end
+  object btnOrderSave: TButton
+    Position.X = 430.000000000000000000
+    Position.Y = 280.000000000000000000
+    Size.Width = 190.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 11
+    Text = 'Save Order'
+    TextSettings.Trimming = None
+  end
+  object cmbOrderItem: TComboBox
+    Position.X = 10.000000000000000000
+    Position.Y = 132.000000000000000000
+    Size.Width = 250.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object edtOrderAmount: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 5
+    Text = '1'
+    Position.X = 270.000000000000000000
+    Position.Y = 132.000000000000000000
+    Size.Width = 70.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object edtOrderCustomer: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    Position.X = 10.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object edtOrderTable: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 430.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object edtOrderWaiter: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 220.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object grdOrderLines: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 10.000000000000000000
+    Position.Y = 190.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 220.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    RowCount = 1
+    Options = [AlternatingRowBackground, ColLines, RowLines, RowSelect, Header]
+    Viewport.Width = 396.000000000000000000
+    Viewport.Height = 195.000000000000000000
+    object colOrderItem: TStringColumn
+      Header = 'Item'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 180.000000000000000000
+    end
+    object colOrderPrice: TStringColumn
+      Header = 'Price'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 70.000000000000000000
+    end
+    object colOrderQty: TStringColumn
+      Header = 'Qty'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 45.000000000000000000
+    end
+    object colOrderLine: TStringColumn
+      Header = 'Line total'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 90.000000000000000000
+    end
+  end
+  object lblOrderAmountCaption: TLabel
+    Position.X = 270.000000000000000000
+    Position.Y = 114.000000000000000000
+    Size.Width = 70.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Amount:'
+    TabOrder = 29
+  end
+  object lblOrderCustomerCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 62.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Customer:'
+    TabOrder = 17
+  end
+  object lblOrderError: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 34.000000000000000000
+    Size.Width = 620.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claRed
+    TextSettings.Trimming = None
+    TabOrder = 14
+  end
+  object lblOrderItemCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 114.000000000000000000
+    Size.Width = 250.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Menu item:'
+    TabOrder = 20
+  end
+  object lblOrderLastID: TLabel
+    Position.X = 430.000000000000000000
+    Position.Y = 396.000000000000000000
+    Size.Width = 190.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Last saved order #: -'
+    TabOrder = 35
+  end
+  object lblOrderLinesCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 170.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Current order:'
+    TabOrder = 22
+  end
+  object lblOrderSubtotalCaption: TLabel
+    Position.X = 430.000000000000000000
+    Position.Y = 190.000000000000000000
+    Size.Width = 90.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Subtotal:'
+    TabOrder = 25
+  end
+  object lblOrderSubtotalValue: TLabel
+    Position.X = 520.000000000000000000
+    Position.Y = 190.000000000000000000
+    Size.Width = 110.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'R 0.00'
+    TabOrder = 26
+  end
+  object lblOrderTableCaption: TLabel
+    Position.X = 430.000000000000000000
+    Position.Y = 62.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Table #:'
+    TabOrder = 18
+  end
+  object lblOrderTitle: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 620.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Place Order'
+    TabOrder = 12
+  end
+  object lblOrderTotalCaption: TLabel
+    Position.X = 430.000000000000000000
+    Position.Y = 242.000000000000000000
+    Size.Width = 90.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'TOTAL:'
+    TabOrder = 27
+  end
+  object lblOrderTotalValue: TLabel
+    Position.X = 520.000000000000000000
+    Position.Y = 242.000000000000000000
+    Size.Width = 110.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'R 0.00'
+    TabOrder = 28
+  end
+  object lblOrderVatCaption: TLabel
+    Position.X = 430.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 90.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'VAT (15%):'
+    TabOrder = 23
+  end
+  object lblOrderVatValue: TLabel
+    Position.X = 520.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 110.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'R 0.00'
+    TabOrder = 24
+  end
+  object lblOrderWaiterCaption: TLabel
+    Position.X = 220.000000000000000000
+    Position.Y = 62.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Waiter:'
+    TabOrder = 15
+  end
+end

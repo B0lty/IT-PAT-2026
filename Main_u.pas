@@ -1,4 +1,4 @@
-unit Unit2;
+unit Main_u;
 
 interface
 
@@ -13,54 +13,25 @@ uses
 
 type
   TfrmMain = class(TForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    btnLogin: TButton;
-    btnCreateAccount: TButton;
-    edtPasswordLogin: TEdit;
-    Label1: TLabel;
-    Rectangle1: TRectangle;
-    Label2: TLabel;
-    Rectangle2: TRectangle;
-    edtUsernameLogin: TEdit;
-    Label3: TLabel;
-    tbCtrlMain: TTabControl;
-    tbLogin: TTabItem;
-    tbCreateAccount: TTabItem;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    btnCreateAccountConfirm: TButton;
-    btnCancelCreateAccount: TButton;
-    Rectangle3: TRectangle;
-    edtPasswordCreate: TEdit;
-    Label4: TLabel;
-    Label5: TLabel;
-    Rectangle4: TRectangle;
-    edtUsernameCreate: TEdit;
-    Label6: TLabel;
-    Rectangle5: TRectangle;
-    edtPasswordConfirmCreate: TEdit;
-    Label7: TLabel;
-    tbMainPage: TTabItem;
-    Label8: TLabel;
-    Label9: TLabel;
-    Panel5: TPanel;
-    btnLogOut: TButton;
-    lblLoginError: TLabel;
-    lblCreateAccountError: TLabel;
-    lblCurrentUser: TLabel;
-    rectSidePanelClosed: TRectangle;
-    Rectangle6: TRectangle;
-    btnOpenSideMenu: TButton;
-    Label10: TLabel;
-    rectSidePanelOpen: TRectangle;
-    btnSend: TButton;
-    memAIInput: TMemo;
-    memAIResponse: TMemo;
-    Rectangle8: TRectangle;
-    btnCloseSideMenu: TButton;
-    Label11: TLabel;
-    Label12: TLabel;
+    Panel6: TPanel;
+    Button1: TButton;
+    Label13: TLabel;
+    Rectangle7: TRectangle;
+    Rectangle9: TRectangle;
+    Button2: TButton;
+    Label14: TLabel;
+    Rectangle10: TRectangle;
+    Button3: TButton;
+    Memo1: TMemo;
+    Memo2: TMemo;
+    Rectangle11: TRectangle;
+    Button4: TButton;
+    Label15: TLabel;
+    Label16: TLabel;
+    btnNavMenu: TButton;
+    btnNavOrders: TButton;
+    btnNavReports: TButton;
+    lblPortalTitle: TLabel;
     procedure btnCreateAccountClick(Sender: TObject);
     procedure btnCancelCreateAccountClick(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);

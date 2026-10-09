@@ -1,0 +1,254 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Smart Eats - Home Page'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object Panel6: TPanel
+    Align = MostTop
+    Size.Width = 640.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object Button1: TButton
+      Align = MostRight
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 544.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 86.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Log Out'
+      TextSettings.Trimming = None
+      OnClick = btnLogOutClick
+    end
+    object Label13: TLabel
+      Align = Right
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 272.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 252.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Trailing
+      TextSettings.Trimming = None
+      Text = 'Loggin in as: none'
+      TabOrder = 1
+    end
+  end
+  object Rectangle7: TRectangle
+    Align = MostRight
+    Fill.Color = x64E0E0E0
+    Position.X = 576.000000000000000000
+    Position.Y = 49.000000000000000000
+    Size.Width = 64.000000000000000000
+    Size.Height = 431.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = x64B59797
+    object Rectangle9: TRectangle
+      Align = MostTop
+      Fill.Color = x77E0E0E0
+      Size.Width = 64.000000000000000000
+      Size.Height = 137.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Button2: TButton
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = -24.000000000000000000
+        Position.Y = 45.000000000000000000
+        RotationAngle = 90.000000000000000000
+        Size.Width = 110.000000000000000000
+        Size.Height = 39.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Open Side Menu'
+        TextSettings.Trimming = None
+        OnClick = btnOpenSideMenuClick
+      end
+    end
+    object Label14: TLabel
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = -30.000000000000000000
+      Position.Y = 192.000000000000000000
+      RotationAngle = 90.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 38.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Trimming = None
+      Text = 'Chatty'
+      TabOrder = 2
+    end
+  end
+  object Rectangle10: TRectangle
+    Align = Right
+    Fill.Color = x64E0E0E0
+    Position.X = 272.000000000000000000
+    Position.Y = 49.000000000000000000
+    Size.Width = 304.000000000000000000
+    Size.Height = 431.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = x64B59797
+    object Button3: TButton
+      Align = Bottom
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 293.000000000000000000
+      Size.Width = 284.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Send'
+      TextSettings.Trimming = None
+      OnClick = btnSendClick
+    end
+    object Memo1: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      Align = MostBottom
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 347.000000000000000000
+      Size.Width = 284.000000000000000000
+      Size.Height = 74.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Viewport.Width = 280.000000000000000000
+      Viewport.Height = 70.000000000000000000
+    end
+    object Memo2: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      ReadOnly = True
+      Align = Right
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 284.000000000000000000
+      Size.Height = 223.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Viewport.Width = 280.000000000000000000
+      Viewport.Height = 219.000000000000000000
+    end
+    object Rectangle11: TRectangle
+      Align = MostTop
+      Fill.Color = x77E0E0E0
+      Size.Width = 304.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Button4: TButton
+        Align = MostRight
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 184.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 110.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Close Side Menu'
+        TextSettings.Trimming = None
+        OnClick = btnCloseSideMenuClick
+      end
+      object Label15: TLabel
+        Align = MostLeft
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Chatty'
+        TabOrder = 1
+      end
+    end
+    object Label16: TLabel
+      Align = MostBottom
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 320.000000000000000000
+      Size.Width = 284.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Type: "/clear" to clear output'
+      TabOrder = 4
+    end
+  end
+  object btnNavMenu: TButton
+    Position.X = 20.000000000000000000
+    Position.Y = 110.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Menu Management'
+    TextSettings.Trimming = None
+  end
+  object btnNavOrders: TButton
+    Position.X = 20.000000000000000000
+    Position.Y = 160.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Place Order'
+    TextSettings.Trimming = None
+  end
+  object btnNavReports: TButton
+    Position.X = 20.000000000000000000
+    Position.Y = 210.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Reports'
+    TextSettings.Trimming = None
+  end
+  object lblPortalTitle: TLabel
+    Position.X = 20.000000000000000000
+    Position.Y = 60.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'SmartEats - Staff Portal'
+    TabOrder = 6
+  end
+end

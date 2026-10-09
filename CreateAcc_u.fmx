@@ -1,0 +1,216 @@
+object frmCreateAcc: TfrmCreateAcc
+  Left = 0
+  Top = 0
+  Caption = 'Smart Eats - Account Creation'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Label9: TLabel
+    Align = Horizontal
+    Size.Width = 640.000000000000000000
+    Size.Height = 71.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'Staff Portal'
+    TabOrder = 2
+  end
+  object Panel3: TPanel
+    Align = Center
+    Size.Width = 400.000000000000000000
+    Size.Height = 293.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'Panel1Style1'
+    TabOrder = 0
+    object Panel4: TPanel
+      Align = MostBottom
+      Position.Y = 241.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'Panel2Style1'
+      TabOrder = 0
+      object btnCreateAccountConfirm: TButton
+        Align = MostRight
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 248.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'Button1Style1'
+        TabOrder = 2
+        Text = 'Create'
+        TextSettings.Trimming = None
+      end
+      object btnCancelCreateAccount: TButton
+        Align = MostLeft
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 143.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Cancel'
+        TextSettings.Trimming = None
+      end
+    end
+    object Rectangle3: TRectangle
+      Align = Top
+      Fill.Kind = None
+      Position.Y = 89.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object edtPasswordCreate: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Right
+        TabOrder = 0
+        Password = True
+        Position.X = 104.000000000000000000
+        Position.Y = 10.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Label4: TLabel
+        Align = Left
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 87.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Password:'
+        TabOrder = 1
+      end
+    end
+    object Label5: TLabel
+      Align = MostTop
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 380.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Create Account'
+      TabOrder = 2
+    end
+    object Rectangle4: TRectangle
+      Align = Top
+      Fill.Kind = None
+      Position.Y = 37.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object edtUsernameCreate: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Right
+        TabOrder = 0
+        Position.X = 104.000000000000000000
+        Position.Y = 10.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Label6: TLabel
+        Align = Left
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 87.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Username:'
+        TabOrder = 1
+      end
+    end
+    object Rectangle5: TRectangle
+      Align = Top
+      Fill.Kind = None
+      Position.Y = 141.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object edtPasswordConfirmCreate: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Right
+        TabOrder = 0
+        Password = True
+        Position.X = 104.000000000000000000
+        Position.Y = 10.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Label7: TLabel
+        Align = Left
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 87.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Confirm Password:'
+        TabOrder = 1
+      end
+    end
+    object lblCreateAccountError: TLabel
+      Align = Top
+      StyledSettings = [Family, Size, Style]
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 193.000000000000000000
+      Size.Width = 380.000000000000000000
+      Size.Height = 35.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = claRed
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      TabOrder = 3
+    end
+  end
+end

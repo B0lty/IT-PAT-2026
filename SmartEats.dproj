@@ -297,8 +297,28 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Unit2.pas">
+        <DCCReference Include="Main_u.pas">
             <Form>frmMain</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="Login_u.pas">
+            <Form>Form1</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="CreateAccount_u.pas">
+            <Form>Form2</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="MenuManagement_u.pas">
+            <Form>Form3</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="Order_u.pas">
+            <Form>Form4</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="Reports_u.pas">
+            <Form>Form5</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

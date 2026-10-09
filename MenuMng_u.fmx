@@ -1,0 +1,246 @@
+object frmMenu: TfrmMenu
+  Left = 0
+  Top = 0
+  Caption = 'Smart Eats - Menu Management'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object btnMenuAdd: TButton
+    Position.X = 10.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 115.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Add'
+    TextSettings.Trimming = None
+  end
+  object btnMenuBack: TButton
+    Position.X = 135.000000000000000000
+    Position.Y = 370.000000000000000000
+    Size.Width = 115.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 12
+    Text = 'Back to Main'
+    TextSettings.Trimming = None
+  end
+  object btnMenuClear: TButton
+    Position.X = 135.000000000000000000
+    Position.Y = 252.000000000000000000
+    Size.Width = 115.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = 'Clear fields'
+    TextSettings.Trimming = None
+  end
+  object btnMenuDelete: TButton
+    Position.X = 10.000000000000000000
+    Position.Y = 252.000000000000000000
+    Size.Width = 115.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Text = 'Delete'
+    TextSettings.Trimming = None
+  end
+  object btnMenuFirst: TButton
+    Position.X = 10.000000000000000000
+    Position.Y = 310.000000000000000000
+    Size.Width = 55.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = '|<'
+    TextSettings.Trimming = None
+  end
+  object btnMenuLast: TButton
+    Position.X = 190.000000000000000000
+    Position.Y = 310.000000000000000000
+    Size.Width = 60.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = '>|'
+    TextSettings.Trimming = None
+  end
+  object btnMenuNext: TButton
+    Position.X = 130.000000000000000000
+    Position.Y = 310.000000000000000000
+    Size.Width = 55.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    Text = '>'
+    TextSettings.Trimming = None
+  end
+  object btnMenuPrev: TButton
+    Position.X = 70.000000000000000000
+    Position.Y = 310.000000000000000000
+    Size.Width = 55.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+    Text = '<'
+    TextSettings.Trimming = None
+  end
+  object btnMenuRefresh: TButton
+    Position.X = 10.000000000000000000
+    Position.Y = 370.000000000000000000
+    Size.Width = 115.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 11
+    Text = 'Refresh'
+    TextSettings.Trimming = None
+  end
+  object btnMenuUpdate: TButton
+    Position.X = 135.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 115.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = 'Update'
+    TextSettings.Trimming = None
+  end
+  object cmbMenuCategory: TComboBox
+    Items.Strings = (
+      'Starters'
+      'Mains'
+      'Desserts'
+      'Drinks')
+    Position.X = 10.000000000000000000
+    Position.Y = 128.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object edtMenuName: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    Position.X = 10.000000000000000000
+    Position.Y = 78.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object edtMenuPrice: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 10.000000000000000000
+    Position.Y = 178.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object grdMenu: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 270.000000000000000000
+    Position.Y = 60.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 410.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 13
+    RowCount = 1
+    Options = [AlternatingRowBackground, ColLines, RowLines, RowSelect, Header]
+    Viewport.Width = 360.000000000000000000
+    Viewport.Height = 410.000000000000000000
+    object colMenuID: TStringColumn
+      Header = 'ID'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 40.000000000000000000
+    end
+    object colMenuName: TStringColumn
+      Header = 'Item name'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 150.000000000000000000
+    end
+    object colMenuCategory: TStringColumn
+      Header = 'Category'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 90.000000000000000000
+    end
+    object colMenuPrice: TStringColumn
+      Header = 'Price'
+      HeaderSettings.TextSettings.WordWrap = False
+      Size.Width = 80.000000000000000000
+    end
+  end
+  object lblMenuCategoryCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 110.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Category:'
+    TabOrder = 17
+  end
+  object lblMenuCount: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 346.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Records: 0'
+    TabOrder = 20
+  end
+  object lblMenuError: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 34.000000000000000000
+    Size.Width = 620.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claRed
+    TextSettings.Trimming = None
+    TabOrder = 15
+  end
+  object lblMenuNameCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 60.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Item name:'
+    TabOrder = 16
+  end
+  object lblMenuNavCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 292.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Navigate records:'
+    TabOrder = 19
+  end
+  object lblMenuPriceCaption: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 160.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 18.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Price (R):'
+    TabOrder = 18
+  end
+  object lblMenuTitle: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 620.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Menu Management'
+    TabOrder = 14
+  end
+end

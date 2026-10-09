@@ -1,0 +1,179 @@
+object frmLogin: TfrmLogin
+  Left = 0
+  Top = 0
+  Caption = 'Smart Eats - Account Login'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Label8: TLabel
+    Align = Horizontal
+    Size.Width = 640.000000000000000000
+    Size.Height = 71.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'Staff Portal'
+    TabOrder = 2
+  end
+  object Panel1: TPanel
+    Align = Center
+    Size.Width = 400.000000000000000000
+    Size.Height = 228.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'Panel1Style1'
+    TabOrder = 0
+    object Panel2: TPanel
+      Align = MostBottom
+      Position.Y = 176.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'Panel2Style1'
+      TabOrder = 0
+      object btnLogin: TButton
+        Align = MostRight
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 248.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'Button1Style1'
+        TabOrder = 2
+        Text = 'Enter'
+        TextSettings.Trimming = None
+      end
+      object btnCreateAccount: TButton
+        Align = MostLeft
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 143.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Create Account'
+        TextSettings.Trimming = None
+      end
+    end
+    object Rectangle1: TRectangle
+      Align = Top
+      Fill.Kind = None
+      Position.Y = 89.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object edtPasswordLogin: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Right
+        TabOrder = 0
+        Password = True
+        HideSelectionOnExit = False
+        Position.X = 104.000000000000000000
+        Position.Y = 10.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Label1: TLabel
+        Align = Left
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 87.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Password:'
+        TabOrder = 1
+      end
+    end
+    object Label2: TLabel
+      Align = MostTop
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 380.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Login'
+      TabOrder = 2
+    end
+    object Rectangle2: TRectangle
+      Align = Top
+      Fill.Kind = None
+      Position.Y = 37.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object edtUsernameLogin: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Right
+        TabOrder = 0
+        HideSelectionOnExit = False
+        Position.X = 104.000000000000000000
+        Position.Y = 10.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Label3: TLabel
+        Align = Left
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 87.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Username:'
+        TabOrder = 1
+      end
+    end
+    object lblLoginError: TLabel
+      Align = Top
+      StyledSettings = [Family, Size, Style]
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 141.000000000000000000
+      Size.Width = 380.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = claRed
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      TabOrder = 3
+    end
+  end
+end
