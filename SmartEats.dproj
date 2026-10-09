@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{EAEE1BBA-6E0F-4B9D-9A91-E8DC8DC542B2}</ProjectGuid>
+        <ProjectGuid>{862E16E9-AD1A-4DC7-B435-5D9115D3A103}</ProjectGuid>
         <ProjectVersion>20.1</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
         <Base>True</Base>
@@ -302,25 +302,26 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Login_u.pas">
-            <Form>Form1</Form>
+            <Form>frmLogin</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="CreateAccount_u.pas">
-            <Form>Form2</Form>
+        <DCCReference Include="CreateAcc_u.pas">
+            <Form>frmCreateAcc</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="MenuManagement_u.pas">
-            <Form>Form3</Form>
+        <DCCReference Include="MenuMng_u.pas">
+            <Form>frmMenu</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Order_u.pas">
-            <Form>Form4</Form>
+            <Form>frmOrder</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Reports_u.pas">
-            <Form>Form5</Form>
+            <Form>frmReports</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="Helpers_u.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

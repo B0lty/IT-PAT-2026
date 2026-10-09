@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
-  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation;
+  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, System.Hash,
+  Helpers_u;
 
 type
   TfrmLogin = class(TForm)
@@ -22,6 +23,8 @@ type
     edtUsernameLogin: TEdit;
     Label3: TLabel;
     lblLoginError: TLabel;
+    procedure btnLoginClick(Sender: TObject);
+    procedure btnCreateAccountClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +36,87 @@ var
 
 implementation
 
+uses Main_u, CreateAcc_u;
+
 {$R *.fmx}
+
+
+
+procedure TfrmLogin.btnCreateAccountClick(Sender: TObject);
+begin
+  frmLogin.Hide;
+  CreateAcc_u.frmCreateAcc.Show;
+  edtUsernameLogin.Text := '';
+  edtPasswordLogin.Text := '';
+end;
+
+procedure TfrmLogin.btnLoginClick(Sender: TObject);
+var
+  tLoginDetails: TextFile;
+  sLine, sUsername, sPassword, sHashedInputPassword: String;
+  iPos: Integer;
+  bCredentialsCorrect: Boolean;
+begin
+  // Confirming that the data in the login details tetx file has not been tampered with.
+  if FHelpers.ConfirmFileValidity(frmMain.LOGIN_DETAILS_PATH) = False then
+  begin
+    ShowMessage('Critical Error: All login details have been compromised..' + #10#13 + 'You will be unable to log in.');
+    exit
+  end;
+
+  // Checking if the username and password are correct
+  AssignFile(tLoginDetails, frmMain.LOGIN_DETAILS_PATH);
+
+  if NOT FileExists(frmMain.LOGIN_DETAILS_PATH) then
+    Rewrite(tLoginDetails)
+  else
+    Reset(tLoginDetails);
+
+  try
+    bCredentialsCorrect := False;
+
+    while (NOT EOF(tLoginDetails)) and (bCredentialsCorrect = False) do
+    begin
+      Readln(tLoginDetails, sLine);
+
+      iPos := Pos(';', sLine);
+      sUsername := Copy(sLine, 1, iPos-1);
+      Delete(sLine, 1, iPos);
+
+      sPassword := sLine;
+
+      sHashedInputPassword := THashSHA2.GetHashString(edtPasswordLogin.Text);
+
+      if (edtUsernameLogin.Text = sUsername) and (sHashedInputPassword = sPassword) then
+      begin
+        bCredentialsCorrect := True;
+      end;
+    end;
+  finally
+    CloseFile(tLoginDetails);
+  end;
+
+  if NOT bCredentialsCorrect then
+  begin
+    edtUsernameLogin.Text := '';
+    edtPasswordLogin.Text := '';
+    lblLoginError.Text := 'Username or password is incorrect.';
+    exit
+  end;
+
+  // Saving the logged in user's username
+  Main_u.sCurrentUser := edtUsernameLogin.Text;
+
+  frmMain.CurrentUserUpdate();
+
+  frmLogin.Hide;
+  frmMain.Show;
+
+  edtUsernameLogin.Text := '';
+  edtPasswordLogin.Text := '';
+  lblLoginError.Text := '';
+
+  FHelpers.IniWriteString('general', ['last_logged_in'], [Main_u.sCurrentUser]);
+end;
 
 end.

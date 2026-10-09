@@ -32,7 +32,7 @@ object frmMain: TfrmMain
       TextSettings.Trimming = None
       OnClick = btnLogOutClick
     end
-    object Label13: TLabel
+    object lblCurrentUser: TLabel
       Align = Right
       Margins.Left = 10.000000000000000000
       Margins.Top = 10.000000000000000000
@@ -49,7 +49,7 @@ object frmMain: TfrmMain
       TabOrder = 1
     end
   end
-  object Rectangle7: TRectangle
+  object rectSidePanelClosed: TRectangle
     Align = MostRight
     Fill.Color = x64E0E0E0
     Position.X = 576.000000000000000000
@@ -98,7 +98,7 @@ object frmMain: TfrmMain
       TabOrder = 2
     end
   end
-  object Rectangle10: TRectangle
+  object rectSidePanelOpen: TRectangle
     Align = Right
     Fill.Color = x64E0E0E0
     Position.X = 272.000000000000000000
@@ -107,7 +107,7 @@ object frmMain: TfrmMain
     Size.Height = 431.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = x64B59797
-    object Button3: TButton
+    object btnSend: TButton
       Align = Bottom
       Margins.Left = 10.000000000000000000
       Margins.Right = 10.000000000000000000
@@ -121,7 +121,7 @@ object frmMain: TfrmMain
       TextSettings.Trimming = None
       OnClick = btnSendClick
     end
-    object Memo1: TMemo
+    object memAIInput: TMemo
       Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
       DataDetectorTypes = []
       Align = MostBottom
@@ -135,10 +135,10 @@ object frmMain: TfrmMain
       Size.Height = 74.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
-      Viewport.Width = 280.000000000000000000
-      Viewport.Height = 70.000000000000000000
+      Viewport.Width = 284.000000000000000000
+      Viewport.Height = 74.000000000000000000
     end
-    object Memo2: TMemo
+    object memAIResponse: TMemo
       Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
       DataDetectorTypes = []
       ReadOnly = True
@@ -153,8 +153,8 @@ object frmMain: TfrmMain
       Size.Height = 223.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
-      Viewport.Width = 280.000000000000000000
-      Viewport.Height = 219.000000000000000000
+      Viewport.Width = 284.000000000000000000
+      Viewport.Height = 223.000000000000000000
     end
     object Rectangle11: TRectangle
       Align = MostTop

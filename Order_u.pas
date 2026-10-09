@@ -52,6 +52,8 @@ var
 
 implementation
 
+uses Main_u;
+
 {$R *.fmx}
 
 end.

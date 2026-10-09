@@ -9,21 +9,22 @@ uses
   FMX.Styles.Objects, FMX.TabControl, FMX.DialogService, System.Hash, System.IniFiles,
   System.IOUtils, System.JSON,
   FMX.Memo.Types, FMX.ScrollBox, FMX.Memo, OpenAI, OpenAI.Chat,
-  OpenAI.Errors, OpenAI.Component.Chat, Winapi.ShellAPI, Winapi.Windows, FMX.Platform.Win;
+  OpenAI.Errors, OpenAI.Component.Chat, Winapi.ShellAPI, Winapi.Windows, FMX.Platform.Win,
+  Login_u, CreateAcc_u, MenuMng_u, Order_u, Reports_u, Helpers_u;
 
 type
   TfrmMain = class(TForm)
     Panel6: TPanel;
     Button1: TButton;
-    Label13: TLabel;
-    Rectangle7: TRectangle;
+    lblCurrentUser: TLabel;
+    rectSidePanelClosed: TRectangle;
     Rectangle9: TRectangle;
     Button2: TButton;
     Label14: TLabel;
-    Rectangle10: TRectangle;
-    Button3: TButton;
-    Memo1: TMemo;
-    Memo2: TMemo;
+    rectSidePanelOpen: TRectangle;
+    btnSend: TButton;
+    memAIInput: TMemo;
+    memAIResponse: TMemo;
     Rectangle11: TRectangle;
     Button4: TButton;
     Label15: TLabel;
@@ -32,10 +33,6 @@ type
     btnNavOrders: TButton;
     btnNavReports: TButton;
     lblPortalTitle: TLabel;
-    procedure btnCreateAccountClick(Sender: TObject);
-    procedure btnCancelCreateAccountClick(Sender: TObject);
-    procedure btnLoginClick(Sender: TObject);
-    procedure btnCreateAccountConfirmClick(Sender: TObject);
     procedure btnLogOutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSendClick(Sender: TObject);
@@ -44,12 +41,6 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    procedure AppendToTextFile(sPath: String; cDelimiter: Char; arrData: TArray<String>);
-    function ConfirmFileValidity(sPath: String): boolean;
-    procedure SetFileHashKey(sPath: String);
-    procedure CurrentUserUpdate();
-    procedure IniWriteString(sSection: String; arrKeys, arrValues: TArray<String>);
-    function IniReadString(sSection: String; arrKeys, arrDefaults: TArray<String>): TArray<String>;
     procedure InitLocalAI;
     function MakeStreamProc(Form: TfrmMain; bShowMessage: Boolean): TChatEvent;
     function MessageAI(sMessage: String): String;
@@ -57,226 +48,32 @@ type
     procedure StopLlamaServer;
 
     var
-      sCurrentUser: String;
-      APP_PATH: String;
       FOpenAI: IOpenAI;
       sAILastMessage: String;
       hServerProcess: THandle;
-    const
-      LOGIN_DETAILS_PATH = 'data\login-details.txt';
   public
     { Public declarations }
+    procedure CurrentUserUpdate();
+    var
+      sCurrentUser: String;
+
+    const
+      LOGIN_DETAILS_PATH = 'data\login-details.txt';
   end;
 
 var
   frmMain: TfrmMain;
+  sCurrentUser: String;
+  APP_PATH: String;
 
 implementation
 
 {$R *.fmx}
 
-procedure TfrmMain.AppendToTextFile(sPath: String; cDelimiter: Char; arrData: TArray<String>);
-var
-  tTextFile: TextFile;
-  sOutput: String;
-  iIndex: Integer;
-begin
-  // Formatting data with delimiters
-  // Differentiate between zero and one indexed arrays
-  if Low(arrData) = 0 then
-  begin
-    sOutput := '';
-    for iIndex := 0 to Length(arrData)-1 do
-    begin
-      if iIndex = Length(arrData)-1 then
-        sOutput := sOutput + arrData[iIndex]
-      else
-        sOutput := sOutput + arrData[iIndex] + cDelimiter;
-    end;
-  end
-  else if Low(arrData) = 1 then
-  begin
-    sOutput := '';
-    for iIndex := 1 to Length(arrData) do
-    begin
-      if iIndex = Length(arrData) then
-        sOutput := sOutput + arrData[iIndex]
-      else
-        sOutput := sOutput + arrData[iIndex] + cDelimiter;
-    end;
-  end;
-
-  // Writing data to file
-  AssignFile(tTextFile, sPath);
-  Append(tTextFile);
-  try
-    Writeln(tTextFile, sOutput);
-  finally
-    CloseFile(tTextFile);
-  end;
-
-end;
-
-
-function TfrmMain.ConfirmFileValidity(sPath: String): boolean;
-var
-  tTextFile: TextFile;
-  sFileData, sFileHash, sLine, sHashKey: String;
-  bFirstLine: Boolean;
-begin
-  AssignFile(tTextFile, sPath);
-
-  if NOT FileExists(sPath) then
-  begin
-    Result := False;
-    exit
-  end;
-
-  Reset(tTextFile);
-
-  try
-    sFileData := '';
-
-    bFirstLine := True;
-
-    while NOT EOF(tTextFile) do
-    begin
-      if NOT bFirstLine then
-      begin
-        Readln(tTextFile, sLine);
-        sFileData := sFileData + sLine;
-      end
-      else
-        Readln(tTextFile, sHashKey);
-
-      bFirstLine := False;
-    end;
-  finally
-    CloseFile(tTextFile);
-  end;
-
-  sFileHash := THashSHA2.GetHashString(sFileData);
-
-  if sFileHash = sHashKey then
-    Result := True
-  else
-    Result := False;
-
-end;
-
-
-procedure TfrmMain.SetFileHashKey(sPath: String);
-var
-  tTextFile: TextFile;
-  sFileData, sFileHash, sLine: String;
-  bFirstLine: Boolean;
-//  SList: TStringList;
-  arrListLines: TArray<String>;
-  iIndex, iArrLength: Integer;
-begin
-  AssignFile(tTextFile, sPath);
-
-  if NOT FileExists(sPath) then
-    exit;
-
-  iArrLength := 0;
-
-  Reset(tTextFile);
-//  SList := TStringList.Create;
-  try
-    sFileData := '';
-    bFirstLine := True;
-
-    while not EOF(tTextFile) do
-    begin
-      Inc(iArrLength);
-      SetLength(arrListLines, iArrlength);
-
-      Readln(tTextFile, sLine);
-
-      if not bFirstLine then
-      begin
-        sFileData := sFileData + sLine;
-        arrListLines[iArrLength-1] := sLine;
-      end;
-
-      bFirstLine := False;
-    end;
-
-    sFileHash := THashSHA2.GetHashString(sFileData);
-
-    Rewrite(tTextFile);
-
-    Writeln(tTextFile, sFileHash);
-
-    for iIndex := 0 to Length(arrListLines) - 1 do
-    begin
-      Writeln(tTextFile, arrListLines[iIndex]);
-    end;
-  finally
-    CloseFile(tTextFile);
-//    SList.Free;
-  end;
-end;
-
 
 procedure TfrmMain.CurrentUserUpdate();
 begin
   lblCurrentUser.Text := 'Logged in as: ' + sCurrentUser;
-end;
-
-
-procedure TfrmMain.IniWriteString(sSection: String; arrKeys, arrValues: TArray<String>);
-var
-  iIndex: Integer;
-  iniFile: TIniFile;
-begin
-  // Allows for bulk writing to the ini file
-
-  if Length(arrKeys) <> Length(arrValues) then
-  begin
-      exit
-  end;
-
-  iniFile := TIniFile.Create(ChangeFileExt(APP_PATH + '\data\data', '.ini'));
-  try
-    for iIndex := 0 to Length(arrValues) - 1 do
-    begin
-      iniFile.WriteString(sSection, arrkeys[iIndex], arrValues[iIndex]);
-    end;
-  finally
-    iniFile.Free;
-  end;
-end;
-
-
-function TfrmMain.IniReadString(sSection: String; arrKeys, arrDefaults: TArray<String>): TArray<String>;
-var
-  iIndex: Integer;
-  iniFile: TIniFile;
-  iResultLength: Integer;
-begin
-  // Allows for bulk reading from the ini file
-
-  if Length(arrKeys) <> Length(arrDefaults) then
-  begin
-      Result := [''];
-      exit
-  end;
-
-  iResultLength := 0;
-
-  iniFile := TIniFile.Create(ChangeFileExt(APP_PATH + '\data\data', '.ini'));
-  try
-    for iIndex := 0 to Length(arrDefaults) - 1 do
-    begin
-      Inc(iResultLength);
-      SetLength(Result, iResultLength);
-      Result[iIndex] := iniFile.ReadString(sSection, arrkeys[iIndex], arrDefaults[iIndex]);
-    end;
-  finally
-    iniFile.Free;
-  end;
 end;
 
 
@@ -446,228 +243,6 @@ end;
 |__/       \_______/|__/     \_______/|__/       \_______/|__/  |__/ \_______/ \_______/ |__/
 }
 
-procedure TfrmMain.btnLoginClick(Sender: TObject);
-var
-  tLoginDetails: TextFile;
-  sLine, sUsername, sPassword, sHashedInputPassword: String;
-  iPos: Integer;
-  bCredentialsCorrect: Boolean;
-begin
-
-  // Confirming that the data in the login details tetx file has not been tampered with.
-  if ConfirmFileValidity(LOGIN_DETAILS_PATH) = False then
-  begin
-    ShowMessage('Critical Error: All login details have been compromised..' + #10#13 + 'You will be unable to log in.');
-    exit
-  end;
-
-  // Checking if the username and password are correct
-  AssignFile(tLoginDetails, LOGIN_DETAILS_PATH);
-
-  if NOT FileExists(LOGIN_DETAILS_PATH) then
-    Rewrite(tLoginDetails)
-  else
-    Reset(tLoginDetails);
-
-  try
-    bCredentialsCorrect := False;
-
-    while (NOT EOF(tLoginDetails)) and (bCredentialsCorrect = False) do
-    begin
-      Readln(tLoginDetails, sLine);
-
-      iPos := Pos(';', sLine);
-      sUsername := Copy(sLine, 1, iPos-1);
-      Delete(sLine, 1, iPos);
-
-      sPassword := sLine;
-
-      sHashedInputPassword := THashSHA2.GetHashString(edtPasswordLogin.Text);
-
-      if (edtUsernameLogin.Text = sUsername) and (sHashedInputPassword = sPassword) then
-      begin
-        bCredentialsCorrect := True;
-      end;
-    end;
-  finally
-    CloseFile(tLoginDetails);
-  end;
-
-  if NOT bCredentialsCorrect then
-  begin
-    edtUsernameLogin.Text := '';
-    edtPasswordLogin.Text := '';
-    lblLoginError.Text := 'Username or password is incorrect.';
-    exit
-  end;
-
-  // Saving the logged in user's username
-  sCurrentUser := edtUsernameLogin.Text;
-
-  CurrentUserUpdate();
-
-  tbCtrlMain.ActiveTab := tbMainPage;
-  edtUsernameLogin.Text := '';
-  edtPasswordLogin.Text := '';
-  lblLoginError.Text := '';
-
-  IniWriteString('general', ['last_logged_in'], [sCurrentUser]);
-end;
-
-procedure TfrmMain.btnCreateAccountClick(Sender: TObject);
-begin
-  tbCtrlMain.ActiveTab := tbCreateAccount;
-  edtUsernameLogin.Text := '';
-  edtPasswordLogin.Text := '';
-end;
-
-procedure TfrmMain.btnCreateAccountConfirmClick(Sender: TObject);
-var
-  tLoginDetails: TextFile;
-  iIndex, iPos: Integer;
-  sLine: String;
-  bPassHasChar, bPassHasNum: Boolean;
-begin
-  {
-  File format:
-  <LINE 1 OF FILE IS HASH KEY>
-  <USERNAME>;<HASHED_PASSWORD>
-  }
-
-  // Confirming that the data in the login details tetx file has not been tampered with.
-  if ConfirmFileValidity(LOGIN_DETAILS_PATH) = False then
-  begin
-    ShowMessage('Critical Error: All login details have been compromised.' + #10#13 + 'You will be unable to create a new account.');
-    exit
-  end;
-
-  // Checking username length
-  if (Length(edtUsernameCreate.Text) < 4) or (Length(edtUsernameCreate.Text) > 21) then
-  begin
-    lblCreateAccountError.Text := 'Username must be at least 5 characters long, and no more than 20 charaters long.';
-    exit
-  end;
-
-  // Validating username
-  for iIndex := 1 to Length(edtUsernameCreate.Text) do
-  begin
-    if (NOT CharInSet(edtUsernameCreate.Text[iIndex], ['0'..'9'])) then
-    begin
-      if (NOT CharInSet(UpCase(edtUsernameCreate.Text[iIndex]), ['A'..'Z'])) then
-      begin
-        if (NOT CharInSet(UpCase(edtUsernameCreate.Text[iIndex]), ['-', '_', '=', '+', '~', '<', '>', '@', '#', '$', '%', '^', '&', '*'])) then
-        begin
-          lblCreateAccountError.Text := 'Username may only contain numbers and letters and other acceptable characters: "-", "_", "=", "+", "~", "<", ">", "@", "#", "$", "%", "^", "&", "*"';
-          exit
-        end;
-      end;
-    end;
-  end;
-
-  // Validating password
-  if NOT (edtPasswordCreate.Text = edtPasswordConfirmCreate.Text) then
-  begin
-    lblCreateAccountError.Text := 'Passwords do not match.';
-    exit
-  end;
-
-  if (Length(edtPasswordCreate.Text) < 5) or (Length(edtPasswordCreate.Text) > 21) then
-  begin
-    lblCreateAccountError.Text := 'Password must be at least 6 characters long, and no more than 20 charaters long.';
-    exit
-  end;
-
-  for iIndex := 1 to Length(edtPasswordCreate.Text) do
-  begin
-    if (NOT CharInSet(edtPasswordCreate.Text[iIndex], ['0'..'9'])) then
-    begin
-      if (NOT CharInSet(UpCase(edtPasswordCreate.Text[iIndex]), ['A'..'Z'])) then
-      begin
-        lblCreateAccountError.Text := 'Password may only contain numbers and letters.';
-        exit
-      end;
-    end;
-  end;
-
-  // Checking that password has number/s and letter/s
-  bPassHasChar := False;
-  bPassHasNum := False;
-
-  for iIndex := 1 to Length(edtPasswordCreate.Text) do
-  begin
-    if (CharInSet(edtPasswordCreate.Text[iIndex], ['1'..'9'])) then
-    begin
-      bPassHasNum := True;
-    end;
-
-    if (CharInSet(UpCase(edtPasswordCreate.Text[iIndex]), ['A'..'Z'])) then
-    begin
-      bPassHasChar := True;
-    end;
-  end;
-
-  if (bPassHasNum = False) or (bPassHasChar = False) then
-  begin
-    lblCreateAccountError.Text := 'Password must contain atleast one number and letter.';
-    exit
-  end;
-
-  // Checking if the username already exists
-  AssignFile(tLoginDetails, LOGIN_DETAILS_PATH);
-
-  if NOT FileExists(LOGIN_DETAILS_PATH) then
-    Rewrite(tLoginDetails)
-  else
-    Reset(tLoginDetails);
-
-  try
-    while NOT EOF(tLoginDetails) do
-    begin
-      Readln(tLoginDetails, sLine);
-
-      iPos := Pos(';', sLine);
-      Delete(sLine, iPos, Length(sLine) - iPos + 1);
-
-      if edtUsernameCreate.Text = sLine then
-      begin
-        lblCreateAccountError.Text := 'Username already taken.';
-        exit
-      end;
-    end;
-  finally
-    CloseFile(tLoginDetails);
-  end;
-
-  // Appending username and password to file
-  AppendToTextFile(LOGIN_DETAILS_PATH, ';', [edtUsernameCreate.Text, THashSHA2.GetHashString(edtPasswordCreate.Text)]);
-
-  // Entering the main page of the project
-  tbCtrlMain.ActiveTab := tbMainPage;
-
-  // Saving the logged in user's username
-  sCurrentUser := edtUsernameCreate.Text;
-
-  CurrentUserUpdate();
-
-  edtUsernameCreate.Text := '';
-  edtPasswordCreate.Text := '';
-  edtPasswordConfirmCreate.Text := '';
-  lblCreateAccountError.Text := '';
-
-  // Extra security via creating a hash of all the data in the file and putting the hash at the top as a key.
-  SetFileHashKey(LOGIN_DETAILS_PATH);
-
-  IniWriteString('general', ['last_logged_in'], [sCurrentUser]);
-end;
-
-procedure TfrmMain.btnCancelCreateAccountClick(Sender: TObject);
-begin
-  tbCtrlMain.ActiveTab := tbLogin;
-
-  edtUsernameCreate.Text := '';
-  edtPasswordCreate.Text := '';
-  edtPasswordConfirmCreate.Text := '';
-end;
 
 procedure TfrmMain.btnLogOutClick(Sender: TObject);
 begin
@@ -681,13 +256,14 @@ begin
     begin
       if AResult = mrYes then
       begin
-        tbCtrlMain.ActiveTab := tbLogin;
+        frmMain.Hide;
+        Login_u.frmLogin.Show;
 
         sCurrentUser := 'none';
 
         CurrentUserUpdate();
 
-        IniWriteString('general', ['last_logged_in'], ['none']);
+        FHelpers.IniWriteString('general', ['last_logged_in'], ['none']);
       end;
     end
   );
@@ -742,16 +318,22 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  tbCtrlMain.ActiveTab := tbLogin;
+  FHelpers := THelperFunc.Create;
+
+//  Login_u.frmLogin.Show;
+//  frmMain.Hide;
 
   APP_PATH := TPath.GetAppPath();
 
-  sCurrentUser := IniReadString('general', ['last_logged_in'], ['none'])[0];
+  sCurrentUser := FHelpers.IniReadString('general', ['last_logged_in'], ['none'])[0];
 
   CurrentUserUpdate();
 
-  if sCurrentUser <> 'none' then
-    tbCtrlMain.ActiveTab := tbMainPage;
+//  if sCurrentUser <> 'none' then
+//  begin
+//    frmMain.Show;
+//    Login_u.frmLogin.Hide;
+//  end;
 
   InitLocalAI;
 

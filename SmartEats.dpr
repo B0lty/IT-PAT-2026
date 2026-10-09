@@ -4,21 +4,22 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   Main_u in 'Main_u.pas' {frmMain},
-  Login_u in 'Login_u.pas' {Form1},
-  CreateAccount_u in 'CreateAccount_u.pas' {Form2},
-  MenuManagement_u in 'MenuManagement_u.pas' {Form3},
-  Order_u in 'Order_u.pas' {Form4},
-  Reports_u in 'Reports_u.pas' {Form5};
+  Login_u in 'Login_u.pas' {frmLogin},
+  CreateAcc_u in 'CreateAcc_u.pas' {frmCreateAcc},
+  MenuMng_u in 'MenuMng_u.pas' {frmMenu},
+  Order_u in 'Order_u.pas' {frmOrder},
+  Reports_u in 'Reports_u.pas' {frmReports},
+  Helpers_u in 'Helpers_u.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TForm2, Form2);
-  Application.CreateForm(TForm3, Form3);
-  Application.CreateForm(TForm4, Form4);
-  Application.CreateForm(TForm5, Form5);
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmCreateAcc, frmCreateAcc);
+  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmOrder, frmOrder);
+  Application.CreateForm(TfrmReports, frmReports);
   Application.Run;
 end.

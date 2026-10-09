@@ -48,6 +48,7 @@ object frmLogin: TfrmLogin
         TabOrder = 2
         Text = 'Enter'
         TextSettings.Trimming = None
+        OnClick = btnLoginClick
       end
       object btnCreateAccount: TButton
         Align = MostLeft
@@ -63,6 +64,7 @@ object frmLogin: TfrmLogin
         TabOrder = 1
         Text = 'Create Account'
         TextSettings.Trimming = None
+        OnClick = btnCreateAccountClick
       end
     end
     object Rectangle1: TRectangle

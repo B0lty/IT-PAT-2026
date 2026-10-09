@@ -48,6 +48,7 @@ object frmCreateAcc: TfrmCreateAcc
         TabOrder = 2
         Text = 'Create'
         TextSettings.Trimming = None
+        OnClick = btnCreateAccountConfirmClick
       end
       object btnCancelCreateAccount: TButton
         Align = MostLeft
@@ -63,6 +64,7 @@ object frmCreateAcc: TfrmCreateAcc
         TabOrder = 1
         Text = 'Cancel'
         TextSettings.Trimming = None
+        OnClick = btnCancelCreateAccountClick
       end
     end
     object Rectangle3: TRectangle
