@@ -29,7 +29,7 @@
 # Default Delphi compiler directories
 # Content of this directories are generated with each Compile/Construct of a project.
 # Most of the time, files here have not there place in a code repository.
-#Win32/
+Win32/
 #Win64/
 #OSX64/
 #OSXARM64/
@@ -79,3 +79,10 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+# Exclude .gguf files, AI model file, as they are too large for github
+*.gguf
+
+# Reincluding build binaries for llama.cpp, this is used to run the AI model
+!Win64/Debug/llama.cpp/*.dll
+!Win64/Debug/llama.cpp/*.exe
