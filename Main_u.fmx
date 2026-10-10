@@ -1,9 +1,11 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Smart Eats - Home Page'
   ClientHeight = 480
   ClientWidth = 640
+  Position = Designed
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -220,6 +222,7 @@ object frmMain: TfrmMain
     TabOrder = 0
     Text = 'Menu Management'
     TextSettings.Trimming = None
+    OnClick = btnNavMenuClick
   end
   object btnNavOrders: TButton
     Position.X = 20.000000000000000000
@@ -230,6 +233,7 @@ object frmMain: TfrmMain
     TabOrder = 1
     Text = 'Place Order'
     TextSettings.Trimming = None
+    OnClick = btnNavOrdersClick
   end
   object btnNavReports: TButton
     Position.X = 20.000000000000000000
@@ -240,6 +244,7 @@ object frmMain: TfrmMain
     TabOrder = 2
     Text = 'Reports'
     TextSettings.Trimming = None
+    OnClick = btnNavReportsClick
   end
   object lblPortalTitle: TLabel
     Position.X = 20.000000000000000000

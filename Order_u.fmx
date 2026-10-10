@@ -1,12 +1,15 @@
 object frmOrder: TfrmOrder
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Smart Eats - Order Placement'
   ClientHeight = 480
   ClientWidth = 640
+  Position = Designed
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object btnOrderAddItem: TButton
     Position.X = 350.000000000000000000
@@ -27,6 +30,7 @@ object frmOrder: TfrmOrder
     TabOrder = 16
     Text = 'Back to Main'
     TextSettings.Trimming = None
+    OnClick = btnOrderBackClick
   end
   object btnOrderClear: TButton
     Position.X = 140.000000000000000000
@@ -129,7 +133,7 @@ object frmOrder: TfrmOrder
     object colOrderItem: TStringColumn
       Header = 'Item'
       HeaderSettings.TextSettings.WordWrap = False
-      Size.Width = 180.000000000000000000
+      Size.Width = 185.000000000000000000
     end
     object colOrderPrice: TStringColumn
       Header = 'Price'

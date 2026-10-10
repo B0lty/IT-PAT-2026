@@ -41,6 +41,8 @@ type
     lblOrderVatCaption: TLabel;
     lblOrderVatValue: TLabel;
     lblOrderWaiterCaption: TLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnOrderBackClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,5 +57,15 @@ implementation
 uses Main_u;
 
 {$R *.fmx}
+
+procedure TfrmOrder.btnOrderBackClick(Sender: TObject);
+begin
+  frmMain.SwapForm(frmOrder, frmMain);
+end;
+
+procedure TfrmOrder.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frmMain.Close;
+end;
 
 end.

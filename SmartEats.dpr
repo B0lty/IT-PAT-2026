@@ -9,7 +9,8 @@ uses
   MenuMng_u in 'MenuMng_u.pas' {frmMenu},
   Order_u in 'Order_u.pas' {frmOrder},
   Reports_u in 'Reports_u.pas' {frmReports},
-  Helpers_u in 'Helpers_u.pas';
+  Helpers_u in 'Helpers_u.pas',
+  DB_u in 'DB_u.pas';
 
 {$R *.res}
 

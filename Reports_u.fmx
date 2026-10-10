@@ -1,12 +1,15 @@
 object frmReports: TfrmReports
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Smart Eats - Reports'
   ClientHeight = 480
   ClientWidth = 640
+  Position = Designed
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object btnReportAll: TButton
     Position.X = 430.000000000000000000
@@ -27,6 +30,7 @@ object frmReports: TfrmReports
     TabOrder = 6
     Text = 'Back to Main'
     TextSettings.Trimming = None
+    OnClick = btnReportBackClick
   end
   object btnReportCategory: TButton
     Position.X = 430.000000000000000000

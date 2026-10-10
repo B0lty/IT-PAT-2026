@@ -28,6 +28,7 @@ type
     lblCreateAccountError: TLabel;
     procedure btnCreateAccountConfirmClick(Sender: TObject);
     procedure btnCancelCreateAccountClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -45,8 +46,7 @@ uses Main_u, Login_u;
 
 procedure TfrmCreateAcc.btnCancelCreateAccountClick(Sender: TObject);
 begin
-  frmCreateAcc.Hide;
-  frmLogin.Show;
+  frmMain.SwapForm(frmCreateAcc, frmLogin);
 
   edtUsernameCreate.Text := '';
   edtPasswordCreate.Text := '';
@@ -175,8 +175,7 @@ begin
   FHelpers.AppendToTextFile(frmMain.LOGIN_DETAILS_PATH, ';', [edtUsernameCreate.Text, THashSHA2.GetHashString(edtPasswordCreate.Text)]);
 
   // Entering the main page of the project
-  frmCreateAcc.Hide;
-  frmMain.Show;
+  frmMain.SwapForm(frmCreateAcc, frmMain);
 
   // Saving the logged in user's username
   // sCurrentUser := edtUsernameCreate.Text;
@@ -192,6 +191,11 @@ begin
   FHelpers.SetFileHashKey(frmMain.LOGIN_DETAILS_PATH);
 
   FHelpers.IniWriteString('general', ['last_logged_in'], [sCurrentUser]);
+end;
+
+procedure TfrmCreateAcc.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frmMain.Close;
 end;
 
 end.

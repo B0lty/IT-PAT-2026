@@ -25,6 +25,7 @@ type
     lblLoginError: TLabel;
     procedure btnLoginClick(Sender: TObject);
     procedure btnCreateAccountClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -44,8 +45,7 @@ uses Main_u, CreateAcc_u;
 
 procedure TfrmLogin.btnCreateAccountClick(Sender: TObject);
 begin
-  frmLogin.Hide;
-  CreateAcc_u.frmCreateAcc.Show;
+  frmMain.SwapForm(frmLogin, frmCreateAcc);
   edtUsernameLogin.Text := '';
   edtPasswordLogin.Text := '';
 end;
@@ -109,14 +109,18 @@ begin
 
   frmMain.CurrentUserUpdate();
 
-  frmLogin.Hide;
-  frmMain.Show;
+  frmMain.SwapForm(frmLogin, frmMain);
 
   edtUsernameLogin.Text := '';
   edtPasswordLogin.Text := '';
   lblLoginError.Text := '';
 
   FHelpers.IniWriteString('general', ['last_logged_in'], [Main_u.sCurrentUser]);
+end;
+
+procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frmMain.Close;
 end;
 
 end.

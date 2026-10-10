@@ -1,12 +1,16 @@
 object frmMenu: TfrmMenu
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Smart Eats - Menu Management'
   ClientHeight = 480
   ClientWidth = 640
+  Position = Designed
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object btnMenuAdd: TButton
     Position.X = 10.000000000000000000
@@ -17,6 +21,7 @@ object frmMenu: TfrmMenu
     TabOrder = 3
     Text = 'Add'
     TextSettings.Trimming = None
+    OnClick = btnMenuAddClick
   end
   object btnMenuBack: TButton
     Position.X = 135.000000000000000000
@@ -27,6 +32,7 @@ object frmMenu: TfrmMenu
     TabOrder = 12
     Text = 'Back to Main'
     TextSettings.Trimming = None
+    OnClick = btnMenuBackClick
   end
   object btnMenuClear: TButton
     Position.X = 135.000000000000000000
@@ -37,6 +43,7 @@ object frmMenu: TfrmMenu
     TabOrder = 6
     Text = 'Clear fields'
     TextSettings.Trimming = None
+    OnClick = btnMenuClearClick
   end
   object btnMenuDelete: TButton
     Position.X = 10.000000000000000000
@@ -47,6 +54,7 @@ object frmMenu: TfrmMenu
     TabOrder = 5
     Text = 'Delete'
     TextSettings.Trimming = None
+    OnClick = btnMenuDeleteClick
   end
   object btnMenuFirst: TButton
     Position.X = 10.000000000000000000
@@ -57,6 +65,7 @@ object frmMenu: TfrmMenu
     TabOrder = 7
     Text = '|<'
     TextSettings.Trimming = None
+    OnClick = btnMenuFirstClick
   end
   object btnMenuLast: TButton
     Position.X = 190.000000000000000000
@@ -67,6 +76,7 @@ object frmMenu: TfrmMenu
     TabOrder = 10
     Text = '>|'
     TextSettings.Trimming = None
+    OnClick = btnMenuLastClick
   end
   object btnMenuNext: TButton
     Position.X = 130.000000000000000000
@@ -77,6 +87,7 @@ object frmMenu: TfrmMenu
     TabOrder = 9
     Text = '>'
     TextSettings.Trimming = None
+    OnClick = btnMenuNextClick
   end
   object btnMenuPrev: TButton
     Position.X = 70.000000000000000000
@@ -87,6 +98,7 @@ object frmMenu: TfrmMenu
     TabOrder = 8
     Text = '<'
     TextSettings.Trimming = None
+    OnClick = btnMenuPrevClick
   end
   object btnMenuRefresh: TButton
     Position.X = 10.000000000000000000
@@ -97,6 +109,7 @@ object frmMenu: TfrmMenu
     TabOrder = 11
     Text = 'Refresh'
     TextSettings.Trimming = None
+    OnClick = btnMenuRefreshClick
   end
   object btnMenuUpdate: TButton
     Position.X = 135.000000000000000000
@@ -107,6 +120,7 @@ object frmMenu: TfrmMenu
     TabOrder = 4
     Text = 'Update'
     TextSettings.Trimming = None
+    OnClick = btnMenuUpdateClick
   end
   object cmbMenuCategory: TComboBox
     Items.Strings = (
@@ -142,25 +156,21 @@ object frmMenu: TfrmMenu
   object grdMenu: TStringGrid
     CanFocus = True
     ClipChildren = True
-    Position.X = 270.000000000000000000
-    Position.Y = 60.000000000000000000
+    Position.X = 272.000000000000000000
+    Position.Y = 52.000000000000000000
     Size.Width = 360.000000000000000000
     Size.Height = 410.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 13
     RowCount = 1
     Options = [AlternatingRowBackground, ColLines, RowLines, RowSelect, Header]
-    Viewport.Width = 360.000000000000000000
-    Viewport.Height = 410.000000000000000000
-    object colMenuID: TStringColumn
-      Header = 'ID'
-      HeaderSettings.TextSettings.WordWrap = False
-      Size.Width = 40.000000000000000000
-    end
+    OnCellClick = grdMenuCellClick
+    Viewport.Width = 356.000000000000000000
+    Viewport.Height = 385.000000000000000000
     object colMenuName: TStringColumn
       Header = 'Item name'
       HeaderSettings.TextSettings.WordWrap = False
-      Size.Width = 150.000000000000000000
+      Size.Width = 186.000000000000000000
     end
     object colMenuCategory: TStringColumn
       Header = 'Category'
@@ -170,7 +180,12 @@ object frmMenu: TfrmMenu
     object colMenuPrice: TStringColumn
       Header = 'Price'
       HeaderSettings.TextSettings.WordWrap = False
-      Size.Width = 80.000000000000000000
+      Size.Width = 73.000000000000000000
+    end
+    object colID: TStringColumn
+      HeaderSettings.TextSettings.WordWrap = False
+      Visible = False
+      Size.Width = 1.000000000000000000
     end
   end
   object lblMenuCategoryCaption: TLabel

@@ -10,7 +10,7 @@ uses
   System.IOUtils, System.JSON,
   FMX.Memo.Types, FMX.ScrollBox, FMX.Memo, OpenAI, OpenAI.Chat,
   OpenAI.Errors, OpenAI.Component.Chat, Winapi.ShellAPI, Winapi.Windows, FMX.Platform.Win,
-  Login_u, CreateAcc_u, MenuMng_u, Order_u, Reports_u, Helpers_u;
+  Login_u, CreateAcc_u, MenuMng_u, Order_u, Reports_u, Helpers_u, DB_u;
 
 type
   TfrmMain = class(TForm)
@@ -39,6 +39,9 @@ type
     procedure btnOpenSideMenuClick(Sender: TObject);
     procedure btnCloseSideMenuClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure btnNavMenuClick(Sender: TObject);
+    procedure btnNavOrdersClick(Sender: TObject);
+    procedure btnNavReportsClick(Sender: TObject);
   private
     { Private declarations }
     procedure InitLocalAI;
@@ -54,6 +57,7 @@ type
   public
     { Public declarations }
     procedure CurrentUserUpdate();
+    procedure SwapForm(aFrom, aTo: TForm);
     var
       sCurrentUser: String;
 
@@ -65,10 +69,29 @@ var
   frmMain: TfrmMain;
   sCurrentUser: String;
   APP_PATH: String;
+  GlobalPosTop, GlobalPosLeft: Integer;
 
 implementation
 
 {$R *.fmx}
+
+procedure TfrmMain.SwapForm(aFrom, aTo: TForm);
+begin
+  if aFrom <> nil then
+  begin
+    GlobalPosLeft := aFrom.Left;
+    GlobalPosTop  := aFrom.Top;
+  end;
+
+  aTo.Position := TFormPosition.Designed;
+  aTo.Left := GlobalPosLeft;
+  aTo.Top  := GlobalPosTop;
+
+  if aFrom <> nil then
+    aFrom.Hide;
+
+  aTo.Show;
+end;
 
 
 procedure TfrmMain.CurrentUserUpdate();
@@ -199,6 +222,8 @@ begin
   hServerProcess := 0;
 end;
 
+
+
 {
  /$$$$$$                   /$$     /$$                   /$$
 |_  $$_/                  | $$    | $$                  | $$
@@ -256,8 +281,7 @@ begin
     begin
       if AResult = mrYes then
       begin
-        frmMain.Hide;
-        Login_u.frmLogin.Show;
+        SwapForm(frmMain, frmLogin);
 
         sCurrentUser := 'none';
 
@@ -267,6 +291,21 @@ begin
       end;
     end
   );
+end;
+
+procedure TfrmMain.btnNavMenuClick(Sender: TObject);
+begin
+  SwapForm(frmMain, frmMenu);
+end;
+
+procedure TfrmMain.btnNavOrdersClick(Sender: TObject);
+begin
+  SwapForm(frmMain, frmOrder);
+end;
+
+procedure TfrmMain.btnNavReportsClick(Sender: TObject);
+begin
+  SwapForm(frmMain, frmReports);
 end;
 
 procedure TfrmMain.btnSendClick(Sender: TObject);
@@ -320,33 +359,34 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   FHelpers := THelperFunc.Create;
 
-//  Login_u.frmLogin.Show;
-//  frmMain.Hide;
-
   APP_PATH := TPath.GetAppPath();
 
   sCurrentUser := FHelpers.IniReadString('general', ['last_logged_in'], ['none'])[0];
 
-  CurrentUserUpdate();
+  CurrentUserUpdate;
 
-//  if sCurrentUser <> 'none' then
+//  if sCurrentUser = 'none' then
 //  begin
-//    frmMain.Show;
-//    Login_u.frmLogin.Hide;
+//    frmMain.SwapForm(frmMain, frmLogin);
 //  end;
 
-  InitLocalAI;
+
+
+  //InitLocalAI;
 
   memAIResponse.WordWrap := True;
 
   rectSidePanelOpen.Visible := False;
 
-  StartLlamaServer;
+  //StartLlamaServer;
+
+  // Start the link to the DB and set up the tables
+  dbOrders := TdbOrders.Create(APP_PATH + '/data/OrderDB.mdb');
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
-  StopLlamaServer;
+  //StopLlamaServer;
 end;
 
 end.

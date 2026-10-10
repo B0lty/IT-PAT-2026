@@ -1,12 +1,15 @@
 object frmCreateAcc: TfrmCreateAcc
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Smart Eats - Account Creation'
   ClientHeight = 480
   ClientWidth = 640
+  Position = Designed
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object Label9: TLabel
     Align = Horizontal

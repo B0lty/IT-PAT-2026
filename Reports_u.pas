@@ -19,6 +19,8 @@ type
     lblReportError: TLabel;
     lblReportTitle: TLabel;
     memReport: TMemo;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnReportBackClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,5 +35,15 @@ implementation
 uses Main_u;
 
 {$R *.fmx}
+
+procedure TfrmReports.btnReportBackClick(Sender: TObject);
+begin
+  frmMain.SwapForm(frmReports, frmMain);
+end;
+
+procedure TfrmReports.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frmMain.Close;
+end;
 
 end.

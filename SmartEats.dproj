@@ -322,6 +322,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Helpers_u.pas"/>
+        <DCCReference Include="DB_u.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

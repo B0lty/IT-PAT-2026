@@ -38,7 +38,6 @@ begin
   inherited;
 end;
 
-
 function THelperFunc.ConfirmFileValidity(sPath: String): boolean;
 var
   tTextFile: TextFile;
