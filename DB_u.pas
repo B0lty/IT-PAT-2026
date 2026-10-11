@@ -62,7 +62,7 @@ begin
   end;
 
   try
-    // Setting up the tables
+    // Setting up the Menu table
     tblMenu := TFDTable.Create(nil);
     dscMenu := TDataSource.Create(nil);
 
@@ -78,7 +78,7 @@ begin
   end;
 
   try
-    // Setting up the tables
+    // Setting up the OrderItem table
     tblOrderItem := TFDTable.Create(nil);
     dscOrderItem := TDataSource.Create(nil);
 
@@ -94,7 +94,7 @@ begin
   end;
 
   try
-    // Setting up the tables
+    // Setting up the Orders table
     tblOrders := TFDTable.Create(nil);
     dscOrders := TDataSource.Create(nil);
 
@@ -108,8 +108,6 @@ begin
     on E: Exception do
       raise Exception.Create('Error setting up the Orders table.'+ sLineBreak + E.Message);
   end;
-
-  SetLength(FMenu, 0);
 end;
 
 
@@ -131,6 +129,7 @@ begin
   inherited;
 end;
 
+// Loads the menu to be displayed on the menu management screen
 procedure TdbOrders.LoadMenu;
 var
   i: Integer;
@@ -152,6 +151,7 @@ begin
 
 end;
 
+// Adds an item to the menu
 procedure TdbOrders.AppendMenu(ItemName, Category: String; ItemPrice: Double);
 begin
   tblMenu.Append;
@@ -161,6 +161,7 @@ begin
   tblmenu.Post;
 end;
 
+// Updates an item on the menu
 procedure TdbOrders.UpdateMenu(ItemName, Category: String; ItemPrice: Double; iItemID: Integer);
 begin
   tblMenu.Locate('MenuItemID', iItemID, []);
@@ -171,6 +172,7 @@ begin
   tblmenu.Post;
 end;
 
+// Removes an item from the menu
 procedure TdbOrders.DeleteMenuItem(iItemID: Integer);
 begin
   tblMenu.Locate('MenuItemID', iItemID, []);
