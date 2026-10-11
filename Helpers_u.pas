@@ -7,16 +7,24 @@ uses System.SysUtils, System.Types, System.UITypes, System.Classes, System.Varia
 
 type
   THelperFunc = class(TObject)
-    private
-    // blah
-    public
-      constructor Create;
-      destructor Destroy; override;
-      function ConfirmFileValidity(sPath: String): boolean;
-      procedure AppendToTextFile(sPath: String; cDelimiter: Char; arrData: TArray<String>);
-      procedure SetFileHashKey(sPath: String);
-      procedure IniWriteString(sSection: String; arrKeys, arrValues: TArray<String>);
-      function IniReadString(sSection: String; arrKeys, arrDefaults: TArray<String>): TArray<String>;
+  private
+  // blah
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function ConfirmFileValidity(sPath: String): boolean;
+    procedure AppendToTextFile(sPath: String; cDelimiter: Char; arrData: TArray<String>);
+    procedure SetFileHashKey(sPath: String);
+    procedure IniWriteString(sSection: String; arrKeys, arrValues: TArray<String>);
+    function IniReadString(sSection: String; arrKeys, arrDefaults: TArray<String>): TArray<String>;
+  end;
+
+  TOrderLine = array[0.. 1] of Integer;
+
+
+  TStringsHelper = class helper for TStrings
+  public
+    procedure SetCount(Value: Integer);
   end;
 
 var
@@ -26,6 +34,18 @@ implementation
 
 uses Main_u;
 
+procedure TStringsHelper.SetCount(Value: Integer);
+begin
+  BeginUpdate;
+  try
+    while Count < Value do
+      Add('');
+    while Count > Value do
+      Delete(Count - 1);
+  finally
+    EndUpdate;
+  end;
+end;
 
 constructor THelperFunc.Create;
 begin

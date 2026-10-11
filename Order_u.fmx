@@ -10,6 +10,7 @@ object frmOrder: TfrmOrder
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object btnOrderAddItem: TButton
     Position.X = 350.000000000000000000
@@ -20,6 +21,7 @@ object frmOrder: TfrmOrder
     TabOrder = 7
     Text = 'Add to order'
     TextSettings.Trimming = None
+    OnClick = btnOrderAddItemClick
   end
   object btnOrderBack: TButton
     Position.X = 430.000000000000000000
@@ -41,6 +43,7 @@ object frmOrder: TfrmOrder
     TabOrder = 10
     Text = 'Clear order'
     TextSettings.Trimming = None
+    OnClick = btnOrderClearClick
   end
   object btnOrderExport: TButton
     Position.X = 430.000000000000000000
@@ -51,6 +54,7 @@ object frmOrder: TfrmOrder
     TabOrder = 13
     Text = 'Export Bill to file'
     TextSettings.Trimming = None
+    OnClick = btnOrderExportClick
   end
   object btnOrderRemoveLine: TButton
     Position.X = 10.000000000000000000
@@ -61,6 +65,7 @@ object frmOrder: TfrmOrder
     TabOrder = 9
     Text = 'Remove line'
     TextSettings.Trimming = None
+    OnClick = btnOrderRemoveLineClick
   end
   object btnOrderSave: TButton
     Position.X = 430.000000000000000000
@@ -71,6 +76,7 @@ object frmOrder: TfrmOrder
     TabOrder = 11
     Text = 'Save Order'
     TextSettings.Trimming = None
+    OnClick = btnOrderSaveClick
   end
   object cmbOrderItem: TComboBox
     Position.X = 10.000000000000000000
@@ -128,8 +134,8 @@ object frmOrder: TfrmOrder
     TabOrder = 6
     RowCount = 1
     Options = [AlternatingRowBackground, ColLines, RowLines, RowSelect, Header]
-    Viewport.Width = 396.000000000000000000
-    Viewport.Height = 195.000000000000000000
+    Viewport.Width = 400.000000000000000000
+    Viewport.Height = 220.000000000000000000
     object colOrderItem: TStringColumn
       Header = 'Item'
       HeaderSettings.TextSettings.WordWrap = False
@@ -190,16 +196,6 @@ object frmOrder: TfrmOrder
     TextSettings.Trimming = None
     Text = 'Menu item:'
     TabOrder = 19
-  end
-  object lblOrderLastID: TLabel
-    Position.X = 430.000000000000000000
-    Position.Y = 396.000000000000000000
-    Size.Width = 190.000000000000000000
-    Size.Height = 20.000000000000000000
-    Size.PlatformDefault = False
-    TextSettings.Trimming = None
-    Text = 'Last saved order #: -'
-    TabOrder = 34
   end
   object lblOrderLinesCaption: TLabel
     Position.X = 10.000000000000000000

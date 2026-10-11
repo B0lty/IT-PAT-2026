@@ -63,6 +63,7 @@ type
 
     const
       LOGIN_DETAILS_PATH = 'data\login-details.txt';
+      VAT = 0.15;
   end;
 
 var
