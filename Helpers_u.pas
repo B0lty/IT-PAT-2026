@@ -17,6 +17,12 @@ type
     procedure SetFileHashKey(sPath: String);
     procedure IniWriteString(sSection: String; arrKeys, arrValues: TArray<String>);
     function IniReadString(sSection: String; arrKeys, arrDefaults: TArray<String>): TArray<String>;
+
+    const
+      // Filters for edits
+      ALPHANUMERIC = 'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ1234567890 ';
+      NUMERIC = '1234567890';
+      ALPHABET = 'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ ';
   end;
 
   TOrderLine = array[0.. 1] of Integer;

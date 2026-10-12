@@ -42,6 +42,8 @@ type
     procedure btnNavMenuClick(Sender: TObject);
     procedure btnNavOrdersClick(Sender: TObject);
     procedure btnNavReportsClick(Sender: TObject);
+    procedure memAIInputKeyDown(Sender: TObject; var Key: Word;
+      var KeyChar: WideChar; Shift: TShiftState);
   private
     { Private declarations }
     procedure InitLocalAI;
@@ -163,6 +165,13 @@ begin
   end;
 end;
 
+
+procedure TfrmMain.memAIInputKeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: WideChar; Shift: TShiftState);
+begin
+  if Key = VK_RETURN then
+    btnSendClick(Sender);
+end;
 
 function TfrmMain.MessageAI(sMessage: String): String;
 // AI ASSISTED, NOT FULLY CODED

@@ -49,6 +49,10 @@ type
     procedure btnMenuDeleteClick(Sender: TObject);
     procedure btnMenuUpdateClick(Sender: TObject);
     procedure grdMenuCellClick(const Column: TColumn; const Row: Integer);
+    procedure edtMenuNameValidating(Sender: TObject; var Text: string);
+    procedure edtMenuNameValidate(Sender: TObject; var Text: string);
+    procedure edtMenuPriceValidating(Sender: TObject; var Text: string);
+    procedure edtMenuPriceValidate(Sender: TObject; var Text: string);
   private
     { Private declarations }
   public
@@ -60,7 +64,7 @@ var
 
 implementation
 
-uses Main_u, DB_u;
+uses Main_u, DB_u, Helpers_u;
 
 {$R *.fmx}
 
@@ -151,6 +155,55 @@ begin
   UpdateRowData(grdMenu.Row);
 end;
 
+procedure TfrmMenu.edtMenuNameValidate(Sender: TObject; var Text: string);
+begin
+  Text := Text.Trim;
+end;
+
+procedure TfrmMenu.edtMenuNameValidating(Sender: TObject; var Text: string);
+begin
+  Text := Text.TrimLeft;
+end;
+
+procedure TfrmMenu.edtMenuPriceValidate(Sender: TObject; var Text: string);
+begin
+  if Length(Text) < 1 then
+    exit;
+
+  if CharInSet(Text[1], [',','.']) then
+    Delete(Text, 1, 1);
+  if CharInSet(Text[Length(Text)], [',','.']) then
+    Delete(Text, Length(Text), 1);
+end;
+
+procedure TfrmMenu.edtMenuPriceValidating(Sender: TObject; var Text: string);
+var
+  bDecimalPt: Boolean;
+  i: Integer;
+begin
+  if Length(Text) < 1 then
+    exit;
+
+  if CharInSet(Text[1], [',','.']) then
+    Delete(Text, 1, 1);
+
+  bDecimalPt := False;
+  for i := 1 to Length(Text) do
+  begin
+    if bDecimalPt AND CharInSet(Text[i], [',','.']) then
+      Text[i] := #0;
+    if CharInSet(Text[i], [',','.']) then
+      bDecimalPt := True;
+  end;
+
+  if Length(Text) < 1 then
+    exit;
+
+  if Text[Length(Text)] = #0 then
+    Delete(Text, Length(Text), 1);
+
+end;
+
 procedure TfrmMenu.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   frmMain.Close;
@@ -160,6 +213,10 @@ procedure TfrmMenu.FormShow(Sender: TObject);
 begin
   dbOrders.LoadMenu;
   UpdateRowData(-1);
+
+  // Applying filters to edits
+  edtMenuName.FilterChar := FHelpers.ALPHANUMERIC + '-+';
+  edtMenuPrice.FilterChar := FHelpers.NUMERIC + ',.';
 end;
 
 procedure TfrmMenu.grdMenuCellClick(const Column: TColumn; const Row: Integer);

@@ -104,6 +104,8 @@ object frmOrder: TfrmOrder
     Size.Width = 200.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    OnValidating = edtOrderCustomerValidating
+    OnValidate = edtOrderCustomerValidate
   end
   object edtOrderTable: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -122,6 +124,8 @@ object frmOrder: TfrmOrder
     Size.Width = 200.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    OnValidating = edtOrderWaiterValidating
+    OnValidate = edtOrderWaiterValidate
   end
   object grdOrderLines: TStringGrid
     CanFocus = True
@@ -134,8 +138,8 @@ object frmOrder: TfrmOrder
     TabOrder = 6
     RowCount = 1
     Options = [AlternatingRowBackground, ColLines, RowLines, RowSelect, Header]
-    Viewport.Width = 400.000000000000000000
-    Viewport.Height = 220.000000000000000000
+    Viewport.Width = 396.000000000000000000
+    Viewport.Height = 195.000000000000000000
     object colOrderItem: TStringColumn
       Header = 'Item'
       HeaderSettings.TextSettings.WordWrap = False

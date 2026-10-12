@@ -51,6 +51,10 @@ type
     procedure btnOrderRemoveLineClick(Sender: TObject);
     procedure btnOrderSaveClick(Sender: TObject);
     procedure btnOrderExportClick(Sender: TObject);
+    procedure edtOrderWaiterValidate(Sender: TObject; var Text: string);
+    procedure edtOrderWaiterValidating(Sender: TObject; var Text: string);
+    procedure edtOrderCustomerValidate(Sender: TObject; var Text: string);
+    procedure edtOrderCustomerValidating(Sender: TObject; var Text: string);
   private
     { Private declarations }
     var
@@ -205,6 +209,27 @@ begin
 
 end;
 
+procedure TfrmOrder.edtOrderCustomerValidate(Sender: TObject; var Text: string);
+begin
+  Text := Text.Trim;
+end;
+
+procedure TfrmOrder.edtOrderCustomerValidating(Sender: TObject;
+  var Text: string);
+begin
+  Text := Text.TrimLeft;
+end;
+
+procedure TfrmOrder.edtOrderWaiterValidate(Sender: TObject; var Text: string);
+begin
+  Text := Text.Trim;
+end;
+
+procedure TfrmOrder.edtOrderWaiterValidating(Sender: TObject; var Text: string);
+begin
+  Text := Text.TrimLeft;
+end;
+
 procedure TfrmOrder.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   frmMain.Close;
@@ -215,6 +240,12 @@ begin
   dbOrders.LoadMenu;
   UpdateOrderDisplay;
   iPrevOrderID := -1;
+
+  // Applying filters to edits
+  edtOrderCustomer.FilterChar := FHelpers.ALPHABET + '-';
+  edtOrderWaiter.FilterChar := FHelpers.ALPHABET + '-';
+  edtOrderTable.FilterChar := FHelpers.NUMERIC;
+  edtOrderAmount.FilterChar := FHelpers.NUMERIC;
 end;
 
 end.

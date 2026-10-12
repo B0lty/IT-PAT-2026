@@ -143,6 +143,8 @@ object frmMenu: TfrmMenu
     Size.Width = 240.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    OnValidating = edtMenuNameValidating
+    OnValidate = edtMenuNameValidate
   end
   object edtMenuPrice: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -152,6 +154,8 @@ object frmMenu: TfrmMenu
     Size.Width = 240.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    OnValidating = edtMenuPriceValidating
+    OnValidate = edtMenuPriceValidate
   end
   object grdMenu: TStringGrid
     CanFocus = True
