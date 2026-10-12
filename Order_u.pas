@@ -160,7 +160,7 @@ end;
 
 procedure TfrmOrder.btnOrderExportClick(Sender: TObject);
 begin
-  dbOrders.ExportReceipt(Main_u.APP_PATH + '/data/recipts', iPrevOrderID);
+  dbOrders.ExportReceipt(Main_u.APP_PATH + '/data/receipts', iPrevOrderID);
 
   btnOrderClearClick(Sender);
 end;

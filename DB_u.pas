@@ -300,11 +300,9 @@ begin
   tblOrderItem.First;
   while not tblOrderItem.Eof do
   begin
-    SetLength(lines, 0);
+    SetLength(lines, i + 1);
     if tblOrderItem.FieldByName('OrderID').AsInteger = iOrderID then
     begin
-      SetLength(lines, i + 1);
-
       tblMenu.Locate('MenuItemID', tblOrderItem.FieldByName('MenuItemID').AsInteger, []);
 
       lines[i].ItemName := tblMenu.FieldByName('ItemName').AsString;
@@ -330,7 +328,7 @@ begin
     sl.Add('           123 Main Road, Cape Town');
     sl.Add('              Tel: 012 345 6789');
     sl.Add('=================================================');
-    sl.Add('Date      : ' + FormatDateTime('yyyy-mm-dd hh:nn', OrderDate));
+    sl.Add('Date      : ' + FormatDateTime('yyyy-mm-dd hh:nn:ss', OrderDate));
     sl.Add('Customer  : ' + sCustomer);
     sl.Add('Waiter    : ' + sWaiter);
     sl.Add(Format('Table     : %d', [iTable]));
@@ -339,9 +337,10 @@ begin
     sl.Add('-------------------------------------------------');
 
     dSubtotal := 0;
-    for i := 0 to High(lines) do
+    for i := 0 to Length(lines) - 1 do
     begin
       dSubtotal := dSubtotal + (lines[i].ItemPrice * lines[i].Amount);
+
       sl.Add(Format('%-22s %4d %11s', [lines[i].ItemName, lines[i].Amount,
         'R ' + FloatToStrF((lines[i].ItemPrice * lines[i].Amount), ffFixed, 10, 2)]));
     end;
@@ -355,7 +354,7 @@ begin
     sl.Add(Format('%-22s %16s', ['TOTAL DUE', 'R ' + FloatToStrF(dTotal, ffFixed, 10, 2)]));
     sl.Add('=================================================');
     sl.Add('          Thank you for dining with us!');
-    sl.SaveToFile(sFilePath + '/recipt-' + FormatDateTime('yyyy-mm-dd-hh-nn', OrderDate) + '.txt');
+    sl.SaveToFile(sFilePath + '/receipt-' + FormatDateTime('yyyy-mm-dd-hh-nn-ss', OrderDate) + '.txt');
   finally
     sl.Free;
   end;
