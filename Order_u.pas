@@ -55,6 +55,8 @@ type
     procedure edtOrderWaiterValidating(Sender: TObject; var Text: string);
     procedure edtOrderCustomerValidate(Sender: TObject; var Text: string);
     procedure edtOrderCustomerValidating(Sender: TObject; var Text: string);
+    procedure edtOrderAmountValidating(Sender: TObject; var Text: string);
+    procedure edtOrderTableValidating(Sender: TObject; var Text: string);
   private
     { Private declarations }
     var
@@ -214,25 +216,49 @@ begin
   btnOrderExport.Enabled := True;
 end;
 
+procedure TfrmOrder.edtOrderAmountValidating(Sender: TObject; var Text: string);
+begin
+  if Length(Text) > 3 then
+    Delete(Text, 3, Length(Text) - 3);
+end;
+
 procedure TfrmOrder.edtOrderCustomerValidate(Sender: TObject; var Text: string);
 begin
   Text := Text.Trim;
+
+  if Length(Text) > 60 then
+    Delete(Text, 60, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.edtOrderCustomerValidating(Sender: TObject;
   var Text: string);
 begin
   Text := Text.TrimLeft;
+
+  if Length(Text) > 60 then
+    Delete(Text, 60, Length(Text) - 60);
+end;
+
+procedure TfrmOrder.edtOrderTableValidating(Sender: TObject; var Text: string);
+begin
+  if Length(Text) > 3 then
+    Delete(Text, 3, Length(Text) - 3);
 end;
 
 procedure TfrmOrder.edtOrderWaiterValidate(Sender: TObject; var Text: string);
 begin
   Text := Text.Trim;
+
+  if Length(Text) > 60 then
+    Delete(Text, 60, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.edtOrderWaiterValidating(Sender: TObject; var Text: string);
 begin
   Text := Text.TrimLeft;
+
+  if Length(Text) > 60 then
+    Delete(Text, 60, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -158,11 +158,17 @@ end;
 procedure TfrmMenu.edtMenuNameValidate(Sender: TObject; var Text: string);
 begin
   Text := Text.Trim;
+
+  if Length(Text) > 40 then
+    Delete(Text, 40, Length(Text) - 40);
 end;
 
 procedure TfrmMenu.edtMenuNameValidating(Sender: TObject; var Text: string);
 begin
   Text := Text.TrimLeft;
+
+  if Length(Text) > 40 then
+    Delete(Text, 40, Length(Text) - 40);
 end;
 
 procedure TfrmMenu.edtMenuPriceValidate(Sender: TObject; var Text: string);

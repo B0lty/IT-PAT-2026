@@ -96,6 +96,7 @@ object frmOrder: TfrmOrder
     Size.Width = 70.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    OnValidating = edtOrderAmountValidating
   end
   object edtOrderCustomer: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -116,6 +117,7 @@ object frmOrder: TfrmOrder
     Size.Width = 100.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    OnValidating = edtOrderTableValidating
   end
   object edtOrderWaiter: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
