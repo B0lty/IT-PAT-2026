@@ -11,6 +11,7 @@ object frmMain: TfrmMain
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object Panel6: TPanel
     Align = MostTop
@@ -245,16 +246,20 @@ object frmMain: TfrmMain
     TabOrder = 2
     Text = 'Reports'
     TextSettings.Trimming = None
+    Visible = False
     OnClick = btnNavReportsClick
   end
   object lblPortalTitle: TLabel
+    StyledSettings = [Family, FontColor]
     Position.X = 20.000000000000000000
     Position.Y = 60.000000000000000000
     Size.Width = 500.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
+    TextSettings.Font.Size = 24.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.Trimming = None
-    Text = 'SmartEats - Staff Portal'
+    Text = 'Staff Portal'
     TabOrder = 6
   end
 end

@@ -209,7 +209,7 @@ object frmMenu: TfrmMenu
     Size.Height = 18.000000000000000000
     Size.PlatformDefault = False
     TextSettings.Trimming = None
-    Text = 'Records: 0'
+    Text = 'Items: 0'
     TabOrder = 20
   end
   object lblMenuError: TLabel
@@ -253,11 +253,14 @@ object frmMenu: TfrmMenu
     TabOrder = 18
   end
   object lblMenuTitle: TLabel
+    StyledSettings = [Family, FontColor]
     Position.X = 10.000000000000000000
     Position.Y = 10.000000000000000000
     Size.Width = 620.000000000000000000
     Size.Height = 24.000000000000000000
     Size.PlatformDefault = False
+    TextSettings.Font.Size = 18.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.Trimming = None
     Text = 'Menu Management'
     TabOrder = 14

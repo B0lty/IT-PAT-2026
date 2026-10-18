@@ -82,7 +82,7 @@ begin
   if grdMenu.Cells[1, iRow] = 'Drinks' then
     cmbMenuCategory.ItemIndex := 3;
 
-  lblMenuCount.Text	:= 'Records: ' + IntToStr(dbOrders.tblMenu.RecordCount);
+  lblMenuCount.Text	:= 'Items: ' + IntToStr(dbOrders.tblMenu.RecordCount);
 end;
 
 procedure TfrmMenu.btnMenuAddClick(Sender: TObject);

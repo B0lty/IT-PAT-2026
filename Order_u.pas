@@ -167,6 +167,10 @@ begin
   dbOrders.ExportReceipt(Main_u.APP_PATH + '/data/receipts', iPrevOrderID);
 
   btnOrderClearClick(Sender);
+
+  btnOrderExport.Enabled := False;
+
+  SHowMessage('Bill saved to: "' + Main_u.APP_PATH + '/data/receipts"');
 end;
 
 procedure TfrmOrder.btnOrderRemoveLineClick(Sender: TObject);
@@ -207,6 +211,7 @@ begin
   else
     dbOrders.UpdateOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder, iPrevOrderID);
 
+  btnOrderExport.Enabled := True;
 end;
 
 procedure TfrmOrder.edtOrderCustomerValidate(Sender: TObject; var Text: string);

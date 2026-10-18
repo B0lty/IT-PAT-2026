@@ -46,6 +46,7 @@ object frmOrder: TfrmOrder
     OnClick = btnOrderClearClick
   end
   object btnOrderExport: TButton
+    Enabled = False
     Position.X = 430.000000000000000000
     Position.Y = 318.000000000000000000
     Size.Width = 190.000000000000000000
@@ -242,11 +243,14 @@ object frmOrder: TfrmOrder
     TabOrder = 18
   end
   object lblOrderTitle: TLabel
+    StyledSettings = [Family, FontColor]
     Position.X = 10.000000000000000000
     Position.Y = 10.000000000000000000
     Size.Width = 620.000000000000000000
     Size.Height = 24.000000000000000000
     Size.PlatformDefault = False
+    TextSettings.Font.Size = 18.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.Trimming = None
     Text = 'Place Order'
     TabOrder = 12

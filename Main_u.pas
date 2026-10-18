@@ -44,6 +44,7 @@ type
     procedure btnNavReportsClick(Sender: TObject);
     procedure memAIInputKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: WideChar; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure InitLocalAI;
@@ -377,7 +378,7 @@ begin
 
 //  if sCurrentUser = 'none' then
 //  begin
-//    frmMain.SwapForm(frmMain, frmLogin);
+//    SwapForm(frmMain, frmLogin);
 //  end;
 
 
@@ -397,6 +398,18 @@ end;
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   //StopLlamaServer;
+end;
+
+procedure TfrmMain.FormShow(Sender: TObject);
+begin
+  sCurrentUser := FHelpers.IniReadString('general', ['last_logged_in'], ['none'])[0];
+
+  CurrentUserUpdate;
+
+  if sCurrentUser = 'none' then
+  begin
+    SwapForm(frmMain, frmLogin);
+  end;
 end;
 
 end.

@@ -106,6 +106,7 @@ begin
 
   // Saving the logged in user's username
   Main_u.sCurrentUser := edtUsernameLogin.Text;
+  FHelpers.IniWriteString('general', ['last_logged_in'], [edtUsernameLogin.Text]);
 
   frmMain.CurrentUserUpdate();
 
@@ -114,8 +115,6 @@ begin
   edtUsernameLogin.Text := '';
   edtPasswordLogin.Text := '';
   lblLoginError.Text := '';
-
-  FHelpers.IniWriteString('general', ['last_logged_in'], [Main_u.sCurrentUser]);
 end;
 
 procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);

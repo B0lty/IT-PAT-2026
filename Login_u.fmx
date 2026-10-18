@@ -13,9 +13,12 @@ object frmLogin: TfrmLogin
   DesignerMasterStyle = 0
   object Label8: TLabel
     Align = Horizontal
+    StyledSettings = [Family, FontColor]
     Size.Width = 640.000000000000000000
     Size.Height = 71.000000000000000000
     Size.PlatformDefault = False
+    TextSettings.Font.Size = 18.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.HorzAlign = Center
     TextSettings.Trimming = None
     Text = 'Staff Portal'
