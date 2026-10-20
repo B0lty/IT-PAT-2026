@@ -124,18 +124,19 @@ end;
 
 destructor TdbOrders.Destroy;
 begin
-  if Assigned(conOrderDB) then
-  begin
-    if conOrderDB.Connected then
-      conOrderDB.Connected := False;
-    conOrderDB.Free;
-  end;
   if Assigned(tblMenu) then tblMenu.Free;
   if Assigned(tblOrderItem) then tblOrderItem.Free;
   if Assigned(tblOrders) then tblOrders.Free;
   if Assigned(dscMenu) then dscMenu.Free;
   if Assigned(dscOrderItem) then dscOrderItem.Free;
   if Assigned(dscOrders) then dscOrders.Free;
+
+  if Assigned(conOrderDB) then
+  begin
+    if conOrderDB.Connected then
+      conOrderDB.Connected := False;
+    conOrderDB.Free;
+  end;
 
   inherited;
 end;
@@ -231,6 +232,7 @@ begin
     tblOrderItem.FieldByName('MenuItemID').AsInteger := arrOrder[i][0];
     tblOrderItem.FieldByName('OrderID').AsInteger := iOrderID;
     tblOrderItem.FieldByName('Amount').AsInteger := arrOrder[i][1];
+    tblOrderItem.Post;
   end;
 
   Result := iOrderID;
@@ -238,8 +240,11 @@ end;
 
 procedure TdbOrders.UpdateOrder(sWaiter, sCustomer: String; iTableNo: Integer; arrOrder: TArray<TOrderLine>; iOrderID: Integer);
 var
-  i, iOldOrders: Integer;
+  iArr: Integer;
 begin
+  if Length(arrOrder) > 1 then
+    exit;
+
   tblOrders.Locate('OrderID', iOrderID, []);
   tblOrders.Edit;
   tblOrders.FieldByName('Customer').AsString := sCustomer;
@@ -250,40 +255,39 @@ begin
 
   iOrderID := tblOrders.FieldByName('OrderID').AsInteger;
 
-  iOldOrders := 0;
-  i := 0;
+  iArr := 0;
   tblOrderItem.First;
+
   while not tblOrderItem.Eof do
   begin
     if tblOrderItem.FieldByName('OrderID').AsInteger = iOrderID then
     begin
-      // Deleting old records that are no longer valid
-      if i > length(arrOrder) then
-        tblMenu.Delete;
+      if iArr < Length(arrOrder) then
+      begin
+        tblOrderItem.Edit;
+        tblOrderItem.FieldByName('MenuItemID').AsInteger := arrOrder[iArr][0];
+        tblOrderItem.FieldByName('Amount').AsInteger := arrOrder[iArr][1];
+        tblOrderItem.Post;
 
-      tblOrderItem.Edit;
-      tblOrderItem.FieldByName('MenuItemID').AsInteger := arrOrder[i][0];
-      tblOrderItem.FieldByName('OrderID').AsInteger := iOrderID;
-      tblOrderItem.FieldByName('Amount').AsInteger := arrOrder[i][1];
-      tblOrderItem.Post;
-
-      Inc(iOldOrders)
-    end;
-
-    tblOrderItem.Next;
-    Inc(i);
+        Inc(iArr);
+        tblOrderItem.Next;
+      end
+      else
+        // Deleting old records that are no longer valid
+        tblOrderItem.Delete;
+    end
+    else
+      tblOrderItem.Next;
   end;
 
-  if iOldOrders < Length(arrOrder) then
+  while iArr < Length(arrOrder) do
   begin
-    for i := iOldOrders + 1 to Length(arrOrder) - 1 do
-    begin
-      tblOrderItem.Append;
-      tblOrderItem.FieldByName('MenuItemID').AsInteger := arrOrder[i][0];
-      tblOrderItem.FieldByName('OrderID').AsInteger := iOrderID;
-      tblOrderItem.FieldByName('Amount').AsInteger := arrOrder[i][1];
-      tblOrderItem.Post;
-    end;
+    tblOrderItem.Append;
+    tblOrderItem.FieldByName('MenuItemID').AsInteger := arrOrder[iArr][0];
+    tblOrderItem.FieldByName('OrderID').AsInteger := iOrderID;
+    tblOrderItem.FieldByName('Amount').AsInteger := arrOrder[iArr][1];
+    tblOrderItem.Post;
+    Inc(iArr);
   end;
 end;
 
@@ -298,28 +302,36 @@ var
 begin
   i := 0;
   tblOrderItem.First;
+  SetLength(lines, 0);
+
   while not tblOrderItem.Eof do
   begin
-    SetLength(lines, i + 1);
     if tblOrderItem.FieldByName('OrderID').AsInteger = iOrderID then
     begin
-      tblMenu.Locate('MenuItemID', tblOrderItem.FieldByName('MenuItemID').AsInteger, []);
+      if tblMenu.Locate('MenuItemID', tblOrderItem.FieldByName('MenuItemID').AsInteger, []) then
+      begin
+        SetLength(lines, i + 1);
 
-      lines[i].ItemName := tblMenu.FieldByName('ItemName').AsString;
-      lines[i].ItemPrice := tblMenu.FieldByName('ItemPrice').AsFloat;
-      lines[i].Amount := tblOrderItem.FieldByName('Amount').AsInteger;
+        lines[i].ItemName := tblMenu.FieldByName('ItemName').AsString;
+        lines[i].ItemPrice := tblMenu.FieldByName('ItemPrice').AsFloat;
+        lines[i].Amount := tblOrderItem.FieldByName('Amount').AsInteger;
 
-      Inc(i);
+        Inc(i);
+      end;
     end;
 
     tblOrderItem.Next;
   end;
 
-  tblOrders.Locate('OrderID', iOrderID, []);
-  sCustomer := tblOrders.FieldByName('Customer').AsString;
-  sWaiter := tblOrders.FieldByName('Waiter').AsString;
-  iTable := tblOrders.FieldByName('Table').AsInteger;
-  OrderDate := tblOrders.FieldByName('OrderDate').AsDateTime;
+  if tblOrders.Locate('OrderID', iOrderID, []) then
+  begin
+    sCustomer := tblOrders.FieldByName('Customer').AsString;
+    sWaiter := tblOrders.FieldByName('Waiter').AsString;
+    iTable := tblOrders.FieldByName('Table').AsInteger;
+    OrderDate := tblOrders.FieldByName('OrderDate').AsDateTime;
+  end
+  else
+    raise Exception.Create('Order not found.');
 
   sl := TStringList.Create;
   try

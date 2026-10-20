@@ -161,6 +161,10 @@ begin
   cmbOrderItem.ItemIndex := -1;
   edtOrderAmount.Text := '1';
 
+  iPrevOrderID := -1;
+
+  btnOrderExport.Enabled := False;
+
   UpdateOrderDisplay;
 end;
 
@@ -170,9 +174,7 @@ begin
 
   btnOrderClearClick(Sender);
 
-  btnOrderExport.Enabled := False;
-
-  SHowMessage('Bill saved to: "' + Main_u.APP_PATH + '/data/receipts"');
+  ShowMessage('Bill saved to: "' + Main_u.APP_PATH + '/data/receipts"');
 end;
 
 procedure TfrmOrder.btnOrderRemoveLineClick(Sender: TObject);
@@ -209,9 +211,15 @@ end;
 procedure TfrmOrder.btnOrderSaveClick(Sender: TObject);
 begin
   if iPrevOrderID = -1 then
-    iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder)
+  begin
+    iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder);
+    ShowMessage('Order saved.');
+  end
   else
+  begin
     dbOrders.UpdateOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder, iPrevOrderID);
+    ShowMessage('Order updated.');
+  end;
 
   btnOrderExport.Enabled := True;
 end;
@@ -263,14 +271,14 @@ end;
 
 procedure TfrmOrder.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  frmMain.Close;
+  frmMain.SwapForm(frmOrder, frmMain);
 end;
 
 procedure TfrmOrder.FormShow(Sender: TObject);
 begin
   dbOrders.LoadMenu;
   UpdateOrderDisplay;
-  iPrevOrderID := -1;
+  btnOrderClearClick(Sender);
 
   // Applying filters to edits
   edtOrderCustomer.FilterChar := FHelpers.ALPHABET + '-';

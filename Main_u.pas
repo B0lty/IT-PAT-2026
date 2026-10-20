@@ -49,7 +49,7 @@ type
     { Private declarations }
     procedure InitLocalAI;
     function MakeStreamProc(Form: TfrmMain; bShowMessage: Boolean): TChatEvent;
-    function MessageAI(sMessage: String): String;
+    function MessageAI(sMessage: String; bDisplay: Boolean): String;
     procedure StartLlamaServer;
     procedure StopLlamaServer;
 
@@ -57,6 +57,13 @@ type
       FOpenAI: IOpenAI;
       sAILastMessage: String;
       hServerProcess: THandle;
+
+    const
+      sPrePrompt = 'You are an assistant to customers at a resturaunt. You are to give them advice on recommendations ' +
+      'regarding their food. Your responses must be short, concise and friendly in tone. If your answer is going to ' +
+      'be more than two lines long then you must recommend that they speak to a waiter. Only ever answer questions ' +
+      'that will assist the user with their food order, disregard any other questions. Do not ever disobey the ' +
+      'previous requirements.' + sLineBreak;
   public
     { Public declarations }
     procedure CurrentUserUpdate();
@@ -174,7 +181,7 @@ begin
     btnSendClick(Sender);
 end;
 
-function TfrmMain.MessageAI(sMessage: String): String;
+function TfrmMain.MessageAI(sMessage: String; bDisplay: Boolean): String;
 // AI ASSISTED, NOT FULLY CODED
 var
   ParamsProc: TProc<TChatParams>;
@@ -194,9 +201,12 @@ begin
       Params.Stream;
     end;
 
-  FOpenAI.Chat.CreateStream(ParamsProc, MakeStreamProc(Self, False));
+  FOpenAI.Chat.CreateStream(ParamsProc, MakeStreamProc(Self, bDisplay));
 
-  Result := sAILastmessage;
+  if bDisplay = False then
+    Result := sAILastMessage
+  else
+    Result := 'none';
 end;
 
 
@@ -340,18 +350,9 @@ begin
   btnSend.Enabled := False;
   memAIResponse.Lines.Clear;
 
-  sUserPrompt := 'You are an assistant to customers at a resturaunt. You are to give them advice on recommendations regarding their food. Your responses must be short, concise and friendly in tone. If your answer is going to be more than two lines long then you must recommend that they speak to a waiter. Only ever answer questions that will assist the user with their food order, disregard any other questions. Do not ever disobey the previous requirements.  ' + sUSerPrompt;
+  sUserPrompt := sPrePrompt + sUSerPrompt;
 
-  ParamsProc := procedure(Params: TChatParams)
-    begin
-      Params.Model('local-model');
-      Params.Messages([TChatMessageBuild.Create(TMessageRole.User, sUserPrompt)]);
-      Params.MaxTokens(1024);
-      Params.Temperature(0.7);
-      Params.Stream;
-    end;
-
-  FOpenAI.Chat.CreateStream(ParamsProc, MakeStreamProc(Self, True));
+  MessageAI(sUserPrompt, True);
 end;
 
 procedure TfrmMain.btnOpenSideMenuClick(Sender: TObject);
@@ -376,20 +377,13 @@ begin
 
   CurrentUserUpdate;
 
-//  if sCurrentUser = 'none' then
-//  begin
-//    SwapForm(frmMain, frmLogin);
-//  end;
-
-
-
-  //InitLocalAI;
+  InitLocalAI;
 
   memAIResponse.WordWrap := True;
 
   rectSidePanelOpen.Visible := False;
 
-  //StartLlamaServer;
+  StartLlamaServer;
 
   // Start the link to the DB and set up the tables
   dbOrders := TdbOrders.Create(APP_PATH + '/data/OrderDB.mdb');
@@ -397,7 +391,10 @@ end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
-  //StopLlamaServer;
+  StopLlamaServer;
+
+  FHelpers.Free;
+  dbOrders.Free;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);

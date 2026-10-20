@@ -128,7 +128,7 @@ begin
 
   for iIndex := 1 to Length(edtPasswordCreate.Text) do
   begin
-    if (CharInSet(edtPasswordCreate.Text[iIndex], ['1'..'9'])) then
+    if (CharInSet(edtPasswordCreate.Text[iIndex], ['0'..'9'])) then
     begin
       bPassHasNum := True;
     end;
@@ -173,6 +173,12 @@ begin
 
   // Appending username and password to file
   FHelpers.AppendToTextFile(frmMain.LOGIN_DETAILS_PATH, ';', [edtUsernameCreate.Text, THashSHA2.GetHashString(edtPasswordCreate.Text)]);
+
+  // Updating current user
+  Main_u.sCurrentUser := edtUsernameCreate.Text;
+  FHelpers.IniWriteString('general', ['last_logged_in'], [edtUsernameCreate.Text]);
+
+  frmMain.CurrentUserUpdate();
 
   // Entering the main page of the project
   frmMain.SwapForm(frmCreateAcc, frmMain);

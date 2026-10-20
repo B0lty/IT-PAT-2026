@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ListBox,
   FMX.Controls.Presentation, FMX.StdCtrls, System.Rtti, FMX.Grid.Style,
-  FMX.Grid, FMX.ScrollBox, FMX.Edit;
+  FMX.Grid, FMX.ScrollBox, FMX.Edit, FMX.DialogService;
 
 type
   TfrmMenu = class(TForm)
@@ -87,6 +87,24 @@ end;
 
 procedure TfrmMenu.btnMenuAddClick(Sender: TObject);
 begin
+  if edtMenuPrice.Text = '' then
+  begin
+    ShowMessage('Input a price.');
+    exit;
+  end;
+
+  if edtMenuName.Text = '' then
+  begin
+    ShowMessage('Input an item name.');
+    exit;
+  end;
+
+  if cmbMenuCategory.Text = '' then
+  begin
+    ShowMessage('Input a category.');
+    exit;
+  end;
+
   dbOrders.AppendMenu(edtMenuName.Text, cmbMenuCategory.Text, StrToFloat(edtMenuPrice.Text));
 
   dbOrders.LoadMenu;
@@ -110,10 +128,29 @@ begin
 end;
 
 procedure TfrmMenu.btnMenuDeleteClick(Sender: TObject);
+var
+  iItem: Integer;
 begin
-  dbOrders.DeleteMenuItem(StrToInt(grdMenu.Cells[3, grdMenu.Row]));
-  dbOrders.LoadMenu;
-  UpdateRowData(grdMenu.Row);
+  TDialogService.MessageDialog(
+    'Confirmation to delete this item from the menu.',
+    TMsgDlgType.mtConfirmation,
+    mbYesNo,
+    TMsgDlgBtn.mbNo,
+    0,
+    procedure(const AResult: TModalResult)
+    begin
+      if AResult = mrYes then
+      begin
+        if TryStrToInt(grdMenu.Cells[3, grdMenu.Row], iItem) = False then
+          raise Exception.Create('Item does not exist.');
+
+        dbOrders.DeleteMenuItem(iItem);
+
+        dbOrders.LoadMenu;
+        UpdateRowData(grdMenu.Row);
+      end;
+    end
+  );
 end;
 
 procedure TfrmMenu.btnMenuFirstClick(Sender: TObject);
@@ -149,8 +186,27 @@ end;
 
 procedure TfrmMenu.btnMenuUpdateClick(Sender: TObject);
 begin
+  if edtMenuPrice.Text = '' then
+  begin
+    ShowMessage('Input a price.');
+    exit;
+  end;
+
+  if edtMenuName.Text = '' then
+  begin
+    ShowMessage('Input an item name.');
+    exit;
+  end;
+
+  if cmbMenuCategory.Text = '' then
+  begin
+    ShowMessage('Input a category.');
+    exit;
+  end;
+
   dbOrders.UpdateMenu(edtMenuName.Text, cmbMenuCategory.Text, StrToFloat(edtMenuPrice.Text),
   StrToInt(grdMenu.Cells[3, grdMenu.Row]));
+
   dbOrders.LoadMenu;
   UpdateRowData(grdMenu.Row);
 end;
@@ -180,6 +236,8 @@ begin
     Delete(Text, 1, 1);
   if CharInSet(Text[Length(Text)], [',','.']) then
     Delete(Text, Length(Text), 1);
+
+  Text := StringReplace(Text, #0, '', []);
 end;
 
 procedure TfrmMenu.edtMenuPriceValidating(Sender: TObject; var Text: string);
@@ -205,14 +263,15 @@ begin
   if Length(Text) < 1 then
     exit;
 
-  if Text[Length(Text)] = #0 then
-    Delete(Text, Length(Text), 1);
+//  if Text[Length(Text)] = #0 then
+//    Delete(Text, Length(Text), 1);
+  Text := StringReplace(Text, #0, '', []);
 
 end;
 
 procedure TfrmMenu.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  frmMain.Close;
+  frmMain.SwapForm(frmMenu, frmMain);
 end;
 
 procedure TfrmMenu.FormShow(Sender: TObject);

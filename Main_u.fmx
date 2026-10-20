@@ -48,7 +48,7 @@ object frmMain: TfrmMain
       Size.PlatformDefault = False
       TextSettings.HorzAlign = Trailing
       TextSettings.Trimming = None
-      Text = 'Loggin in as: none'
+      Text = 'Logged in as: none'
       TabOrder = 1
     end
   end
