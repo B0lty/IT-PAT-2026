@@ -242,7 +242,7 @@ procedure TdbOrders.UpdateOrder(sWaiter, sCustomer: String; iTableNo: Integer; a
 var
   iArr: Integer;
 begin
-  if Length(arrOrder) > 1 then
+  if Length(arrOrder) < 1 then
     exit;
 
   tblOrders.Locate('OrderID', iOrderID, []);
