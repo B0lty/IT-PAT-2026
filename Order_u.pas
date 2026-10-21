@@ -138,10 +138,30 @@ begin
 end;
 
 procedure TfrmOrder.btnOrderAddItemClick(Sender: TObject);
+var
+  iAmount: Integer;
 begin
+  if cmbOrderItem.ItemIndex < 0 then
+  begin
+    ShowMessage('Select an item.');
+    exit;
+  end;
+
+  if TryStrToInt(edtOrderAmount.Text, iAmount) = False then
+  begin
+    ShowMessage('Amount invalid. Err: Not a string');
+    exit;
+  end;
+
+  if NOT (iAmount > 0) then
+  begin
+    ShowMessage('Amount too low.');
+    exit;
+  end;
+
   SetLength(arrNewOrder, Length(arrNewOrder) + 1);
   arrNewOrder[Length(arrNewOrder) - 1][0] := IndexToID(cmbOrderItem.ItemIndex);
-  arrNewOrder[Length(arrNewOrder) - 1][1] := StrToInt(edtOrderAmount.Text);
+  arrNewOrder[Length(arrNewOrder) - 1][1] := iAmount;
   UpdateOrderDisplay;
 end;
 
@@ -183,7 +203,15 @@ var
   iRowIndex: Integer;
   i, j: Integer;
 begin
-  SetLength(arrOrderTmp, Length(arrNewOrder) - 1);
+  if grdOrderLines.RowCount < 1 then
+  begin
+    ShowMessage('No rows to delete');
+    exit;
+  end;
+
+  if Length(arrNewOrder) > 0 then
+    SetLength(arrOrderTmp, Length(arrNewOrder) - 1);
+
   iRowIndex := grdOrderLines.Row;
   j := 0;
 
@@ -210,6 +238,12 @@ end;
 
 procedure TfrmOrder.btnOrderSaveClick(Sender: TObject);
 begin
+  if Length(arrNewOrder) < 1 then
+  begin
+    ShowMessage('No items in order.');
+    exit;
+  end;
+
   if iPrevOrderID = -1 then
   begin
     iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder);
@@ -227,7 +261,7 @@ end;
 procedure TfrmOrder.edtOrderAmountValidating(Sender: TObject; var Text: string);
 begin
   if Length(Text) > 3 then
-    Delete(Text, 3, Length(Text) - 3);
+    Delete(Text, 4, Length(Text) - 3);
 end;
 
 procedure TfrmOrder.edtOrderCustomerValidate(Sender: TObject; var Text: string);
@@ -235,7 +269,7 @@ begin
   Text := Text.Trim;
 
   if Length(Text) > 60 then
-    Delete(Text, 60, Length(Text) - 60);
+    Delete(Text, 61, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.edtOrderCustomerValidating(Sender: TObject;
@@ -244,13 +278,13 @@ begin
   Text := Text.TrimLeft;
 
   if Length(Text) > 60 then
-    Delete(Text, 60, Length(Text) - 60);
+    Delete(Text, 61, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.edtOrderTableValidating(Sender: TObject; var Text: string);
 begin
   if Length(Text) > 3 then
-    Delete(Text, 3, Length(Text) - 3);
+    Delete(Text, 4, Length(Text) - 3);
 end;
 
 procedure TfrmOrder.edtOrderWaiterValidate(Sender: TObject; var Text: string);
@@ -258,7 +292,7 @@ begin
   Text := Text.Trim;
 
   if Length(Text) > 60 then
-    Delete(Text, 60, Length(Text) - 60);
+    Delete(Text, 61, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.edtOrderWaiterValidating(Sender: TObject; var Text: string);
@@ -266,7 +300,7 @@ begin
   Text := Text.TrimLeft;
 
   if Length(Text) > 60 then
-    Delete(Text, 60, Length(Text) - 60);
+    Delete(Text, 61, Length(Text) - 60);
 end;
 
 procedure TfrmOrder.FormClose(Sender: TObject; var Action: TCloseAction);

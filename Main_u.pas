@@ -69,10 +69,8 @@ type
     procedure CurrentUserUpdate();
     procedure SwapForm(aFrom, aTo: TForm);
     var
-      sCurrentUser: String;
-
+      LOGIN_DETAILS_PATH: String;
     const
-      LOGIN_DETAILS_PATH = 'data\login-details.txt';
       VAT = 0.15;
   end;
 
@@ -372,6 +370,8 @@ begin
   FHelpers := THelperFunc.Create;
 
   APP_PATH := TPath.GetAppPath();
+
+  LOGIN_DETAILS_PATH := TPath.Combine(APP_PATH, 'data\login-details.txt');
 
   sCurrentUser := FHelpers.IniReadString('general', ['last_logged_in'], ['none'])[0];
 

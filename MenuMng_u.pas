@@ -105,12 +105,17 @@ begin
     exit;
   end;
 
-  dbOrders.AppendMenu(edtMenuName.Text, cmbMenuCategory.Text, StrToFloat(edtMenuPrice.Text));
+  try
+    dbOrders.AppendMenu(edtMenuName.Text, cmbMenuCategory.Text, StrToFloat(edtMenuPrice.Text));
 
-  dbOrders.LoadMenu;
+    dbOrders.LoadMenu;
 
-  grdMenu.SelectRow(grdMenu.RowCount - 1);
-  UpdateRowData(grdMenu.RowCount - 1);
+    grdMenu.SelectRow(grdMenu.RowCount - 1);
+    UpdateRowData(grdMenu.RowCount - 1);
+  except
+    ShowMessage('Add failed. Contact support.');
+  end;
+
 end;
 
 procedure TfrmMenu.btnMenuBackClick(Sender: TObject);
@@ -131,6 +136,12 @@ procedure TfrmMenu.btnMenuDeleteClick(Sender: TObject);
 var
   iItem: Integer;
 begin
+  if grdMenu.Row < 0 then
+  begin
+    ShowMessage('No row selected.');
+    exit;
+  end;
+
   TDialogService.MessageDialog(
     'Confirmation to delete this item from the menu.',
     TMsgDlgType.mtConfirmation,
@@ -141,13 +152,14 @@ begin
     begin
       if AResult = mrYes then
       begin
-        if TryStrToInt(grdMenu.Cells[3, grdMenu.Row], iItem) = False then
-          raise Exception.Create('Item does not exist.');
+        try
+          dbOrders.DeleteMenuItem(StrToInt(grdMenu.Cells[3, grdMenu.Row]));
 
-        dbOrders.DeleteMenuItem(iItem);
-
-        dbOrders.LoadMenu;
-        UpdateRowData(grdMenu.Row);
+          dbOrders.LoadMenu;
+          UpdateRowData(grdMenu.Row);
+        except
+          ShowMessage('Deletion failed. Contact support.');
+        end;
       end;
     end
   );
@@ -186,6 +198,12 @@ end;
 
 procedure TfrmMenu.btnMenuUpdateClick(Sender: TObject);
 begin
+  if grdMenu.Row < 0 then
+  begin
+    ShowMessage('No row selected.');
+    exit;
+  end;
+
   if edtMenuPrice.Text = '' then
   begin
     ShowMessage('Input a price.');
@@ -204,11 +222,15 @@ begin
     exit;
   end;
 
-  dbOrders.UpdateMenu(edtMenuName.Text, cmbMenuCategory.Text, StrToFloat(edtMenuPrice.Text),
-  StrToInt(grdMenu.Cells[3, grdMenu.Row]));
+  try
+    dbOrders.UpdateMenu(edtMenuName.Text, cmbMenuCategory.Text, StrToFloat(edtMenuPrice.Text),
+    StrToInt(grdMenu.Cells[3, grdMenu.Row]));
 
-  dbOrders.LoadMenu;
-  UpdateRowData(grdMenu.Row);
+    dbOrders.LoadMenu;
+    UpdateRowData(grdMenu.Row);
+  except
+    ShowMessage('Update failed. Contact support.');
+  end;
 end;
 
 procedure TfrmMenu.edtMenuNameValidate(Sender: TObject; var Text: string);
@@ -216,7 +238,7 @@ begin
   Text := Text.Trim;
 
   if Length(Text) > 40 then
-    Delete(Text, 40, Length(Text) - 40);
+    Delete(Text, 41, Length(Text) - 40);
 end;
 
 procedure TfrmMenu.edtMenuNameValidating(Sender: TObject; var Text: string);
@@ -224,7 +246,7 @@ begin
   Text := Text.TrimLeft;
 
   if Length(Text) > 40 then
-    Delete(Text, 40, Length(Text) - 40);
+    Delete(Text, 41, Length(Text) - 40);
 end;
 
 procedure TfrmMenu.edtMenuPriceValidate(Sender: TObject; var Text: string);

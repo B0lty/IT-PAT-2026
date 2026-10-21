@@ -65,7 +65,7 @@ begin
   end;
 
   // Checking if the username and password are correct
-  AssignFile(tLoginDetails, Main_u.APP_PATH + '\' +frmMain.LOGIN_DETAILS_PATH);
+  AssignFile(tLoginDetails, frmMain.LOGIN_DETAILS_PATH);
 
   if NOT FileExists(frmMain.LOGIN_DETAILS_PATH) then
     Rewrite(tLoginDetails)

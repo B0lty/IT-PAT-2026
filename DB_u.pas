@@ -185,31 +185,37 @@ end;
 // Updates an item on the menu
 procedure TdbOrders.UpdateMenu(ItemName, Category: String; ItemPrice: Double; iItemID: Integer);
 begin
-  tblMenu.Locate('MenuItemID', iItemID, []);
-  tblMenu.Edit;
-  tblMenu.FieldByName('ItemName').AsString := ItemName;
-  tblMenu.FieldByName('Category').AsString := Category;
-  tblMenu.FieldByName('ItemPrice').AsFloat := ItemPrice;
-  tblmenu.Post;
+  if tblMenu.Locate('MenuItemID', iItemID, []) then
+  begin
+    tblMenu.Edit;
+    tblMenu.FieldByName('ItemName').AsString := ItemName;
+    tblMenu.FieldByName('Category').AsString := Category;
+    tblMenu.FieldByName('ItemPrice').AsFloat := ItemPrice;
+    tblmenu.Post;
+  end;
 end;
 
 // Removes an item from the menu
 procedure TdbOrders.DeleteMenuItem(iItemID: Integer);
 begin
-  tblMenu.Locate('MenuItemID', iItemID, []);
-  tblMenu.Delete;
+  if tblMenu.Locate('MenuItemID', iItemID, []) then
+    tblMenu.Delete;
 end;
 
 function TdbOrders.GetMenuItemName(iItemID: Integer): String;
 begin
-  tblMenu.Locate('MenuItemID', iItemID, []);
-  result := tblMenu.FieldByName('ItemName').AsString;
+  if tblMenu.Locate('MenuItemID', iItemID, []) then
+    result := tblMenu.FieldByName('ItemName').AsString
+  else
+    result := '';
 end;
 
 function TdbOrders.GetMenuItemPrice(iItemID: Integer): Double;
 begin
-  tblMenu.Locate('MenuItemID', iItemID, []);
-  result := tblMenu.FieldByName('ItemPrice').AsFloat;
+  if tblMenu.Locate('MenuItemID', iItemID, []) then
+    result := tblMenu.FieldByName('ItemPrice').AsFloat
+  else
+    result := 0.0;
 end;
 
 function TdbOrders.NewOrder(sWaiter, sCustomer: String; iTableNo: Integer; arrOrder: TArray<TOrderLine>): Integer;
@@ -245,7 +251,10 @@ begin
   if Length(arrOrder) < 1 then
     exit;
 
-  tblOrders.Locate('OrderID', iOrderID, []);
+  if tblOrders.Locate('OrderID', iOrderID, []) = False then
+  begin
+    raise Exception.Create('Order not found, update failed.');
+  end;
   tblOrders.Edit;
   tblOrders.FieldByName('Customer').AsString := sCustomer;
   tblOrders.FieldByName('Waiter').AsString := sWaiter;
@@ -366,6 +375,8 @@ begin
     sl.Add(Format('%-22s %16s', ['TOTAL DUE', 'R ' + FloatToStrF(dTotal, ffFixed, 10, 2)]));
     sl.Add('=================================================');
     sl.Add('          Thank you for dining with us!');
+
+    ForceDirectories(sFilePath);
     sl.SaveToFile(sFilePath + '/receipt-' + FormatDateTime('yyyy-mm-dd-hh-nn-ss', OrderDate) + '.txt');
   finally
     sl.Free;
