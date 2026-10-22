@@ -4,6 +4,8 @@ My grade 11 IT PAT
 # To-do:
 - [x] Make it neccesary to save an order before exporting bill
 - [ ] Move SwapForm procedure to Helpers_u.pas
+- [ ] Remove ability to delete menu items
+- [ ] Add ability to delete orders. Maybe, not entirely sure yet.
 
 # Far-fetched to-do:
 - [ ] Update login system
