@@ -64,6 +64,7 @@ begin
   inherited;
 end;
 
+// Confirms whether the text file of passwords is valid, and returns T/F
 function THelperFunc.ConfirmFileValidity(sPath: String): boolean;
 var
   tTextFile: TextFile;
@@ -110,6 +111,7 @@ begin
 
 end;
 
+// Adds a text to a text file
 procedure THelperFunc.AppendToTextFile(sPath: String; cDelimiter: Char; arrData: TArray<String>);
 var
   tTextFile: TextFile;
@@ -152,7 +154,7 @@ begin
 
 end;
 
-
+// Sets the hash key for the text file of passwords
 procedure THelperFunc.SetFileHashKey(sPath: String);
 var
   tTextFile: TextFile;
@@ -204,14 +206,12 @@ begin
   end;
 end;
 
-
+// Allows for bulk writing to the ini file
 procedure THelperFunc.IniWriteString(sSection: String; arrKeys, arrValues: TArray<String>);
 var
   iIndex: Integer;
   iniFile: TIniFile;
 begin
-  // Allows for bulk writing to the ini file
-
   if Length(arrKeys) <> Length(arrValues) then
   begin
       exit
@@ -228,15 +228,13 @@ begin
   end;
 end;
 
-
+// Allows for bulk reading from the ini file
 function THelperFunc.IniReadString(sSection: String; arrKeys, arrDefaults: TArray<String>): TArray<String>;
 var
   iIndex: Integer;
   iniFile: TIniFile;
   iResultLength: Integer;
 begin
-  // Allows for bulk reading from the ini file
-
   if Length(arrKeys) <> Length(arrDefaults) then
   begin
       Result := [''];
