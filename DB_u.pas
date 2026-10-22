@@ -124,6 +124,7 @@ end;
 
 destructor TdbOrders.Destroy;
 begin
+  // Freeing the created tables and connection
   if Assigned(tblMenu) then tblMenu.Free;
   if Assigned(tblOrderItem) then tblOrderItem.Free;
   if Assigned(tblOrders) then tblOrders.Free;
@@ -202,6 +203,7 @@ begin
     tblMenu.Delete;
 end;
 
+// Gets the name of a menu item.
 function TdbOrders.GetMenuItemName(iItemID: Integer): String;
 begin
   if tblMenu.Locate('MenuItemID', iItemID, []) then
@@ -218,6 +220,7 @@ begin
     result := 0.0;
 end;
 
+// Creates a new order.
 function TdbOrders.NewOrder(sWaiter, sCustomer: String; iTableNo: Integer; arrOrder: TArray<TOrderLine>): Integer;
 var
   iOrderID: Integer;
@@ -244,6 +247,7 @@ begin
   Result := iOrderID;
 end;
 
+// Updates an order.
 procedure TdbOrders.UpdateOrder(sWaiter, sCustomer: String; iTableNo: Integer; arrOrder: TArray<TOrderLine>; iOrderID: Integer);
 var
   iArr: Integer;
@@ -300,6 +304,7 @@ begin
   end;
 end;
 
+// Creates a receipt and exports it to a text file.
 procedure TdbOrders.ExportReceipt(sFilePath: String; iOrderID: Integer);
 var
   lines: TArray<TOrderLineRec>;
