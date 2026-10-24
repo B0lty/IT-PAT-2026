@@ -82,8 +82,8 @@ object frmMenu: TfrmMenu
     OnClick = btnMenuBackClick
   end
   object btnMenuClear: TButton
-    Position.X = 135.000000000000000000
-    Position.Y = 252.000000000000000000
+    Position.X = 70.000000000000000000
+    Position.Y = 254.000000000000000000
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
@@ -93,14 +93,16 @@ object frmMenu: TfrmMenu
     OnClick = btnMenuClearClick
   end
   object btnMenuDelete: TButton
-    Position.X = 10.000000000000000000
-    Position.Y = 252.000000000000000000
+    Enabled = False
+    Position.X = 12.000000000000000000
+    Position.Y = 254.000000000000000000
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
     Text = 'Delete'
     TextSettings.Trimming = None
+    Visible = False
     OnClick = btnMenuDeleteClick
   end
   object btnMenuFirst: TButton
