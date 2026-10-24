@@ -10,7 +10,7 @@ uses
   System.IOUtils, System.JSON,
   FMX.Memo.Types, FMX.ScrollBox, FMX.Memo, OpenAI, OpenAI.Chat,
   OpenAI.Errors, OpenAI.Component.Chat, Winapi.ShellAPI, Winapi.Windows, FMX.Platform.Win,
-  Login_u, CreateAcc_u, MenuMng_u, Order_u, Reports_u, Helpers_u, DB_u;
+  Login_u, CreateAcc_u, MenuMng_u, Order_u, Helpers_u, DB_u;
 
 type
   TfrmMain = class(TForm)
@@ -31,8 +31,8 @@ type
     Label16: TLabel;
     btnNavMenu: TButton;
     btnNavOrders: TButton;
-    btnNavReports: TButton;
     lblPortalTitle: TLabel;
+    StyleBook1: TStyleBook;
     procedure btnLogOutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSendClick(Sender: TObject);
@@ -41,7 +41,6 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnNavMenuClick(Sender: TObject);
     procedure btnNavOrdersClick(Sender: TObject);
-    procedure btnNavReportsClick(Sender: TObject);
     procedure memAIInputKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: WideChar; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
@@ -320,11 +319,6 @@ end;
 procedure TfrmMain.btnNavOrdersClick(Sender: TObject);
 begin
   SwapForm(frmMain, frmOrder);
-end;
-
-procedure TfrmMain.btnNavReportsClick(Sender: TObject);
-begin
-  SwapForm(frmMain, frmReports);
 end;
 
 procedure TfrmMain.btnSendClick(Sender: TObject);

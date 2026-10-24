@@ -6,6 +6,7 @@ object frmCreateAcc: TfrmCreateAcc
   ClientHeight = 480
   ClientWidth = 640
   Position = Designed
+  StyleBook = frmMain.StyleBook1
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]

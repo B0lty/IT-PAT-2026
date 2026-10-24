@@ -6,6 +6,7 @@ object frmReports: TfrmReports
   ClientHeight = 480
   ClientWidth = 640
   Position = Designed
+  StyleBook = frmMain.StyleBook1
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -102,7 +103,7 @@ object frmReports: TfrmReports
     Size.Height = 410.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    Viewport.Width = 396.000000000000000000
-    Viewport.Height = 406.000000000000000000
+    Viewport.Width = 386.000000000000000000
+    Viewport.Height = 402.000000000000000000
   end
 end
