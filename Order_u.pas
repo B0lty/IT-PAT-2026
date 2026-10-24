@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ListBox,
   FMX.Controls.Presentation, FMX.StdCtrls, System.Rtti, FMX.Grid.Style,
   FMX.Grid, FMX.ScrollBox, FMX.Edit,
-  Helpers_u;
+  Helpers_u, System.Skia, FMX.Skia;
 
 type
   TfrmOrder = class(TForm)
@@ -41,6 +41,7 @@ type
     lblOrderVatCaption: TLabel;
     lblOrderVatValue: TLabel;
     lblOrderWaiterCaption: TLabel;
+    svgLogo: TSkSvg;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOrderBackClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

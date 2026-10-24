@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ListBox,
   FMX.Controls.Presentation, FMX.StdCtrls, System.Rtti, FMX.Grid.Style,
-  FMX.Grid, FMX.ScrollBox, FMX.Edit, FMX.DialogService;
+  FMX.Grid, FMX.ScrollBox, FMX.Edit, FMX.DialogService, System.Skia, FMX.Skia;
 
 type
   TfrmMenu = class(TForm)
@@ -35,6 +35,7 @@ type
     lblMenuPriceCaption: TLabel;
     lblMenuTitle: TLabel;
     colID: TStringColumn;
+    svgLogo: TSkSvg;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnMenuBackClick(Sender: TObject);
     procedure btnMenuRefreshClick(Sender: TObject);

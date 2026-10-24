@@ -10,7 +10,8 @@ uses
   System.IOUtils, System.JSON,
   FMX.Memo.Types, FMX.ScrollBox, FMX.Memo, OpenAI, OpenAI.Chat,
   OpenAI.Errors, OpenAI.Component.Chat, Winapi.ShellAPI, Winapi.Windows, FMX.Platform.Win,
-  Login_u, CreateAcc_u, MenuMng_u, Order_u, Helpers_u, DB_u;
+  Login_u, CreateAcc_u, MenuMng_u, Order_u, Helpers_u, DB_u, System.Skia,
+  FMX.Skia;
 
 type
   TfrmMain = class(TForm)
@@ -33,6 +34,7 @@ type
     btnNavOrders: TButton;
     lblPortalTitle: TLabel;
     StyleBook1: TStyleBook;
+    svgLogo: TSkSvg;
     procedure btnLogOutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSendClick(Sender: TObject);

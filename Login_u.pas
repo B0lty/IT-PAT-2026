@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, System.Hash,
-  Helpers_u;
+  Helpers_u, System.Skia, FMX.Skia;
 
 type
   TfrmLogin = class(TForm)
@@ -23,6 +23,7 @@ type
     edtUsernameLogin: TEdit;
     Label3: TLabel;
     lblLoginError: TLabel;
+    svgLogo: TSkSvg;
     procedure btnLoginClick(Sender: TObject);
     procedure btnCreateAccountClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

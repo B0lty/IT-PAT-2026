@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, System.Hash,
-  Helpers_u;
+  Helpers_u, System.Skia, FMX.Skia;
 
 type
   TfrmCreateAcc = class(TForm)
@@ -26,6 +26,7 @@ type
     edtPasswordConfirmCreate: TEdit;
     Label7: TLabel;
     lblCreateAccountError: TLabel;
+    svgLogo: TSkSvg;
     procedure btnCreateAccountConfirmClick(Sender: TObject);
     procedure btnCancelCreateAccountClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

@@ -12,6 +12,52 @@ object frmCreateAcc: TfrmCreateAcc
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
   DesignerMasterStyle = 0
+  object svgLogo: TSkSvg
+    Align = Fit
+    Margins.Left = 50.000000000000000000
+    Margins.Top = 50.000000000000000000
+    Margins.Right = 50.000000000000000000
+    Margins.Bottom = 50.000000000000000000
+    Opacity = 0.500000000000000000
+    Size.Width = 540.000000000000000000
+    Size.Height = 345.621948242187500000
+    Size.PlatformDefault = False
+    Svg.Source = 
+      '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'#13#10'<!DOCTYP' +
+      'E svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphi' +
+      'cs/SVG/1.1/DTD/svg11.dtd">'#13#10'<svg width="100%" height="100%" view' +
+      'Box="0 0 248 248" version="1.1" xmlns="http://www.w3.org/2000/sv' +
+      'g" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserv' +
+      'e" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;' +
+      'clip-rule:evenodd;stroke-linecap:round;">'#13#10'    <g transform="mat' +
+      'rix(1,0,0,1,-196,-46)">'#13#10'        <circle cx="320" cy="170" r="12' +
+      '4" style="fill:rgb(227,243,253);"/>'#13#10'        <circle cx="320" cy' +
+      '="170" r="112" style="fill:url(#_Linear1);"/>'#13#10'        <g>'#13#10'    ' +
+      '        <path d="M298.8,143.8C310.434,132.18 329.566,132.18 341.' +
+      '2,143.8" style="fill:none;fill-rule:nonzero;stroke:white;stroke-' +
+      'width:9px;"/>'#13#10'            <path d="M284.6,129.6C293.977,120.199' +
+      ' 306.722,114.911 320,114.911C333.278,114.911 346.023,120.199 355' +
+      '.4,129.6" style="fill:none;fill-rule:nonzero;stroke:white;stroke' +
+      '-width:9px;"/>'#13#10'            <path d="M270.5,115.5C283.623,102.37' +
+      '6 301.441,94.995 320,94.995C338.559,94.995 356.377,102.376 369.5' +
+      ',115.5" style="fill:none;fill-rule:nonzero;stroke:white;stroke-w' +
+      'idth:9px;"/>'#13#10'        </g>'#13#10'        <circle cx="320" cy="164" r=' +
+      '"7" style="fill:white;"/>'#13#10'        <path d="M236,180L404,180C404' +
+      ',226.081 366.081,264 320,264C273.919,264 236,226.081 236,180Z" s' +
+      'tyle="fill:white;fill-rule:nonzero;"/>'#13#10'        <path d="M348,26' +
+      '4.5C348,266.984 345.984,269 343.5,269L296.5,269C294.016,269 292,' +
+      '266.984 292,264.5C292,262.016 294.016,260 296.5,260L343.5,260C34' +
+      '5.984,260 348,262.016 348,264.5Z" style="fill:white;"/>'#13#10'       ' +
+      ' <circle cx="290" cy="208" r="5" style="fill:rgb(143,208,250);"/' +
+      '>'#13#10'        <circle cx="320" cy="222" r="5" style="fill:rgb(143,2' +
+      '08,250);"/>'#13#10'        <circle cx="350" cy="208" r="5" style="fill' +
+      ':rgb(143,208,250);"/>'#13#10'    </g>'#13#10'    <defs>'#13#10'        <linearGrad' +
+      'ient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="us' +
+      'erSpaceOnUse" gradientTransform="matrix(224,224,-224,224,208,58)' +
+      '"><stop offset="0" style="stop-color:rgb(143,208,250);stop-opaci' +
+      'ty:1"/><stop offset="1" style="stop-color:rgb(61,148,224);stop-o' +
+      'pacity:1"/></linearGradient>'#13#10'    </defs>'#13#10'</svg>'
+  end
   object Label9: TLabel
     Align = Horizontal
     Size.Width = 640.000000000000000000
