@@ -173,6 +173,8 @@ procedure TfrmOrder.btnOrderClearClick(Sender: TObject);
 begin
   SetLength(arrNewOrder, 0);
 
+  btnOrderSave.Text := 'Save Order';
+
   edtOrderCustomer.Text := '';
   edtOrderWaiter.Text := '';
   edtOrderTable.Text := '';
@@ -262,13 +264,14 @@ begin
 
   if iPrevOrderID = -1 then
   begin
-    iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text, edtOrderCustomer.Text,
+    iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text.Trim, edtOrderCustomer.Text.Trim,
       iTableNo, arrNewOrder);
+    btnOrderSave.Text := 'Update Order';
     ShowMessage('Order saved.');
   end
   else
   begin
-    dbOrders.UpdateOrder(edtOrderWaiter.Text, edtOrderCustomer.Text,
+    dbOrders.UpdateOrder(edtOrderWaiter.Text.Trim, edtOrderCustomer.Text.Trim,
       iTableNo, arrNewOrder, iPrevOrderID);
     ShowMessage('Order updated.');
   end;
