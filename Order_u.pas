@@ -102,8 +102,6 @@ var
   i: Integer;
   dSubtotal: Double;
 begin
-  //grdOrderLines.ClearContent;
-
   if Length(arrNewOrder) < 1 then
   begin
     grdOrderLines.RowCount := 1;
@@ -187,6 +185,8 @@ begin
   btnOrderExport.Enabled := False;
 
   UpdateOrderDisplay;
+
+  grdOrderLines.SelectRow(-1);
 end;
 
 procedure TfrmOrder.btnOrderExportClick(Sender: TObject);
@@ -200,44 +200,41 @@ end;
 
 procedure TfrmOrder.btnOrderRemoveLineClick(Sender: TObject);
 var
-  arrOrderTmp: TArray<array[0.. 1] of Integer>;
-  iRowIndex: Integer;
-  i, j: Integer;
+  iRowIndex, i: Integer;
 begin
-  if grdOrderLines.RowCount < 1 then
+  if Length(arrNewOrder) < 1 then
   begin
-    ShowMessage('No rows to delete');
+    ShowMessage('No order lines to remove.');
     exit;
   end;
 
-  if Length(arrNewOrder) > 0 then
-    SetLength(arrOrderTmp, Length(arrNewOrder) - 1);
-
   iRowIndex := grdOrderLines.Row;
-  j := 0;
-
-  for i := 0 to Length(arrNewOrder) - 1 do
+  if (iRowIndex < 0) or (iRowIndex >= Length(arrNewOrder)) then
   begin
-    if i <> iRowIndex then
-    begin
-      arrOrderTmp[j][0] := arrNewOrder[i][0];
-      arrOrderTmp[j][1] := arrNewOrder[i][1];
-      Inc(j);
-    end;
+    ShowMessage('Select an order line to remove.');
+    exit;
   end;
 
-  SetLength(arrNewOrder, Length(arrOrderTmp));
+  for i := iRowIndex to Length(arrNewOrder) - 2 do
+    arrNewOrder[i] := arrNewOrder[i + 1];
 
-  for i := 0 to Length(arrOrderTmp) - 1 do
-  begin
-    arrNewOrder[i][0] := arrOrderTmp[i][0];
-    arrNewOrder[i][1] := arrOrderTmp[i][1];
-  end;
+  SetLength(arrNewOrder, Length(arrNewOrder) - 1);
 
   UpdateOrderDisplay;
+
+  if Length(arrNewOrder) > 0 then
+  begin
+    if iRowIndex > Length(arrNewOrder) - 1 then
+      iRowIndex := Length(arrNewOrder) - 1;
+    grdOrderLines.SelectRow(iRowIndex);
+  end
+  else
+    grdOrderLines.SelectRow(-1);
 end;
 
 procedure TfrmOrder.btnOrderSaveClick(Sender: TObject);
+var
+  iTableNo: Integer;
 begin
   if Length(arrNewOrder) < 1 then
   begin
@@ -245,20 +242,39 @@ begin
     exit;
   end;
 
+    if edtOrderWaiter.Text.Trim = '' then
+  begin
+    ShowMessage('Enter the waiter''s name.');
+    exit;
+  end;
+
+  if edtOrderCustomer.Text.Trim = '' then
+  begin
+    ShowMessage('Enter the customer name or order description.');
+    exit;
+  end;
+
+  if (not TryStrToInt(edtOrderTable.Text.Trim, iTableNo)) or (iTableNo < 1) or (iTableNo > 999) then
+  begin
+    ShowMessage('Enter a valid table number (1-999).');
+    exit;
+  end;
+
   if iPrevOrderID = -1 then
   begin
-    iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder);
+    iPrevOrderID := dbOrders.NewOrder(edtOrderWaiter.Text, edtOrderCustomer.Text,
+      iTableNo, arrNewOrder);
     ShowMessage('Order saved.');
   end
   else
   begin
-    dbOrders.UpdateOrder(edtOrderWaiter.Text, edtOrderCustomer.Text, StrToInt(edtOrderTable.Text), arrNewOrder, iPrevOrderID);
+    dbOrders.UpdateOrder(edtOrderWaiter.Text, edtOrderCustomer.Text,
+      iTableNo, arrNewOrder, iPrevOrderID);
     ShowMessage('Order updated.');
   end;
 
   btnOrderExport.Enabled := True;
 end;
-
 procedure TfrmOrder.edtOrderAmountValidating(Sender: TObject; var Text: string);
 begin
   if Length(Text) > 3 then
