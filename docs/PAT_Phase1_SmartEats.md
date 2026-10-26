@@ -88,25 +88,25 @@ Two direct user types were identified. A third stakeholder, the customer, benefi
 
 **Table 3: User stories for the two direct user types**
 
-| ID | As a … | I want to … | So that … |
-|---|---|---|---|
-| US-01 | Manager | log in with a username and password | only authorised staff can change the menu |
-| US-02 | Manager | add a new menu item with a name, category and price | the item can be ordered by waiters |
-| US-03 | Manager | update the name, category or price of an existing menu item | the menu and its prices stay accurate |
-| US-04 | Manager | delete a menu item that is no longer sold | waiters cannot order an item that is unavailable |
-| US-05 | Manager | move to the first, previous, next or last menu record | I can find and edit an item quickly |
-| US-06 | Waiter | create an order for a table by choosing menu items and quantities | the customer's order is recorded accurately |
-| US-07 | Waiter | remove an incorrect order line and see the totals update immediately | the bill is correct before it is saved |
-| US-08 | Waiter | save the order and export a formatted bill to a text file | the customer receives a record and the restaurant keeps a copy |
+| ID    | As a …  | I want to …                                                          | So that …                                                      |
+| ----- | ------- | -------------------------------------------------------------------- | -------------------------------------------------------------- |
+| US-01 | Manager | log in with a username and password                                  | only authorised staff can change the menu                      |
+| US-02 | Manager | add a new menu item with a name, category and price                  | the item can be ordered by waiters                             |
+| US-03 | Manager | update the name, category or price of an existing menu item          | the menu and its prices stay accurate                          |
+| US-04 | Manager | delete a menu item that is no longer sold                            | waiters cannot order an item that is unavailable               |
+| US-05 | Manager | move to the first, previous, next or last menu record                | I can find and edit an item quickly                            |
+| US-06 | Waiter  | create an order for a table by choosing menu items and quantities    | the customer's order is recorded accurately                    |
+| US-07 | Waiter  | remove an incorrect order line and see the totals update immediately | the bill is correct before it is saved                         |
+| US-08 | Waiter  | save the order and export a formatted bill to a text file            | the customer receives a record and the restaurant keeps a copy |
 
 US-09 and US-10 are planned. The AI panel and the Reports form exist in the current build, but the AI service is not started and the report buttons contain no code. They are therefore listed separately in Table 4 and are not used as the basis for the acceptance tests that must pass in the current build.
 
 **Table 4: Planned user stories**
 
-| ID | User story | Current status |
-|---|---|---|
-| US-09 | As a waiter, I want to ask the AI assistant for a food recommendation so that I can answer a customer quickly. | The chat panel and streaming code exist. The local llama.cpp server and model are not started, so the feature is disabled. |
-| US-10 | As a manager, I want to view daily sales, popular items and sales by category so that I can monitor performance. | The Reports form exists, but its buttons have no event handlers and the navigation button is hidden. |
+| ID    | User story                                                                                                       | Current status                                                                                                             |
+| ----- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| US-09 | As a waiter, I want to ask the AI assistant for a food recommendation so that I can answer a customer quickly.   | The chat panel and streaming code exist. The local llama.cpp server and model are not started, so the feature is disabled. |
+| US-10 | As a manager, I want to view daily sales, popular items and sales by category so that I can monitor performance. | The Reports form exists, but its buttons have no event handlers and the navigation button is hidden.                       |
 
 ### 3.3 Acceptance tests
 
@@ -114,20 +114,20 @@ An acceptance test describes an observable result that proves a user story has b
 
 **Table 5: Acceptance tests**
 
-| ID | Story | Test action or input | Expected result |
-|---|---|---|---|
-| AT-01 | US-01 | Enter a valid username and password on the Login form and click Enter. | The Staff Portal opens and `data.ini` stores the username as `last_logged_in`. |
-| AT-02 | US-01 | Enter a valid username with an incorrect password. | The red message "Username or password is incorrect." appears, both fields are cleared and the Login form remains open. |
-| AT-03 | US-01 | Change one character in a stored line of `login-details.txt`, then try to log in. | A critical-error message appears and the login is blocked. |
-| AT-04 | US-02 | Enter a menu item name, choose a category, enter a price and click Add. | The new item appears in the menu grid and in the order-item combo box, the item count increases and a new row is stored in `tblMenuItem`. |
-| AT-05 | US-03 | Select a menu row, change its price and click Update. | The grid shows the new price and the corresponding database row is updated. |
-| AT-06 | US-04 | Select an unreferenced menu item and click Delete. | The item disappears from the grid and the order-item combo box, and its database row is deleted. |
-| AT-07 | US-05 | Click the first, previous, next and last navigation buttons. | The selected row moves within the grid, the fields show the selected record and the selection stops at the first and last rows. |
-| AT-08 | US-06 | Select a menu item, enter an amount of 2 and click Add to order. | A line appears in the order grid with the item name, unit price, quantity 2 and a line total equal to twice the unit price. |
-| AT-09 | US-07 | Select an order line and click Remove line. | The line disappears from the grid and the subtotal, VAT and total are recalculated. |
-| AT-10 | US-07 | Add a R100 item with quantity 1 and a R20 item with quantity 2. | The subtotal is R140.00, VAT is R21.00 and the total is R161.00. |
-| AT-11 | US-08 | Enter a customer, waiter and table number for a valid order and click Save Order. | A new row is stored in `tblOrders`, the order lines are appended to `tblOrderItem` and the Export Bill button becomes enabled. |
-| AT-12 | US-08 | After a successful save, click Export Bill to file. | A `receipt-yyyy-mm-dd-hh-nn-ss.txt` file is created in `data/receipts` containing the header, order lines, subtotal, VAT and total, and a confirmation message is shown. |
+| ID    | Story | Test action or input                                                              | Expected result                                                                                                                                                          |
+| ----- | ----- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| AT-01 | US-01 | Enter a valid username and password on the Login form and click Enter.            | The Staff Portal opens and `data.ini` stores the username as `last_logged_in`.                                                                                           |
+| AT-02 | US-01 | Enter a valid username with an incorrect password.                                | The red message "Username or password is incorrect." appears, both fields are cleared and the Login form remains open.                                                   |
+| AT-03 | US-01 | Change one character in a stored line of `login-details.txt`, then try to log in. | A critical-error message appears and the login is blocked.                                                                                                               |
+| AT-04 | US-02 | Enter a menu item name, choose a category, enter a price and click Add.           | The new item appears in the menu grid and in the order-item combo box, the item count increases and a new row is stored in `tblMenuItem`.                                |
+| AT-05 | US-03 | Select a menu row, change its price and click Update.                             | The grid shows the new price and the corresponding database row is updated.                                                                                              |
+| AT-06 | US-04 | Select an unreferenced menu item and click Delete.                                | The item disappears from the grid and the order-item combo box, and its database row is deleted.                                                                         |
+| AT-07 | US-05 | Click the first, previous, next and last navigation buttons.                      | The selected row moves within the grid, the fields show the selected record and the selection stops at the first and last rows.                                          |
+| AT-08 | US-06 | Select a menu item, enter an amount of 2 and click Add to order.                  | A line appears in the order grid with the item name, unit price, quantity 2 and a line total equal to twice the unit price.                                              |
+| AT-09 | US-07 | Select an order line and click Remove line.                                       | The line disappears from the grid and the subtotal, VAT and total are recalculated.                                                                                      |
+| AT-10 | US-07 | Add a R100 item with quantity 1 and a R20 item with quantity 2.                   | The subtotal is R140.00, VAT is R21.00 and the total is R161.00.                                                                                                         |
+| AT-11 | US-08 | Enter a customer, waiter and table number for a valid order and click Save Order. | A new row is stored in `tblOrders`, the order lines are appended to `tblOrderItem` and the Export Bill button becomes enabled.                                           |
+| AT-12 | US-08 | After a successful save, click Export Bill to file.                               | A `receipt-yyyy-mm-dd-hh-nn-ss.txt` file is created in `data/receipts` containing the header, order lines, subtotal, VAT and total, and a confirmation message is shown. |
 
 **Note:** AT-11 and AT-12 assume the explicit order-line `Post` described in Section 9. In the current build, the final line may remain pending until the dataset next moves.
 
@@ -168,36 +168,36 @@ A few older local names, such as `lines`, `sl` and `OrderDate`, do not follow th
 
 **Table 7: Global and local variables**
 
-| Name | Data type | Scope and unit | Purpose |
-|---|---|---|---|
-| `APP_PATH` | String | Global, `Main_u` | Stores the application's folder path and is used to locate the database, data files and receipts. |
-| `sCurrentUser` | String | Global, `Main_u`; also a public field of `TfrmMain` | Holds the username of the signed-in user. The two same-named variables are a maintainability risk and contribute to the account-creation session issue in Section 9. |
-| `GlobalPosTop`, `GlobalPosLeft` | Integer | Global, `Main_u` | Remember the position of the form being replaced so that the next form opens in the same place. |
-| `frmMain`, `frmLogin`, `frmCreateAcc`, `frmMenu`, `frmOrder`, `frmReports` | Form instances | Global, one per unit | References to the application's forms. |
-| `FHelpers` | `THelperFunc` | Global, `Helpers_u` | Shared helper object for hashing, text-file and INI operations. |
-| `dbOrders` | `TdbOrders` | Global, `DB_u` | Shared database object that owns the connection, tables and data sources. |
-| `VAT` | Constant Real = 0.15 | Class constant, `TfrmMain` | VAT rate used in all calculations. |
-| `LOGIN_DETAILS_PATH` | Constant String = `data\login-details.txt` | Class constant, `TfrmMain` | Path to the login text file. |
-| `ALPHANUMERIC`, `NUMERIC`, `ALPHABET` | Constant String | Class constants, `THelperFunc` | Character sets used to filter edit boxes. |
-| `tLoginDetails` | TextFile | Local, `TfrmLogin.btnLoginClick` and `TfrmCreateAcc.btnCreateAccountConfirmClick` | File handle used to read or append login details. |
-| `sLine`, `sUsername`, `sPassword`, `sHashedInputPassword` | String | Local, `TfrmLogin.btnLoginClick` | Temporary values while parsing a login line and hashing the entered password. |
-| `iPos` | Integer | Local, `TfrmLogin` and `TfrmCreateAcc` | Position of the semicolon that separates username and password. |
-| `bCredentialsCorrect` | Boolean | Local, `TfrmLogin.btnLoginClick` | Flag that stops the search when a matching account is found. |
-| `bPassHasChar`, `bPassHasNum` | Boolean | Local, `TfrmCreateAcc` | Record whether the password contains a letter and a digit. |
-| `i` | Integer | Local, repeated in several methods | Loop counter. |
-| `bDecimalPt` | Boolean | Local, `TfrmMenu.edtMenuPriceValidating` | Ensures that a price contains at most one decimal separator. |
-| `arrOrderTmp` | `TArray<array[0..1] of Integer>` | Local, `TfrmOrder.btnOrderRemoveLineClick` | Temporary copy used when removing an order line. |
-| `iPrevOrderID` | Integer | Private field, `TfrmOrder` | Stores the ID of the order being edited. It is reset to -1 when the form is shown. |
-| `dSubtotal` | Double | Local, `TfrmOrder.UpdateOrderDisplay` and `TdbOrders.ExportReceipt` | Running subtotal before VAT. |
-| `lines` | `TArray<TOrderLineRec>` | Local, `TdbOrders.ExportReceipt` | Collected receipt lines, each containing an item name, price and quantity. |
-| `sl` | `TStringList` | Local, `TdbOrders.ExportReceipt` | Builds the receipt line by line before saving it to a text file. |
-| `sCustomer`, `sWaiter` | String | Local, `TdbOrders.ExportReceipt` | Values read from the selected order. |
-| `OrderDate` | TDateTime | Local, `TdbOrders.ExportReceipt` | Date and time of the selected order. |
-| `iOrderID` | Integer | Local, `TdbOrders.NewOrder` and `UpdateOrder` | Primary key of the order header. |
-| `sFileData`, `sFileHash`, `sHashKey`, `sLine` | String | Local, `THelperFunc` | File contents, calculated hash, stored hash and one line of a text file. |
-| `bFirstLine` | Boolean | Local, `THelperFunc` | Distinguishes the hash line from the data lines. |
-| `arrListLines` | `TArray<String>` | Local, `THelperFunc.SetFileHashKey` | Preserves the data lines while the hash line is rewritten. |
-| `iniFile` | `TIniFile` | Local, `THelperFunc` | Reads and writes `data.ini`. |
+| Name                                                                       | Data type                                  | Scope and unit                                                                    | Purpose                                                                                                                                                              |
+| -------------------------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `APP_PATH`                                                                 | String                                     | Global, `Main_u`                                                                  | Stores the application's folder path and is used to locate the database, data files and receipts.                                                                    |
+| `sCurrentUser`                                                             | String                                     | Global, `Main_u`; also a public field of `TfrmMain`                               | Holds the username of the signed-in user. The two same-named variables are a maintainability risk and contribute to the account-creation session issue in Section 9. |
+| `GlobalPosTop`, `GlobalPosLeft`                                            | Integer                                    | Global, `Main_u`                                                                  | Remember the position of the form being replaced so that the next form opens in the same place.                                                                      |
+| `frmMain`, `frmLogin`, `frmCreateAcc`, `frmMenu`, `frmOrder`, `frmReports` | Form instances                             | Global, one per unit                                                              | References to the application's forms.                                                                                                                               |
+| `FHelpers`                                                                 | `THelperFunc`                              | Global, `Helpers_u`                                                               | Shared helper object for hashing, text-file and INI operations.                                                                                                      |
+| `dbOrders`                                                                 | `TdbOrders`                                | Global, `DB_u`                                                                    | Shared database object that owns the connection, tables and data sources.                                                                                            |
+| `VAT`                                                                      | Constant Real = 0.15                       | Class constant, `TfrmMain`                                                        | VAT rate used in all calculations.                                                                                                                                   |
+| `LOGIN_DETAILS_PATH`                                                       | Constant String = `data\login-details.txt` | Class constant, `TfrmMain`                                                        | Path to the login text file.                                                                                                                                         |
+| `ALPHANUMERIC`, `NUMERIC`, `ALPHABET`                                      | Constant String                            | Class constants, `THelperFunc`                                                    | Character sets used to filter edit boxes.                                                                                                                            |
+| `tLoginDetails`                                                            | TextFile                                   | Local, `TfrmLogin.btnLoginClick` and `TfrmCreateAcc.btnCreateAccountConfirmClick` | File handle used to read or append login details.                                                                                                                    |
+| `sLine`, `sUsername`, `sPassword`, `sHashedInputPassword`                  | String                                     | Local, `TfrmLogin.btnLoginClick`                                                  | Temporary values while parsing a login line and hashing the entered password.                                                                                        |
+| `iPos`                                                                     | Integer                                    | Local, `TfrmLogin` and `TfrmCreateAcc`                                            | Position of the semicolon that separates username and password.                                                                                                      |
+| `bCredentialsCorrect`                                                      | Boolean                                    | Local, `TfrmLogin.btnLoginClick`                                                  | Flag that stops the search when a matching account is found.                                                                                                         |
+| `bPassHasChar`, `bPassHasNum`                                              | Boolean                                    | Local, `TfrmCreateAcc`                                                            | Record whether the password contains a letter and a digit.                                                                                                           |
+| `i`                                                                        | Integer                                    | Local, repeated in several methods                                                | Loop counter.                                                                                                                                                        |
+| `bDecimalPt`                                                               | Boolean                                    | Local, `TfrmMenu.edtMenuPriceValidating`                                          | Ensures that a price contains at most one decimal separator.                                                                                                         |
+| `arrOrderTmp`                                                              | `TArray<array[0..1] of Integer>`           | Local, `TfrmOrder.btnOrderRemoveLineClick`                                        | Temporary copy used when removing an order line.                                                                                                                     |
+| `iPrevOrderID`                                                             | Integer                                    | Private field, `TfrmOrder`                                                        | Stores the ID of the order being edited. It is reset to -1 when the form is shown.                                                                                   |
+| `dSubtotal`                                                                | Double                                     | Local, `TfrmOrder.UpdateOrderDisplay` and `TdbOrders.ExportReceipt`               | Running subtotal before VAT.                                                                                                                                         |
+| `lines`                                                                    | `TArray<TOrderLineRec>`                    | Local, `TdbOrders.ExportReceipt`                                                  | Collected receipt lines, each containing an item name, price and quantity.                                                                                           |
+| `sl`                                                                       | `TStringList`                              | Local, `TdbOrders.ExportReceipt`                                                  | Builds the receipt line by line before saving it to a text file.                                                                                                     |
+| `sCustomer`, `sWaiter`                                                     | String                                     | Local, `TdbOrders.ExportReceipt`                                                  | Values read from the selected order.                                                                                                                                 |
+| `OrderDate`                                                                | TDateTime                                  | Local, `TdbOrders.ExportReceipt`                                                  | Date and time of the selected order.                                                                                                                                 |
+| `iOrderID`                                                                 | Integer                                    | Local, `TdbOrders.NewOrder` and `UpdateOrder`                                     | Primary key of the order header.                                                                                                                                     |
+| `sFileData`, `sFileHash`, `sHashKey`, `sLine`                              | String                                     | Local, `THelperFunc`                                                              | File contents, calculated hash, stored hash and one line of a text file.                                                                                             |
+| `bFirstLine`                                                               | Boolean                                    | Local, `THelperFunc`                                                              | Distinguishes the hash line from the data lines.                                                                                                                     |
+| `arrListLines`                                                             | `TArray<String>`                           | Local, `THelperFunc.SetFileHashKey`                                               | Preserves the data lines while the hash line is rewritten.                                                                                                           |
+| `iniFile`                                                                  | `TIniFile`                                 | Local, `THelperFunc`                                                              | Reads and writes `data.ini`.                                                                                                                                         |
 
 ### 4.3 Components
 
@@ -205,27 +205,27 @@ The forms use a variety of components so that each type of input and output is h
 
 **Table 8: Main component types and their purposes**
 
-| Component type | Naming prefix | Purpose in this project |
-|---|---|---|
-| `TForm` | `frm` | Separate screens for login, account creation, the staff portal, menu management, order placement and reports. |
-| `TPanel` | `Panel` | Groups the top bar and the centred login panels. |
-| `TRectangle` | `rect` | Draws the closed and open side panels for the Chatty assistant. |
-| `TButton` | `btn` | Login, create account, navigation, CRUD, save, export and clear actions. |
-| `TLabel` | `lbl` | Field captions, the current-user label, item count, order totals and red error messages. |
-| `TEdit` | `edt` | Username, password, menu item name, price, customer, waiter, table and quantity input. |
-| `TComboBox` | `cmb` | Category selection (Starters, Mains, Desserts, Drinks) and menu-item selection. |
-| `TStringGrid` | `grd` | Displays menu records and the current order lines, and allows row selection. |
-| `TStringColumn` | `col` | Defines the visible columns and widths of each grid. |
-| `TMemo` | `mem` | Multi-line AI input, AI response and report output. |
-| `TFDConnection` | `con` | Opens the Microsoft Access database through the FireDAC MSAcc driver. |
-| `TFDTable` | `tbl` | Provides record-level access to each database table. |
-| `TDataSource` | `dsc` | Links each table to a data source; available for data-aware components. |
-| `TStringList` | `sl` | Builds the receipt text before it is written to disk. |
-| `TIniFile` | `iniFile` | Reads and writes the `last_logged_in` value in `data.ini`. |
-| `TextFile` | `t` | Reads and appends the login-details text file. |
-| `TArray` | `arr` | Stores the current order and the menu-index mapping. |
-| Record (`TOrderLineRec`) | — | Groups an item name, price and quantity for a receipt line. |
-| Class (`TdbOrders`, `THelperFunc`) | `T` | Separates database logic and reusable file/INI logic from the forms. |
+| Component type                     | Naming prefix | Purpose in this project                                                                                       |
+| ---------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+| `TForm`                            | `frm`         | Separate screens for login, account creation, the staff portal, menu management, order placement and reports. |
+| `TPanel`                           | `Panel`       | Groups the top bar and the centred login panels.                                                              |
+| `TRectangle`                       | `rect`        | Draws the closed and open side panels for the Chatty assistant.                                               |
+| `TButton`                          | `btn`         | Login, create account, navigation, CRUD, save, export and clear actions.                                      |
+| `TLabel`                           | `lbl`         | Field captions, the current-user label, item count, order totals and red error messages.                      |
+| `TEdit`                            | `edt`         | Username, password, menu item name, price, customer, waiter, table and quantity input.                        |
+| `TComboBox`                        | `cmb`         | Category selection (Starters, Mains, Desserts, Drinks) and menu-item selection.                               |
+| `TStringGrid`                      | `grd`         | Displays menu records and the current order lines, and allows row selection.                                  |
+| `TStringColumn`                    | `col`         | Defines the visible columns and widths of each grid.                                                          |
+| `TMemo`                            | `mem`         | Multi-line AI input, AI response and report output.                                                           |
+| `TFDConnection`                    | `con`         | Opens the Microsoft Access database through the FireDAC MSAcc driver.                                         |
+| `TFDTable`                         | `tbl`         | Provides record-level access to each database table.                                                          |
+| `TDataSource`                      | `dsc`         | Links each table to a data source; available for data-aware components.                                       |
+| `TStringList`                      | `sl`          | Builds the receipt text before it is written to disk.                                                         |
+| `TIniFile`                         | `iniFile`     | Reads and writes the `last_logged_in` value in `data.ini`.                                                    |
+| `TextFile`                         | `t`           | Reads and appends the login-details text file.                                                                |
+| `TArray`                           | `arr`         | Stores the current order and the menu-index mapping.                                                          |
+| Record (`TOrderLineRec`)           | —             | Groups an item name, price and quantity for a receipt line.                                                   |
+| Class (`TdbOrders`, `THelperFunc`) | `T`           | Separates database logic and reusable file/INI logic from the forms.                                          |
 
 ### 4.4 Arrays
 
@@ -233,16 +233,16 @@ Arrays are used where the number of items is not known in advance and where a li
 
 **Table 9: Arrays used in the project**
 
-| Name and declaration | Where used | Purpose and value |
-|---|---|---|
-| `TOrderLine = array[0..1] of Integer` | Type declared in `Helpers_u` | Defines one order line as a pair: `[MenuItemID, Quantity]`. It keeps the order data compact and easy to pass to database methods. |
-| `arrNewOrder: TArray<TOrderLine>` | `TfrmOrder` | Holds the current order while the waiter adds or removes lines. A dynamic array is used because the number of lines changes during service. |
-| `arrMenuIndexToID: TArray<array[0..1] of Integer>` | `TfrmOrder` | Maps each combo-box index to the matching `MenuItemID`. This is a two-dimensional mapping array: `[i][0]` is the combo index and `[i][1]` is the database primary key. It allows the combo box to show names while the program still uses stable IDs. |
-| `arrOrderTmp` | `TfrmOrder.btnOrderRemoveLineClick` | A temporary dynamic array that receives every line except the one being removed. The old array is then replaced, which avoids leaving a gap in the order. |
-| `arrData`, `arrKeys`, `arrValues`, `arrDefaults` | `THelperFunc.AppendToTextFile`, `IniWriteString`, `IniReadString` | Allow the helper methods to accept any number of values and keys, so the same method can be reused for different files and settings. |
-| `arrListLines: TArray<String>` | `THelperFunc.SetFileHashKey` | Stores the data lines while the first line (the hash) is recalculated and rewritten. |
-| `lines: TArray<TOrderLineRec>` | `TdbOrders.ExportReceipt` | Collects the receipt lines with their names, prices and quantities before formatting. It separates data collection from text formatting. |
-| `grdMenu.Cells[column, row]` and `grdOrderLines.Cells[column, row]` | `TfrmMenu`, `TfrmOrder` | The grid's two-dimensional cell array is used to display and read tabular data. |
+| Name and declaration                                                | Where used                                                        | Purpose and value                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TOrderLine = array[0..1] of Integer`                               | Type declared in `Helpers_u`                                      | Defines one order line as a pair: `[MenuItemID, Quantity]`. It keeps the order data compact and easy to pass to database methods.                                                                                                                     |
+| `arrNewOrder: TArray<TOrderLine>`                                   | `TfrmOrder`                                                       | Holds the current order while the waiter adds or removes lines. A dynamic array is used because the number of lines changes during service.                                                                                                           |
+| `arrMenuIndexToID: TArray<array[0..1] of Integer>`                  | `TfrmOrder`                                                       | Maps each combo-box index to the matching `MenuItemID`. This is a two-dimensional mapping array: `[i][0]` is the combo index and `[i][1]` is the database primary key. It allows the combo box to show names while the program still uses stable IDs. |
+| `arrOrderTmp`                                                       | `TfrmOrder.btnOrderRemoveLineClick`                               | A temporary dynamic array that receives every line except the one being removed. The old array is then replaced, which avoids leaving a gap in the order.                                                                                             |
+| `arrData`, `arrKeys`, `arrValues`, `arrDefaults`                    | `THelperFunc.AppendToTextFile`, `IniWriteString`, `IniReadString` | Allow the helper methods to accept any number of values and keys, so the same method can be reused for different files and settings.                                                                                                                  |
+| `arrListLines: TArray<String>`                                      | `THelperFunc.SetFileHashKey`                                      | Stores the data lines while the first line (the hash) is recalculated and rewritten.                                                                                                                                                                  |
+| `lines: TArray<TOrderLineRec>`                                      | `TdbOrders.ExportReceipt`                                         | Collects the receipt lines with their names, prices and quantities before formatting. It separates data collection from text formatting.                                                                                                              |
+| `grdMenu.Cells[column, row]` and `grdOrderLines.Cells[column, row]` | `TfrmMenu`, `TfrmOrder`                                           | The grid's two-dimensional cell array is used to display and read tabular data.                                                                                                                                                                       |
 
 Arrays add value because they allow the program to work with a variable number of order lines, to keep a stable link between displayed menu names and database IDs, and to reuse one helper method for many values. Without arrays, each order line would need its own variable or a fixed maximum number of lines.
 
@@ -252,11 +252,11 @@ The application uses text files for both input and output. The main text-file re
 
 **Table 10: Text files used by the application**
 
-| File and path | Direction | Format | Used by | Purpose |
-|---|---|---|---|---|
-| `data\login-details.txt` | Input and output | Line 1: 64-character SHA-256 hash of the remaining data. Following lines: `username;SHA-256(password)`. Blank lines are ignored. | `TfrmLogin`, `TfrmCreateAcc`, `THelperFunc` | Stores staff accounts without storing plain-text passwords and detects tampering with the file. |
-| `data\receipts\receipt-yyyy-mm-dd-hh-nn-ss.txt` | Output | Fixed-width text receipt with restaurant header, date, customer, waiter, table, item lines, subtotal, VAT and total. | `TdbOrders.ExportReceipt` | Gives the customer a printable bill and the restaurant a permanent record. |
-| `data\data.ini` | Input and output | INI text: `[general]` section with `last_logged_in=<username>` or `none`. | `THelperFunc`, `TfrmMain`, `TfrmLogin` | Remembers the last user so the application can restore the session when it starts. |
+| File and path                                   | Direction        | Format                                                                                                                           | Used by                                     | Purpose                                                                                         |
+| ----------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `data\login-details.txt`                        | Input and output | Line 1: 64-character SHA-256 hash of the remaining data. Following lines: `username;SHA-256(password)`. Blank lines are ignored. | `TfrmLogin`, `TfrmCreateAcc`, `THelperFunc` | Stores staff accounts without storing plain-text passwords and detects tampering with the file. |
+| `data\receipts\receipt-yyyy-mm-dd-hh-nn-ss.txt` | Output           | Fixed-width text receipt with restaurant header, date, customer, waiter, table, item lines, subtotal, VAT and total.             | `TdbOrders.ExportReceipt`                   | Gives the customer a printable bill and the restaurant a permanent record.                      |
+| `data\data.ini`                                 | Input and output | INI text: `[general]` section with `last_logged_in=<username>` or `none`.                                                        | `THelperFunc`, `TfrmMain`, `TfrmLogin`      | Remembers the last user so the application can restore the session when it starts.              |
 
 The login file is the most important text file. Its first line is a hash of all the account lines. When a user logs in or creates an account, `ConfirmFileValidity` recalculates the hash and compares it with the stored value. If the file was edited by hand, the values do not match and the operation is blocked. Passwords are stored as SHA-256 hashes, so the original password cannot be read directly from the file.
 
@@ -301,30 +301,30 @@ User-defined methods are used to avoid repeating logic and to keep the forms foc
 
 **Table 11: User-defined methods**
 
-| Method | Unit or class | Parameters and return value | Purpose and reuse |
-|---|---|---|---|
-| `THelperFunc.ConfirmFileValidity` | `Helpers_u` | `sPath: String`; returns Boolean | Reads the first line as a hash, recalculates the SHA-256 hash of the remaining lines and returns whether they match. It is reused by login and account creation. |
-| `THelperFunc.AppendToTextFile` | `Helpers_u` | `sPath: String`, `cDelimiter: Char`, `arrData: TArray<String>` | Joins an array of values with a delimiter and appends one line. It supports both zero-based and one-based arrays. It is reused for account creation. |
-| `THelperFunc.SetFileHashKey` | `Helpers_u` | `sPath: String` | Recalculates the login-file hash and rewrites it as the first line. It is called after a new account is added. |
-| `THelperFunc.IniWriteString` | `Helpers_u` | `sSection: String`, `arrKeys`, `arrValues: TArray<String>` | Writes several keys to `data.ini` in one call. It is reusable for future settings. |
-| `THelperFunc.IniReadString` | `Helpers_u` | `sSection: String`, `arrKeys`, `arrDefaults: TArray<String>`; returns `TArray<String>` | Reads several keys and supplies defaults. It is reusable for future settings. |
-| `TStringsHelper.SetCount` | `Helpers_u` | `Value: Integer` | A class helper that grows or shrinks a string list to an exact count. It is available for list-based output. |
-| `TdbOrders.Create` and `Destroy` | `DB_u` | `sDBPath: String` | Opens the Access database and creates the three `TFDTable` components and data sources; releases them on shutdown. |
-| `TdbOrders.LoadMenu` | `DB_u` | None | Copies every menu record into the menu grid, the order-item combo box and the index-to-ID array. It is reused whenever either form needs a fresh menu. |
-| `TdbOrders.AppendMenu` | `DB_u` | `ItemName`, `Category: String`; `ItemPrice: Double` | Adds a menu record and posts it. |
-| `TdbOrders.UpdateMenu` | `DB_u` | `ItemName`, `Category: String`; `ItemPrice: Double`; `iItemID: Integer` | Locates a menu record by ID, edits its fields and posts the change. |
-| `TdbOrders.DeleteMenuItem` | `DB_u` | `iItemID: Integer` | Locates and deletes a menu record. |
-| `TdbOrders.GetMenuItemName` | `DB_u` | `iItemID: Integer`; returns String | Looks up an item name by primary key for display in the order grid. |
-| `TdbOrders.GetMenuItemPrice` | `DB_u` | `iItemID: Integer`; returns Double | Looks up an item price by primary key for totals. |
-| `TdbOrders.NewOrder` | `DB_u` | `sWaiter`, `sCustomer: String`; `iTableNo: Integer`; `arrOrder: TArray<TOrderLine>`; returns Integer | Appends one order header and one order-item record per line, then returns the new order ID. |
-| `TdbOrders.UpdateOrder` | `DB_u` | `sWaiter`, `sCustomer: String`; `iTableNo: Integer`; `arrOrder: TArray<TOrderLine>`; `iOrderID: Integer` | Intended to update an existing order and its lines. It is not exposed in the current GUI and contains a defect; see Section 9. |
-| `TdbOrders.ExportReceipt` | `DB_u` | `sFilePath: String`; `iOrderID: Integer` | Reads an order and its lines, calculates the totals and writes a formatted receipt. |
-| `TfrmMain.SwapForm` | `Main_u` | `aFrom`, `aTo: TForm` | Remembers the current form position, hides the old form and shows the new one. It is reused for all navigation. |
-| `TfrmMain.CurrentUserUpdate` | `Main_u` | None | Updates the current-user label from the session variable. |
-| `TfrmMain.InitLocalAI`, `StartLlamaServer`, `StopLlamaServer`, `MakeStreamProc`, `MessageAI` | `Main_u` | Various | Support the local AI assistant. The AI service is not initialised in the current build, so the feature is disabled. |
-| `TfrmOrder.IndexToID` | `Order_u` | `iIndex: Integer`; returns Integer | Converts a combo-box index to a `MenuItemID` using the parallel array. |
-| `TfrmOrder.UpdateOrderDisplay` | `Order_u` | None | Rebuilds the order grid and recalculates subtotal, VAT and total. |
-| `TfrmMenu.UpdateRowData` | `MenuMng_u` | `iRow: Integer` | Copies the selected grid row into the edit fields and updates the item count. |
+| Method                                                                                       | Unit or class | Parameters and return value                                                                              | Purpose and reuse                                                                                                                                                |
+| -------------------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `THelperFunc.ConfirmFileValidity`                                                            | `Helpers_u`   | `sPath: String`; returns Boolean                                                                         | Reads the first line as a hash, recalculates the SHA-256 hash of the remaining lines and returns whether they match. It is reused by login and account creation. |
+| `THelperFunc.AppendToTextFile`                                                               | `Helpers_u`   | `sPath: String`, `cDelimiter: Char`, `arrData: TArray<String>`                                           | Joins an array of values with a delimiter and appends one line. It supports both zero-based and one-based arrays. It is reused for account creation.             |
+| `THelperFunc.SetFileHashKey`                                                                 | `Helpers_u`   | `sPath: String`                                                                                          | Recalculates the login-file hash and rewrites it as the first line. It is called after a new account is added.                                                   |
+| `THelperFunc.IniWriteString`                                                                 | `Helpers_u`   | `sSection: String`, `arrKeys`, `arrValues: TArray<String>`                                               | Writes several keys to `data.ini` in one call. It is reusable for future settings.                                                                               |
+| `THelperFunc.IniReadString`                                                                  | `Helpers_u`   | `sSection: String`, `arrKeys`, `arrDefaults: TArray<String>`; returns `TArray<String>`                   | Reads several keys and supplies defaults. It is reusable for future settings.                                                                                    |
+| `TStringsHelper.SetCount`                                                                    | `Helpers_u`   | `Value: Integer`                                                                                         | A class helper that grows or shrinks a string list to an exact count. It is available for list-based output.                                                     |
+| `TdbOrders.Create` and `Destroy`                                                             | `DB_u`        | `sDBPath: String`                                                                                        | Opens the Access database and creates the three `TFDTable` components and data sources; releases them on shutdown.                                               |
+| `TdbOrders.LoadMenu`                                                                         | `DB_u`        | None                                                                                                     | Copies every menu record into the menu grid, the order-item combo box and the index-to-ID array. It is reused whenever either form needs a fresh menu.           |
+| `TdbOrders.AppendMenu`                                                                       | `DB_u`        | `ItemName`, `Category: String`; `ItemPrice: Double`                                                      | Adds a menu record and posts it.                                                                                                                                 |
+| `TdbOrders.UpdateMenu`                                                                       | `DB_u`        | `ItemName`, `Category: String`; `ItemPrice: Double`; `iItemID: Integer`                                  | Locates a menu record by ID, edits its fields and posts the change.                                                                                              |
+| `TdbOrders.DeleteMenuItem`                                                                   | `DB_u`        | `iItemID: Integer`                                                                                       | Locates and deletes a menu record.                                                                                                                               |
+| `TdbOrders.GetMenuItemName`                                                                  | `DB_u`        | `iItemID: Integer`; returns String                                                                       | Looks up an item name by primary key for display in the order grid.                                                                                              |
+| `TdbOrders.GetMenuItemPrice`                                                                 | `DB_u`        | `iItemID: Integer`; returns Double                                                                       | Looks up an item price by primary key for totals.                                                                                                                |
+| `TdbOrders.NewOrder`                                                                         | `DB_u`        | `sWaiter`, `sCustomer: String`; `iTableNo: Integer`; `arrOrder: TArray<TOrderLine>`; returns Integer     | Appends one order header and one order-item record per line, then returns the new order ID.                                                                      |
+| `TdbOrders.UpdateOrder`                                                                      | `DB_u`        | `sWaiter`, `sCustomer: String`; `iTableNo: Integer`; `arrOrder: TArray<TOrderLine>`; `iOrderID: Integer` | Intended to update an existing order and its lines. It is not exposed in the current GUI and contains a defect; see Section 9.                                   |
+| `TdbOrders.ExportReceipt`                                                                    | `DB_u`        | `sFilePath: String`; `iOrderID: Integer`                                                                 | Reads an order and its lines, calculates the totals and writes a formatted receipt.                                                                              |
+| `TfrmMain.SwapForm`                                                                          | `Main_u`      | `aFrom`, `aTo: TForm`                                                                                    | Remembers the current form position, hides the old form and shows the new one. It is reused for all navigation.                                                  |
+| `TfrmMain.CurrentUserUpdate`                                                                 | `Main_u`      | None                                                                                                     | Updates the current-user label from the session variable.                                                                                                        |
+| `TfrmMain.InitLocalAI`, `StartLlamaServer`, `StopLlamaServer`, `MakeStreamProc`, `MessageAI` | `Main_u`      | Various                                                                                                  | Support the local AI assistant. The AI service is not initialised in the current build, so the feature is disabled.                                              |
+| `TfrmOrder.IndexToID`                                                                        | `Order_u`     | `iIndex: Integer`; returns Integer                                                                       | Converts a combo-box index to a `MenuItemID` using the parallel array.                                                                                           |
+| `TfrmOrder.UpdateOrderDisplay`                                                               | `Order_u`     | None                                                                                                     | Rebuilds the order grid and recalculates subtotal, VAT and total.                                                                                                |
+| `TfrmMenu.UpdateRowData`                                                                     | `MenuMng_u`   | `iRow: Integer`                                                                                          | Copies the selected grid row into the edit fields and updates the item count.                                                                                    |
 
 ### 4.7 Other data structures and techniques
 
@@ -509,11 +509,11 @@ The main input interfaces are the Login form, the Create Account form, the Menu 
 
 **Table 20: Inputs on the Login form**
 
-| Field | Source | Data type | Format | Component | Validation |
-|---|---|---|---|---|---|
-| Username | Keyboard | String | Free text; must match a stored username | `TEdit edtUsernameLogin` | Must match a stored account. An empty value fails the comparison. There is no explicit length check. |
-| Password | Keyboard | String | Masked free text | `TEdit edtPasswordLogin` with `Password = True` | The SHA-256 hash must match the stored hash. An empty value fails. |
-| Login file | File system | Text | Line 1 hash; following lines `username;hash` | `TextFile` | The SHA-256 hash of the data lines must match the stored hash. A missing or modified file blocks login. |
+| Field      | Source      | Data type | Format                                       | Component                                       | Validation                                                                                              |
+| ---------- | ----------- | --------- | -------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Username   | Keyboard    | String    | Free text; must match a stored username      | `TEdit edtUsernameLogin`                        | Must match a stored account. An empty value fails the comparison. There is no explicit length check.    |
+| Password   | Keyboard    | String    | Masked free text                             | `TEdit edtPasswordLogin` with `Password = True` | The SHA-256 hash must match the stored hash. An empty value fails.                                      |
+| Login file | File system | Text      | Line 1 hash; following lines `username;hash` | `TextFile`                                      | The SHA-256 hash of the data lines must match the stored hash. A missing or modified file blocks login. |
 
 **Table 21: Inputs on the Create Account form**
 
@@ -525,12 +525,12 @@ The main input interfaces are the Login form, the Create Account form, the Menu 
 
 **Table 22: Inputs on the Menu Management form**
 
-| Field | Source | Data type | Format | Component | Validation |
-|---|---|---|---|---|---|
-| Item name | Keyboard | String | Letters, digits, spaces, `-` and `+`; maximum 40 characters by design | `TEdit edtMenuName` | Character filter, trim and truncation. There is no explicit empty-field check. The current truncation starts at position 40, so up to 39 characters remain. |
-| Category | Selection | String | Starters, Mains, Desserts or Drinks | `TComboBox cmbMenuCategory` | The list restricts the value. There is no explicit check that a category was selected. |
-| Price | Keyboard | Currency / Real | Digits with at most one comma or full stop as the decimal separator; no leading separator | `TEdit edtMenuPrice` | Character filter; leading separator removed; only one decimal separator allowed. There is no range or empty-field check. |
-| Selected menu row | Grid selection | Integer ID | Hidden `MenuItemID` in column 3 | `TStringGrid grdMenu` | A row must be selected for Update or Delete. The current code does not check this explicitly. |
+| Field             | Source         | Data type       | Format                                                                                    | Component                   | Validation                                                                                                                                                  |
+| ----------------- | -------------- | --------------- | ----------------------------------------------------------------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Item name         | Keyboard       | String          | Letters, digits, spaces, `-` and `+`; maximum 40 characters by design                     | `TEdit edtMenuName`         | Character filter, trim and truncation. There is no explicit empty-field check. The current truncation starts at position 40, so up to 39 characters remain. |
+| Category          | Selection      | String          | Starters, Mains, Desserts or Drinks                                                       | `TComboBox cmbMenuCategory` | The list restricts the value. There is no explicit check that a category was selected.                                                                      |
+| Price             | Keyboard       | Currency / Real | Digits with at most one comma or full stop as the decimal separator; no leading separator | `TEdit edtMenuPrice`        | Character filter; leading separator removed; only one decimal separator allowed. There is no range or empty-field check.                                    |
+| Selected menu row | Grid selection | Integer ID      | Hidden `MenuItemID` in column 3                                                           | `TStringGrid grdMenu`       | A row must be selected for Update or Delete. The current code does not check this explicitly.                                                               |
 
 **Table 23: Inputs on the Place Order form**
 
@@ -545,10 +545,10 @@ The main input interfaces are the Login form, the Create Account form, the Menu 
 
 **Table 24: Inputs on the Chatty AI panel**
 
-| Field | Source | Data type | Format | Component | Validation |
-|---|---|---|---|---|---|
-| Prompt | Keyboard | String | Free text; the command `/clear` clears the response | `TMemo memAIInput` | The prompt must not be empty. The AI service is not initialised in the current build. |
-| Send command | Keyboard or button | Event | Enter key or Send button | `btnSend`, `memAIInput.OnKeyDown` | A non-empty prompt is required. While a response is streaming, the Send button is disabled. |
+| Field        | Source             | Data type | Format                                              | Component                         | Validation                                                                                  |
+| ------------ | ------------------ | --------- | --------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- |
+| Prompt       | Keyboard           | String    | Free text; the command `/clear` clears the response | `TMemo memAIInput`                | The prompt must not be empty. The AI service is not initialised in the current build.       |
+| Send command | Keyboard or button | Event     | Enter key or Send button                            | `btnSend`, `memAIInput.OnKeyDown` | A non-empty prompt is required. While a response is streaming, the Send button is disabled. |
 
 ### 7.2 Validation summary
 
@@ -556,20 +556,20 @@ The application validates more than four data types and more than four inputs. T
 
 **Table 25: Validation types and coverage**
 
-| Validation type | Where it is applied | Rule | Behaviour when invalid |
-|---|---|---|---|
-| File integrity | Login and Create Account | SHA-256 hash of the data lines must equal the first line. | A critical-error message is shown and the operation stops. |
-| Required / empty | Chatty prompt; login credentials | The prompt must not be empty; empty credentials cannot match a stored account. | The AI send is ignored; login shows "Username or password is incorrect." |
-| Length | Username, password, menu name, customer, waiter, table number, amount | Username 4–21; password 5–21; menu name up to 40; customer/waiter up to 60; table and amount up to 3 digits. | Username and password show messages; other fields are silently truncated. |
-| Character and format | Username, password, names, price, table, amount | Usernames use letters, digits and listed symbols; passwords use letters and digits; names use letters, spaces and hyphens; price uses digits and one decimal separator; table and amount use digits. | The edit filter blocks or removes invalid characters; username and password show messages. |
-| Numeric range | Table number and amount | Maximum 3 digits. No minimum or maximum value is enforced. | Extra digits are removed by the length check; zero and empty values are still possible. |
-| Selection | Category, menu item, grid row | A value must be selected from the list or grid. | The combo box restricts the category; there is no explicit message for an unselected menu item or row. |
-| Duplicate | Username | The username must not already exist in the login file. | "Username already taken." |
-| Matching | Password confirmation | The two password fields must be identical. | "Passwords do not match." |
-| Composition | Password | At least one letter and one digit (1–9). | "Password must contain atleast one number and letter." |
-| Referential integrity | `tblOrderItem` foreign keys | Every order line must refer to an existing order and menu item. | Access/FireDAC raises an error; the program does not currently show a friendly message. |
-| Data-type conversion | `StrToInt` and `StrToFloat` calls | The text must be a valid integer or floating-point value. | A runtime exception can occur if the field is empty or invalid; this is a known limitation. |
-| Exception handling | Database connection, file reading, AI streaming | Errors should be caught and reported. | The database constructor and AI stream have handlers; several form-level conversions do not. |
+| Validation type       | Where it is applied                                                   | Rule                                                                                                                                                                                                 | Behaviour when invalid                                                                                 |
+| --------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| File integrity        | Login and Create Account                                              | SHA-256 hash of the data lines must equal the first line.                                                                                                                                            | A critical-error message is shown and the operation stops.                                             |
+| Required / empty      | Chatty prompt; login credentials                                      | The prompt must not be empty; empty credentials cannot match a stored account.                                                                                                                       | The AI send is ignored; login shows "Username or password is incorrect."                               |
+| Length                | Username, password, menu name, customer, waiter, table number, amount | Username 4–21; password 5–21; menu name up to 40; customer/waiter up to 60; table and amount up to 3 digits.                                                                                         | Username and password show messages; other fields are silently truncated.                              |
+| Character and format  | Username, password, names, price, table, amount                       | Usernames use letters, digits and listed symbols; passwords use letters and digits; names use letters, spaces and hyphens; price uses digits and one decimal separator; table and amount use digits. | The edit filter blocks or removes invalid characters; username and password show messages.             |
+| Numeric range         | Table number and amount                                               | Maximum 3 digits. No minimum or maximum value is enforced.                                                                                                                                           | Extra digits are removed by the length check; zero and empty values are still possible.                |
+| Selection             | Category, menu item, grid row                                         | A value must be selected from the list or grid.                                                                                                                                                      | The combo box restricts the category; there is no explicit message for an unselected menu item or row. |
+| Duplicate             | Username                                                              | The username must not already exist in the login file.                                                                                                                                               | "Username already taken."                                                                              |
+| Matching              | Password confirmation                                                 | The two password fields must be identical.                                                                                                                                                           | "Passwords do not match."                                                                              |
+| Composition           | Password                                                              | At least one letter and one digit (1–9).                                                                                                                                                             | "Password must contain atleast one number and letter."                                                 |
+| Referential integrity | `tblOrderItem` foreign keys                                           | Every order line must refer to an existing order and menu item.                                                                                                                                      | Access/FireDAC raises an error; the program does not currently show a friendly message.                |
+| Data-type conversion  | `StrToInt` and `StrToFloat` calls                                     | The text must be a valid integer or floating-point value.                                                                                                                                            | A runtime exception can occur if the field is empty or invalid; this is a known limitation.            |
+| Exception handling    | Database connection, file reading, AI streaming                       | Errors should be caught and reported.                                                                                                                                                                | The database constructor and AI stream have handlers; several form-level conversions do not.           |
 
 ### 7.3 Error messages
 
@@ -577,22 +577,22 @@ The messages below are the messages that the current build displays, or the mess
 
 **Table 26: Error and feedback messages**
 
-| Situation | Message or feedback |
-|---|---|
-| Incorrect login | "Username or password is incorrect." |
-| Tampered login file during login | "Critical Error: All login details have been compromised." followed by "You will be unable to log in." |
-| Tampered login file during account creation | "Critical Error: All login details have been compromised." followed by "You will be unable to create a new account." |
-| Username too short or too long | "Username must be at least 5 characters long, and no more than 20 charaters long." The code currently accepts 4–21 characters. |
-| Username has an invalid character | "Username may only contain numbers and letters and other acceptable characters: "-", "_", "=", "+", "~", "<", ">", "@", "#", "$", "%", "^", "&", "*"" |
-| Passwords do not match | "Passwords do not match." |
-| Password too short or too long | "Password must be at least 6 characters long, and no more than 20 charaters long." The code currently accepts 5–21 characters. |
-| Password has an invalid character | "Password may only contain numbers and letters." |
-| Password lacks a letter or digit | "Password must contain atleast one number and letter." |
-| Username already exists | "Username already taken." |
-| Bill exported | "Bill saved to: "<path>/data/receipts"" |
-| Logout confirmation | "Confirmation to log out" with Yes and No buttons. |
-| Database connection failure | "Could not connect to the database (<path>)." followed by the database error. |
-| Menu or order validation | The red `lblMenuError` and `lblOrderError` labels exist, but the current code does not set them. This is a planned improvement. |
+| Situation                                   | Message or feedback                                                                                                                                   |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Incorrect login                             | "Username or password is incorrect."                                                                                                                  |
+| Tampered login file during login            | "Critical Error: All login details have been compromised." followed by "You will be unable to log in."                                                |
+| Tampered login file during account creation | "Critical Error: All login details have been compromised." followed by "You will be unable to create a new account."                                  |
+| Username too short or too long              | "Username must be at least 5 characters long, and no more than 20 charaters long." The code currently accepts 4–21 characters.                        |
+| Username has an invalid character           | "Username may only contain numbers and letters and other acceptable characters: "-", "_", "=", "+", "~", "<", ">", "@", "#", "$", "%", "^", "&", "*"" |
+| Passwords do not match                      | "Passwords do not match."                                                                                                                             |
+| Password too short or too long              | "Password must be at least 6 characters long, and no more than 20 charaters long." The code currently accepts 5–21 characters.                        |
+| Password has an invalid character           | "Password may only contain numbers and letters."                                                                                                      |
+| Password lacks a letter or digit            | "Password must contain atleast one number and letter."                                                                                                |
+| Username already exists                     | "Username already taken."                                                                                                                             |
+| Bill exported                               | "Bill saved to: "<path>/data/receipts""                                                                                                               |
+| Logout confirmation                         | "Confirmation to log out" with Yes and No buttons.                                                                                                    |
+| Database connection failure                 | "Could not connect to the database (<path>)." followed by the database error.                                                                         |
+| Menu or order validation                    | The red `lblMenuError` and `lblOrderError` labels exist, but the current code does not set them. This is a planned improvement.                       |
 
 ### 7.4 Processing
 
@@ -600,22 +600,22 @@ The program performs the following processes. At least eight are required; fourt
 
 **Table 27: Processing requirements**
 
-| ID | Process | Input | Output |
-|---|---|---|---|
-| P1 | Verify the login-file hash | `login-details.txt` | A Boolean that allows or blocks login and account creation. |
-| P2 | Authenticate a user | Username, password, login file | A session username, or an error message. |
-| P3 | Create an account | Username, password, confirmation | A new `username;hash` line, an updated file hash and navigation to the portal. |
-| P4 | Persist and restore the session | `data.ini` | The startup form and the current-user label. |
-| P5 | Load the menu | `tblMenuItem` | Menu grid rows, combo-box items and the index-to-ID array. |
-| P6 | Add, update or delete a menu item | Menu fields and selected ID | A changed `tblMenuItem` table and a reloaded grid. |
-| P7 | Add an order line | Selected menu item index and amount | A new element in `arrNewOrder` and an updated order grid. |
-| P8 | Calculate the order totals | `arrNewOrder` and menu prices | Subtotal, VAT and total labels. |
-| P9 | Remove an order line | Selected grid row | A smaller `arrNewOrder` and updated totals. |
-| P10 | Save an order | Customer, waiter, table and `arrNewOrder` | A new `tblOrders` row and appended `tblOrderItem` rows. |
-| P11 | Export a receipt | Order ID | A formatted receipt text file. |
-| P12 | Navigate menu records | First, Previous, Next or Last command | A new selected row and updated edit fields. |
-| P13 | Generate an AI response (planned) | User prompt | Streamed text in `memAIResponse`. |
-| P14 | Generate reports (planned) | Order and menu data | Daily sales, popular items, category sales and a full report in `memReport`. |
+| ID  | Process                           | Input                                     | Output                                                                         |
+| --- | --------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------ |
+| P1  | Verify the login-file hash        | `login-details.txt`                       | A Boolean that allows or blocks login and account creation.                    |
+| P2  | Authenticate a user               | Username, password, login file            | A session username, or an error message.                                       |
+| P3  | Create an account                 | Username, password, confirmation          | A new `username;hash` line, an updated file hash and navigation to the portal. |
+| P4  | Persist and restore the session   | `data.ini`                                | The startup form and the current-user label.                                   |
+| P5  | Load the menu                     | `tblMenuItem`                             | Menu grid rows, combo-box items and the index-to-ID array.                     |
+| P6  | Add, update or delete a menu item | Menu fields and selected ID               | A changed `tblMenuItem` table and a reloaded grid.                             |
+| P7  | Add an order line                 | Selected menu item index and amount       | A new element in `arrNewOrder` and an updated order grid.                      |
+| P8  | Calculate the order totals        | `arrNewOrder` and menu prices             | Subtotal, VAT and total labels.                                                |
+| P9  | Remove an order line              | Selected grid row                         | A smaller `arrNewOrder` and updated totals.                                    |
+| P10 | Save an order                     | Customer, waiter, table and `arrNewOrder` | A new `tblOrders` row and appended `tblOrderItem` rows.                        |
+| P11 | Export a receipt                  | Order ID                                  | A formatted receipt text file.                                                 |
+| P12 | Navigate menu records             | First, Previous, Next or Last command     | A new selected row and updated edit fields.                                    |
+| P13 | Generate an AI response (planned) | User prompt                               | Streamed text in `memAIResponse`.                                              |
+| P14 | Generate reports (planned)        | Order and menu data                       | Daily sales, popular items, category sales and a full report in `memReport`.   |
 
 ### 7.5 Algorithms and formulas
 
@@ -762,18 +762,18 @@ save as receipt-yyyy-mm-dd-hh-nn-ss.txt
 
 **Table 28: Output interfaces**
 
-| Output | Data | Format | Component or destination |
-|---|---|---|---|
-| Menu grid | Item name, category, price and hidden ID | Text; price as a number | `TStringGrid grdMenu` |
-| Menu item count | Integer | "Items: n" | `TLabel lblMenuCount` |
-| Order grid | Item, price, quantity and line total | Text; prices and line totals as decimal strings | `TStringGrid grdOrderLines` |
-| Order totals | Subtotal, VAT and total | Currency with two decimals and an "R" prefix | `lblOrderSubtotalValue`, `lblOrderVatValue`, `lblOrderTotalValue` |
-| Receipt file | Header, date, customer, waiter, table, items, subtotal, VAT and total | Fixed-width text; `R 0.00`; `yyyy-mm-dd hh:nn:ss` | `data/receipts/receipt-...txt` |
-| Login and account feedback | Error text | Red label | `lblLoginError`, `lblCreateAccountError` |
-| Menu and order feedback | Reserved error text | Red label | `lblMenuError`, `lblOrderError` (not currently set) |
-| AI response | Streamed text | Plain text | `TMemo memAIResponse` (planned/disabled) |
-| Reports | Report text | Plain text | `TMemo memReport` (planned) |
-| Confirmation dialogs | Logout, export and critical errors | Modal message | `TDialogService.MessageDialog` and `ShowMessage` |
+| Output                     | Data                                                                  | Format                                            | Component or destination                                          |
+| -------------------------- | --------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------- |
+| Menu grid                  | Item name, category, price and hidden ID                              | Text; price as a number                           | `TStringGrid grdMenu`                                             |
+| Menu item count            | Integer                                                               | "Items: n"                                        | `TLabel lblMenuCount`                                             |
+| Order grid                 | Item, price, quantity and line total                                  | Text; prices and line totals as decimal strings   | `TStringGrid grdOrderLines`                                       |
+| Order totals               | Subtotal, VAT and total                                               | Currency with two decimals and an "R" prefix      | `lblOrderSubtotalValue`, `lblOrderVatValue`, `lblOrderTotalValue` |
+| Receipt file               | Header, date, customer, waiter, table, items, subtotal, VAT and total | Fixed-width text; `R 0.00`; `yyyy-mm-dd hh:nn:ss` | `data/receipts/receipt-...txt`                                    |
+| Login and account feedback | Error text                                                            | Red label                                         | `lblLoginError`, `lblCreateAccountError`                          |
+| Menu and order feedback    | Reserved error text                                                   | Red label                                         | `lblMenuError`, `lblOrderError` (not currently set)               |
+| AI response                | Streamed text                                                         | Plain text                                        | `TMemo memAIResponse` (planned/disabled)                          |
+| Reports                    | Report text                                                           | Plain text                                        | `TMemo memReport` (planned)                                       |
+| Confirmation dialogs       | Logout, export and critical errors                                    | Modal message                                     | `TDialogService.MessageDialog` and `ShowMessage`                  |
 
 ### 7.7 IPO tables for two main interfaces
 

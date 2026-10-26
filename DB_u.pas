@@ -27,6 +27,7 @@ type
     function NewOrder(sWaiter, sCustomer: String; iTableNo: Integer; arrOrder: TArray<TOrderLine>): Integer;
     procedure UpdateOrder(sWaiter, sCustomer: String; iTableNo: Integer; arrOrder: TArray<TOrderLine>; iOrderID: Integer);
     procedure ExportReceipt(sFilePath: String; iOrderID: Integer);
+    function IsMenuItemReferenced(iPK: Integer): Boolean;
 
     var
       conOrderDB: TFDConnection;
@@ -386,6 +387,11 @@ begin
   finally
     sl.Free;
   end;
+end;
+
+function TdbOrders.IsMenuItemReferenced(iPK: Integer): Boolean;
+begin
+  Result := tblOrderItem.Locate('MenuItemID', iPK, []);
 end;
 
 end.

@@ -84,6 +84,11 @@ begin
     cmbMenuCategory.ItemIndex := 3;
 
   lblMenuCount.Text	:= 'Items: ' + IntToStr(dbOrders.tblMenu.RecordCount);
+
+  if dbOrders.IsMenuItemReferenced(StrToInt(grdMenu.Cells[3, grdMenu.Row])) then
+    btnMenuDelete.Enabled := False
+  else
+    btnMenuDelete.Enabled := True;
 end;
 
 procedure TfrmMenu.btnMenuAddClick(Sender: TObject);
@@ -135,11 +140,23 @@ end;
 
 procedure TfrmMenu.btnMenuDeleteClick(Sender: TObject);
 var
-  iItem: Integer;
+  iItemPK: Integer;
 begin
   if grdMenu.Row < 0 then
   begin
     ShowMessage('No row selected.');
+    exit;
+  end;
+
+  if TryStrToInt((grdMenu.Cells[3, grdMenu.Row]), iItemPK) then
+  begin
+    ShowMessage('If you are seeing this, then something has gone dreadfully wrong. Raise this issue with the manager.');
+    exit;
+  end;
+
+  if dbOrders.IsMenuItemReferenced(iItemPK) then
+  begin
+    ShowMessage('That menu item is referenced by a previous order and may not be deleted.');
     exit;
   end;
 
@@ -154,7 +171,7 @@ begin
       if AResult = mrYes then
       begin
         try
-          dbOrders.DeleteMenuItem(StrToInt(grdMenu.Cells[3, grdMenu.Row]));
+          dbOrders.DeleteMenuItem(iItemPK);
 
           dbOrders.LoadMenu;
           UpdateRowData(grdMenu.Row);

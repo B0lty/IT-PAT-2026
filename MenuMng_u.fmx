@@ -65,7 +65,7 @@ object frmMenu: TfrmMenu
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 5
     Text = 'Add'
     TextSettings.Trimming = None
     OnClick = btnMenuAddClick
@@ -76,33 +76,31 @@ object frmMenu: TfrmMenu
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 12
+    TabOrder = 18
     Text = 'Back to Main'
     TextSettings.Trimming = None
     OnClick = btnMenuBackClick
   end
   object btnMenuClear: TButton
-    Position.X = 70.000000000000000000
+    Position.X = 135.000000000000000000
     Position.Y = 254.000000000000000000
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 6
+    TabOrder = 8
     Text = 'Clear fields'
     TextSettings.Trimming = None
     OnClick = btnMenuClearClick
   end
   object btnMenuDelete: TButton
-    Enabled = False
-    Position.X = 12.000000000000000000
+    Position.X = 10.000000000000000000
     Position.Y = 254.000000000000000000
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 5
+    TabOrder = 7
     Text = 'Delete'
     TextSettings.Trimming = None
-    Visible = False
     OnClick = btnMenuDeleteClick
   end
   object btnMenuFirst: TButton
@@ -111,7 +109,7 @@ object frmMenu: TfrmMenu
     Size.Width = 55.000000000000000000
     Size.Height = 28.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 7
+    TabOrder = 9
     Text = '|<'
     TextSettings.Trimming = None
     OnClick = btnMenuFirstClick
@@ -122,7 +120,7 @@ object frmMenu: TfrmMenu
     Size.Width = 60.000000000000000000
     Size.Height = 28.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 10
+    TabOrder = 12
     Text = '>|'
     TextSettings.Trimming = None
     OnClick = btnMenuLastClick
@@ -133,7 +131,7 @@ object frmMenu: TfrmMenu
     Size.Width = 55.000000000000000000
     Size.Height = 28.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 9
+    TabOrder = 11
     Text = '>'
     TextSettings.Trimming = None
     OnClick = btnMenuNextClick
@@ -144,7 +142,7 @@ object frmMenu: TfrmMenu
     Size.Width = 55.000000000000000000
     Size.Height = 28.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 8
+    TabOrder = 10
     Text = '<'
     TextSettings.Trimming = None
     OnClick = btnMenuPrevClick
@@ -155,7 +153,7 @@ object frmMenu: TfrmMenu
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 11
+    TabOrder = 15
     Text = 'Refresh'
     TextSettings.Trimming = None
     OnClick = btnMenuRefreshClick
@@ -166,7 +164,7 @@ object frmMenu: TfrmMenu
     Size.Width = 115.000000000000000000
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 4
+    TabOrder = 6
     Text = 'Update'
     TextSettings.Trimming = None
     OnClick = btnMenuUpdateClick
@@ -182,7 +180,7 @@ object frmMenu: TfrmMenu
     Size.Width = 240.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 1
+    TabOrder = 3
   end
   object edtMenuName: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -218,8 +216,8 @@ object frmMenu: TfrmMenu
     RowCount = 1
     Options = [AlternatingRowBackground, ColLines, RowLines, RowSelect, Header]
     OnCellClick = grdMenuCellClick
-    Viewport.Width = 356.000000000000000000
-    Viewport.Height = 385.000000000000000000
+    Viewport.Width = 360.000000000000000000
+    Viewport.Height = 410.000000000000000000
     object colMenuName: TStringColumn
       Header = 'Item name'
       HeaderSettings.TextSettings.WordWrap = False
@@ -249,7 +247,7 @@ object frmMenu: TfrmMenu
     Size.PlatformDefault = False
     TextSettings.Trimming = None
     Text = 'Category:'
-    TabOrder = 17
+    TabOrder = 21
   end
   object lblMenuCount: TLabel
     Position.X = 10.000000000000000000
@@ -259,7 +257,7 @@ object frmMenu: TfrmMenu
     Size.PlatformDefault = False
     TextSettings.Trimming = None
     Text = 'Items: 0'
-    TabOrder = 20
+    TabOrder = 24
   end
   object lblMenuError: TLabel
     Position.X = 10.000000000000000000
@@ -269,7 +267,7 @@ object frmMenu: TfrmMenu
     Size.PlatformDefault = False
     TextSettings.FontColor = claRed
     TextSettings.Trimming = None
-    TabOrder = 15
+    TabOrder = 16
   end
   object lblMenuNameCaption: TLabel
     Position.X = 10.000000000000000000
@@ -279,7 +277,7 @@ object frmMenu: TfrmMenu
     Size.PlatformDefault = False
     TextSettings.Trimming = None
     Text = 'Item name:'
-    TabOrder = 16
+    TabOrder = 17
   end
   object lblMenuNavCaption: TLabel
     Position.X = 10.000000000000000000
@@ -289,7 +287,7 @@ object frmMenu: TfrmMenu
     Size.PlatformDefault = False
     TextSettings.Trimming = None
     Text = 'Navigate records:'
-    TabOrder = 19
+    TabOrder = 20
   end
   object lblMenuPriceCaption: TLabel
     Position.X = 10.000000000000000000
@@ -299,7 +297,7 @@ object frmMenu: TfrmMenu
     Size.PlatformDefault = False
     TextSettings.Trimming = None
     Text = 'Price (R):'
-    TabOrder = 18
+    TabOrder = 19
   end
   object lblMenuTitle: TLabel
     StyledSettings = [Family, FontColor]
