@@ -285,6 +285,9 @@ var
   bDecimalPt: Boolean;
   i: Integer;
 begin
+  if Length(Text) > 6 then
+    Delete(Text, 7, Length(Text) - 6);
+
   if Length(Text) < 1 then
     exit;
 
