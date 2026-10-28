@@ -85,6 +85,8 @@ begin
 
   lblMenuCount.Text	:= 'Items: ' + IntToStr(dbOrders.tblMenu.RecordCount);
 
+  if grdMenu.Row < 0 then
+    exit;
   if dbOrders.IsMenuItemReferenced(StrToInt(grdMenu.Cells[3, grdMenu.Row])) then
     btnMenuDelete.Enabled := False
   else
