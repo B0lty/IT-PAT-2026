@@ -148,7 +148,7 @@ begin
     exit;
   end;
 
-  if TryStrToInt((grdMenu.Cells[3, grdMenu.Row]), iItemPK) then
+  if not TryStrToInt((grdMenu.Cells[3, grdMenu.Row]), iItemPK) then
   begin
     ShowMessage('If you are seeing this, then something has gone dreadfully wrong. Raise this issue with the manager.');
     exit;
